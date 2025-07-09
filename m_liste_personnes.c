@@ -1,0 +1,221 @@
+
+/*=========================================================*/
+/* Module m_liste_personnes pour INF147 - Été 2025 */
+/*=========================================================*/
+#include "m_liste_personnes.h"
+#include "m_alea_pop.h"
+#include "m_personnes.h"
+#include "m_R3.h"
+#include "m_R2.h"
+#include "Constante.h"
+
+
+
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+
+/*=========================================================*/
+t_liste_personnes creer_liste_personnes(int taille) {
+    t_liste_personnes liste;
+    liste.liste = (t_personne*)malloc(taille * sizeof(t_personne));
+    liste.taille = taille;
+    liste.nb_personnes = 0;
+    liste.nb_sains = 0;
+    liste.nb_malades = 0;
+    liste.nb_morts = 0;
+    return liste;
+}
+
+/*=========================================================*/
+int ajouter_des_personnes(t_liste_personnes* liste, int nb, double largeur, double hauteur, double prop_confinement) {
+    int i, ajoutes = 0;
+    for (i = 0; i < nb && liste->nb_personnes < liste->taille; i++) {
+        liste->liste[liste->nb_personnes] = init_personne(largeur, hauteur, prop_confinement);
+        liste->nb_personnes++;
+        liste->nb_sains++;
+        ajoutes++;
+    }
+    return ajoutes;
+}
+
+/*=========================================================*/
+/*fonction permettant de creer le premier patient atteint de la maladie sans infection par contact avec une personne infecte*/
+
+int creer_patient_zero(t_liste_personnes* liste) {
+    if (liste->nb_sains == 0 | liste->nb_malades > 0) {
+        return 0;
+    }
+    int idx = randi(liste->nb_personnes) - 1;
+    if (get_etat(&liste->liste[idx]) == SAIN) {
+        modifier_etat_personne(&liste->liste[idx], MALADE, 0.75); /* Confinement par défaut */
+        liste->nb_sains--;
+        liste->nb_malades++;
+        return 1;
+    }
+    return 0;
+}
+
+/*=========================================================*/
+void liberer_liste(t_liste_personnes* liste) {
+    free(liste->liste);
+    liste->liste = NULL;
+    liste->taille = 0;
+    liste->nb_personnes = 0;
+    liste->nb_sains = 0;
+    liste->nb_malades = 0;
+    liste->nb_morts = 0;
+}
+
+/*=========================================================*/
+/*cette fonction permet de verifier su la personne dans la liste a un indice donnee est morte.
+Si c est le cas la personne est deplace a la fin de la liste*/
+
+int deplacer_un_mort(t_liste_personnes* liste, int indice) {
+    if (indice < 0 || indice >= liste->nb_personnes || get_etat(&liste->liste[indice]) != MORT) {
+        return 0;
+    }
+    int dernier_vivant = liste->nb_personnes - liste->nb_morts ;
+    if (indice < dernier_vivant) {
+        t_personne temp = liste->liste[indice];
+        liste->liste[indice] = liste->liste[dernier_vivant];
+        liste->liste[dernier_vivant] = temp;
+        return 1;
+    }
+    return 0;
+}
+
+/*=========================================================*/
+int assurer_temps_maladie(t_liste_personnes* liste) {
+    int nb_termines = 0;
+    for (int i = 0; i < liste->nb_personnes - liste->nb_morts; i++) {
+        if (get_etat(&liste->liste[i]) == MALADE) {
+            inc_hrs_maladie(&liste->liste[i]);
+            if (get_hrs_maladie(&liste->liste[i]) >= NB_HRS_MALADIE) {
+                nb_termines++;
+            }
+        }
+    }
+    return nb_termines;
+}
+
+/*=========================================================*/
+/*fonction qui permet de decider apres qu une personne ai contracter la maladie, 
+si la personne decede ou guerit apres que le temps maximal de maladie sois atteint.*/
+
+int terminer_maladie(t_liste_personnes* liste, double prop_confinement) {
+    int nb_morts = 0  ;
+    for (int i = 0; i < liste->nb_personnes - liste->nb_morts; i++) {
+        int resultat = determiner_mort_ou_retabli(&liste->liste[i]); 
+        if (resultat == 1) { /* Mort */
+            modifier_etat_personne(&liste->liste[i], MORT, prop_confinement);
+            liste->nb_malades--;
+            liste->nb_morts++;
+            deplacer_un_mort(liste, i);
+
+           
+            nb_morts++;
+           
+        }
+        else if (resultat == 2) { /* Rétabli */
+            modifier_etat_personne(&liste->liste[i], SAIN, prop_confinement);
+            liste->nb_malades--;
+            liste->nb_sains++;
+        }
+    }
+    return nb_morts;
+}
+
+/*=========================================================*/
+/*Fonction repertoriant le nombre de personne vivante etant deplace chaque heure sur la surface definie initialement*/
+
+int deplacer_les_personnes(t_liste_personnes* liste, double largeur, double hauteur) {
+    int nb_deplaces = 0;
+    for (int i = 0; i < liste->nb_personnes - liste->nb_morts; i++) {
+        nb_deplaces += deplacer_personne(&liste->liste[i], largeur, hauteur);
+    }
+    return nb_deplaces;
+}
+
+/*=========================================================*/
+/*Fonction qui determine la transmission de la maladie en cas de contact entre une personne saine et infecte.*/
+
+int traiter_contacts(t_liste_personnes* liste, double prop_confinement) {
+    int nb_infections = 0;
+    for (int i = 0; i < liste->nb_personnes - liste->nb_morts; i++) {
+        for (int j = i + 1; j < liste->nb_personnes - liste->nb_morts; j++) {
+            if (distance_personnes(&liste->liste[i], &liste->liste[j]) <= DISTANCE_CONTACT) {
+                t_personne* p1 = &liste->liste[i];
+                t_personne* p2 = &liste->liste[j];
+                if (get_etat(p1) == MALADE && get_hrs_maladie(p1) >= NB_HRS_TRANSMISSION && get_etat(p2) == SAIN) {
+                    if (randf() < get_prob_infection(p1)) {
+                        modifier_etat_personne(p2, MALADE, prop_confinement);
+                        inc_cause_infections(p1);
+                        liste->nb_sains--;
+                        liste->nb_malades++;
+                        nb_infections++;
+                    }
+                    inverser_les_vitesses(p1, p2);
+                }
+                else if (get_etat(p2) == MALADE && get_hrs_maladie(p2) >= NB_HRS_TRANSMISSION && get_etat(p1) == SAIN) {
+                    if (randf() < get_prob_infection(p2)) {
+                        modifier_etat_personne(p1, MALADE, prop_confinement);
+                        inc_cause_infections(p2);
+                        liste->nb_sains--;
+                        liste->nb_malades++;
+                        nb_infections++;
+                    }
+                    inverser_les_vitesses(p1, p2);
+                }
+            }
+        }
+    }
+    return nb_infections;
+}
+
+/*=========================================================*/
+int simuler_une_heure_pandemie(t_liste_personnes* liste, double prop_confinement, double largeur, double hauteur) {
+    /* Séquence :
+       1. Déplacer les personnes vivantes
+       2. Traiter les contacts et infections
+       3. Mettre à jour le temps de maladie
+       4. Gérer les rétablissements et décès
+    */
+    deplacer_les_personnes(liste, largeur, hauteur);
+    traiter_contacts(liste, prop_confinement);
+    assurer_temps_maladie(liste);
+    terminer_maladie(liste, prop_confinement);
+    return get_nb_malades(liste);
+}
+
+/*=========================================================*/
+int get_nb_personnes(const t_liste_personnes* liste) {
+    return liste->nb_personnes;
+}
+
+/*=========================================================*/
+int get_nb_malades(const t_liste_personnes* liste) {
+    return liste->nb_malades;
+}
+
+/*=========================================================*/
+int get_nb_sains(const t_liste_personnes* liste) {
+    return liste->nb_sains;
+}
+
+/*=========================================================*/
+int get_nb_morts(const t_liste_personnes* liste) {
+    return liste->nb_morts;
+}
+
+/*=========================================================*/
+void afficher_liste_personnes(const t_liste_personnes* liste) {
+    printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts):\n",
+        liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts);
+    for (int i = 0; i < liste->nb_personnes; i++) {
+        printf("Personne %d: ", i);
+        afficher_personne(&liste->liste[i]);
+    }
+}
+/*=========================================================*/
