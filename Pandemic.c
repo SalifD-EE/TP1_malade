@@ -2,6 +2,7 @@
 /* pandemie.c - Programme principal pour INF147 TP1 */
 
 //TEST GITHUB
+//Test github 2 enfin
 
 
 /*=========================================================*/
