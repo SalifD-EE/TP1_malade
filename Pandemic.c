@@ -27,10 +27,10 @@ int main(void) {
     srand_sys();
 
     /* Paramètres de la simulation */
-    const int TAILLE_LISTE = 4001;     /* Capacité initiale */
-    const int NB_PERSONNES = 4000;     /* Nombre de personnes */
-    const double LARGEUR = 1000;     /* Largeur du quartier (mètres) */
-    const double HAUTEUR = 1000;     /* Hauteur du quartier (mètres) */
+    const int TAILLE_LISTE = 401;     /* Capacité initiale */
+    const int NB_PERSONNES = 400;     /* Nombre de personnes */
+    const double LARGEUR = 100;     /* Largeur du quartier (mètres) */
+    const double HAUTEUR = 100;     /* Hauteur du quartier (mètres) */
     const double PROP_CONFINEMENT = 0.3; /* Proportion de confinement */
     const int INTERVALLE_AFFICHAGE = 24; /* Afficher toutes les 24 heures */
 

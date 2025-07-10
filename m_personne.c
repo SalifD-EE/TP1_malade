@@ -119,7 +119,7 @@ int get_hrs_maladie(const t_personne* lui) {
 /*=========================================================*/
 /* Détermine si une personne meurt ou se rétablit */
 int determiner_mort_ou_retabli( const t_personne* lui) {
-    if (lui->etat != MALADE | lui->hrs_maladie < NB_HRS_MALADIE ) {
+    if (lui->etat != MALADE || lui->hrs_maladie < NB_HRS_MALADIE ) {
         return 0;
     }
 
