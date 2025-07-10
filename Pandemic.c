@@ -1,11 +1,6 @@
 /*=========================================================*/
 /* pandemie.c - Programme principal pour INF147 TP1 */
 
-//TEST GITHUB
-//Test github 2 enfin
-//test conflit 2
-
-
 /*=========================================================*/
 
 #include "m_alea_pop.h"
