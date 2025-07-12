@@ -55,6 +55,13 @@ int main(void) {
         liberer_liste(&liste);
         return EXIT_FAILURE;
     }
+
+    /* Ouverture du fichier de configuration */
+    FILE* config = fopen("config_simulations.txt", "r");
+    if (!config) {
+        printf("Erreur : impossible d'ouvrir config_simulations.txt\n");
+        return EXIT_FAILURE;
+    }
    //afficher_liste_personnes(&liste);
  
     /* Boucle de simulation */
