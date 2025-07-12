@@ -22,8 +22,8 @@ int main(void) {
     srand_sys();
 
     /* Paramètres de la simulation */
-    const int TAILLE_LISTE = 41;     /* Capacité initiale */
-    const int NB_PERSONNES = 40;     /* Nombre de personnes */
+    const int TAILLE_LISTE = 401;     /* Capacité initiale */
+    const int NB_PERSONNES = 400;     /* Nombre de personnes */
     const double LARGEUR = 100;     /* Largeur du quartier (mètres) */
     const double HAUTEUR = 100;     /* Hauteur du quartier (mètres) */
     const int INTERVALLE_AFFICHAGE = 100; /* Afficher toutes les 24 heures */
@@ -71,13 +71,15 @@ int main(void) {
         max_infections_heure = infections_heure > max_infections_heure ? infections_heure : max_infections_heure;
         min_infections_heure = infections_heure < min_infections_heure ? infections_heure : min_infections_heure;
       
-       
+        if (get_prop_malades(&liste) > 0.05 && get_prop_morts(&liste) > 0.05) {
+            modifier_confinement(&liste, NOUVELLE_PROP);
+        }
 
          /*Affichage périodique*/
         if (heures % INTERVALLE_AFFICHAGE == 0) {
-            printf("\nHeure %d: Sains=%d, Malades=%d, Morts=%d, Infections=%d \n",
+            printf("\nHeure %d: Sains=%d, Malades=%d, Morts=%d, Infections=%d, Confinement=%.2f \n",
                 heures, get_nb_sains(&liste), get_nb_malades(&liste), get_nb_morts(&liste),
-                infections_heure);
+                infections_heure, get_confinement(&liste));
          max_morts_heure = get_nb_morts(&liste) > max_morts_heure ? get_nb_morts(&liste) : max_morts_heure;
         }
     }

@@ -25,7 +25,7 @@ t_liste_personnes creer_liste_personnes(int taille) {
     liste.nb_sains = 0;
     liste.nb_malades = 0;
     liste.nb_morts = 0;
-    liste.prop_confine = 0.0;//PROP_CONFINEMENT;
+    liste.prop_confine = PROP_CONFINEMENT;
     return liste;
 }
 
@@ -213,6 +213,29 @@ int get_nb_morts(const t_liste_personnes* liste) {
 }
 
 /*=========================================================*/
+double get_confinement(const t_liste_personnes* liste) {
+    return liste->prop_confine;
+}
+
+/*=========================================================*/
+double get_prop_malades(const t_liste_personnes* liste) {
+    if (liste->nb_personnes > 0) {
+        return liste->nb_malades / liste->nb_personnes;
+    }
+
+    return -1;
+}
+
+/*=========================================================*/
+double get_prop_morts(const t_liste_personnes* liste) {
+    if (liste->nb_personnes > 0) {
+        return liste->nb_morts / liste->nb_personnes;
+    }
+
+    return -1;
+}
+
+/*=========================================================*/
 
 //void afficher_liste_personnes(const t_liste_personnes* liste) {
 //    printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts):\n",
@@ -233,10 +256,6 @@ void afficher_liste_personnes(const t_liste_personnes* liste) {
     }
 }
 
-/*=========================================================*/
-double get_confinement(const t_liste_personnes* liste) {
-    return liste->prop_confine;
-}
 
 /*=========================================================*/
 double modifier_confinement(t_liste_personnes* liste, double nouvelle_prop) {

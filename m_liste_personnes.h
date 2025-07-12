@@ -140,6 +140,10 @@ int get_nb_sains(const t_liste_personnes* liste);
 int get_nb_morts(const t_liste_personnes* liste);
 double get_confinement(const t_liste_personnes* liste);
 
+//Les fonctions suivantes retournent -1 s'il n'y a personne dans la liste.
+double get_prop_malades(const t_liste_personnes* liste);
+double get_prop_morts(const t_liste_personnes* liste);
+
 
 /* AFFICHER_LISTE_PERSONNES
    Affiche l'état de la liste pour débogage
