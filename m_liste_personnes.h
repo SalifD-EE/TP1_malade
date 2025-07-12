@@ -23,7 +23,8 @@ typedef struct {
     int nb_personnes;    // nombre de personnes dans la liste
     int nb_malades;      // nombre de personnes malades
     int nb_sains;        // nombre de personnes saines
-    int nb_morts;        // nombre de personnes mortes
+    int nb_morts;
+    double prop_confine;// nombre de personnes mortes
 } t_liste_personnes;
 /*=========================================================*/
 
@@ -93,7 +94,7 @@ int assurer_temps_maladie(t_liste_personnes* liste);
    RETOUR : nombre de morts apparus
    SPECS : permute les morts en fin de liste, met à jour les compteurs
 */
-int terminer_maladie(t_liste_personnes* liste, double prop_confinement);
+int terminer_maladie(t_liste_personnes* liste);
 
 /* DEPLACER_LES_PERSONNES
    Déplace les personnes vivantes dans la liste
@@ -111,7 +112,7 @@ int deplacer_les_personnes(t_liste_personnes* liste, double largeur, double haut
    RETOUR : nombre de nouvelles infections
    SPECS : teste les distances, gère contagion et vitesses
 */
-int traiter_contacts(t_liste_personnes* liste, double prop_confinement);
+int traiter_contacts(t_liste_personnes* liste);
 
 /* SIMULER_UNE_HEURE_PANDEMIE
    Simule une heure de pandémie en appelant les fonctions mutatrices
@@ -121,13 +122,24 @@ int traiter_contacts(t_liste_personnes* liste, double prop_confinement);
    RETOUR : nombre de malades actuels
    SPECS : définit la séquence des appels
 */
-int simuler_une_heure_pandemie(t_liste_personnes* liste, double prop_confinement, double largeur, double hauteur);
+int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double hauteur);
+
+/*MODIFIER_CONFINEMENT
+  ajuste la proportion de confinement de la population en fonction de l etat de santw de la personne
+  PARAMETRES : liste - pointeur sur la liste
+             nouvelle_prop - nouvelle propriete de confinement
+  RETOUR : moyenne de la proababilite de mouvement des personnes vivantes
+  */
+double modifier_confinement(t_liste_personnes* liste, double nouvelle_prop);
+
 
 /* INFORMATICES */
 int get_nb_personnes(const t_liste_personnes* liste);
 int get_nb_malades(const t_liste_personnes* liste);
 int get_nb_sains(const t_liste_personnes* liste);
 int get_nb_morts(const t_liste_personnes* liste);
+double get_confinement(const t_liste_personnes* liste);
+
 
 /* AFFICHER_LISTE_PERSONNES
    Affiche l'état de la liste pour débogage

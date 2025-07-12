@@ -25,8 +25,10 @@ t_liste_personnes creer_liste_personnes(int taille) {
     liste.nb_sains = 0;
     liste.nb_malades = 0;
     liste.nb_morts = 0;
+    liste.prop_confine = 0.0;//PROP_CONFINEMENT;
     return liste;
 }
+
 
 /*=========================================================*/
 int ajouter_des_personnes(t_liste_personnes* liste, int nb, double largeur, double hauteur, double prop_confinement) {
@@ -66,6 +68,7 @@ void liberer_liste(t_liste_personnes* liste) {
     liste->nb_sains = 0;
     liste->nb_malades = 0;
     liste->nb_morts = 0;
+    liste->prop_confine = 0;
 }
 
 /*=========================================================*/
@@ -76,7 +79,7 @@ int deplacer_un_mort(t_liste_personnes* liste, int indice) {
     if (indice < 0 || indice >= liste->nb_personnes || get_etat(&liste->liste[indice]) != MORT) {
         return 0;
     }
-    int dernier_vivant = liste->nb_personnes - liste->nb_morts ;
+    int dernier_vivant = liste->nb_personnes - liste->nb_morts;
     if (indice < dernier_vivant) {
         t_personne temp = liste->liste[indice];
         liste->liste[indice] = liste->liste[dernier_vivant];
@@ -101,25 +104,25 @@ int assurer_temps_maladie(t_liste_personnes* liste) {
 }
 
 /*=========================================================*/
-/*fonction qui permet de decider apres qu une personne ai contracter la maladie, 
+/*fonction qui permet de decider apres qu une personne ai contracter la maladie,
 si la personne decede ou guerit apres que le temps maximal de maladie sois atteint.*/
 
-int terminer_maladie(t_liste_personnes* liste, double prop_confinement) {
-    int nb_morts = 0  ;
+int terminer_maladie(t_liste_personnes* liste) {
+    int nb_morts = 0;
     for (int i = 0; i < liste->nb_personnes - liste->nb_morts; i++) {
-        int resultat = determiner_mort_ou_retabli(&liste->liste[i]); 
+        int resultat = determiner_mort_ou_retabli(&liste->liste[i]);
         if (resultat == 1) { /* Mort */
-            modifier_etat_personne(&liste->liste[i], MORT, prop_confinement);
+            modifier_etat_personne(&liste->liste[i], MORT, liste->prop_confine);
             liste->nb_malades--;
             liste->nb_morts++;
             deplacer_un_mort(liste, i);
 
-           
+
             nb_morts++;
-           
+
         }
         else if (resultat == 2) { /* Rétabli */
-            modifier_etat_personne(&liste->liste[i], SAIN, prop_confinement);
+            modifier_etat_personne(&liste->liste[i], SAIN, liste->prop_confine);
             liste->nb_malades--;
             liste->nb_sains++;
         }
@@ -141,7 +144,7 @@ int deplacer_les_personnes(t_liste_personnes* liste, double largeur, double haut
 /*=========================================================*/
 /*Fonction qui determine la transmission de la maladie en cas de contact entre une personne saine et infecte.*/
 
-int traiter_contacts(t_liste_personnes* liste, double prop_confinement) {
+int traiter_contacts(t_liste_personnes* liste) {
     int nb_infections = 0;
     for (int i = 0; i < liste->nb_personnes - liste->nb_morts; i++) {
         for (int j = i + 1; j < liste->nb_personnes - liste->nb_morts; j++) {
@@ -150,7 +153,7 @@ int traiter_contacts(t_liste_personnes* liste, double prop_confinement) {
                 t_personne* p2 = &liste->liste[j];
                 if (get_etat(p1) == MALADE && get_hrs_maladie(p1) >= NB_HRS_TRANSMISSION && get_etat(p2) == SAIN) {
                     if (randf() < get_prob_infection(p1)) {
-                        modifier_etat_personne(p2, MALADE, prop_confinement);
+                        modifier_etat_personne(p2, MALADE, liste->prop_confine);
                         inc_cause_infections(p1);
                         liste->nb_sains--;
                         liste->nb_malades++;
@@ -160,7 +163,7 @@ int traiter_contacts(t_liste_personnes* liste, double prop_confinement) {
                 }
                 else if (get_etat(p2) == MALADE && get_hrs_maladie(p2) >= NB_HRS_TRANSMISSION && get_etat(p1) == SAIN) {
                     if (randf() < get_prob_infection(p2)) {
-                        modifier_etat_personne(p1, MALADE, prop_confinement);
+                        modifier_etat_personne(p1, MALADE, liste->prop_confine);
                         inc_cause_infections(p2);
                         liste->nb_sains--;
                         liste->nb_malades++;
@@ -175,7 +178,7 @@ int traiter_contacts(t_liste_personnes* liste, double prop_confinement) {
 }
 
 /*=========================================================*/
-int simuler_une_heure_pandemie(t_liste_personnes* liste, double prop_confinement, double largeur, double hauteur) {
+int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double hauteur) {
     /* Séquence :
        1. Déplacer les personnes vivantes
        2. Traiter les contacts et infections
@@ -183,9 +186,9 @@ int simuler_une_heure_pandemie(t_liste_personnes* liste, double prop_confinement
        4. Gérer les rétablissements et décès
     */
     deplacer_les_personnes(liste, largeur, hauteur);
-    traiter_contacts(liste, prop_confinement);
+    traiter_contacts(liste);
     assurer_temps_maladie(liste);
-    terminer_maladie(liste, prop_confinement);
+    terminer_maladie(liste);
     return get_nb_malades(liste);
 }
 
@@ -218,4 +221,62 @@ void afficher_liste_personnes(const t_liste_personnes* liste) {
         afficher_personne(&liste->liste[i]);
     }
 }
+
+
 /*=========================================================*/
+double get_confinement(const t_liste_personnes* liste) {
+    return liste->prop_confine;
+}
+
+/*=========================================================*/
+double modifier_confinement(t_liste_personnes* liste, double nouvelle_prop) {
+    double ancienne_prop = liste->prop_confine;
+    liste->prop_confine = nouvelle_prop; // Mise à jour de prop_confine
+    double somme_prob_deplacer = 0.0;
+    int nb_vivants = liste->nb_personnes - liste->nb_morts;
+
+    for (int i = 0; i < nb_vivants; i++) {
+        t_personne* personne = &liste->liste[i];
+        // Si la proportion augmente, ajuster pour tous
+        // Si la proportion diminue, ajuster seulement pour les sains
+        if (nouvelle_prop > ancienne_prop || get_etat(personne) == SAIN) {
+            modifier_prob_deplacer(personne, nouvelle_prop);
+        }
+        somme_prob_deplacer += get_prob_deplacer(personne);
+    }
+
+    // Retourner la probabilité moyenne de déplacement des vivants
+    return (nb_vivants > 0) ? somme_prob_deplacer / nb_vivants : 0.0;
+}
+
+/*=========================================================*/
+int get_nb_personnes(const t_liste_personnes* liste) {
+    return liste->nb_personnes;
+}
+
+/*=========================================================*/
+int get_nb_malades(const t_liste_personnes* liste) {
+    return liste->nb_malades;
+}
+
+/*=========================================================*/
+int get_nb_sains(const t_liste_personnes* liste) {
+    return liste->nb_sains;
+}
+
+/*=========================================================*/
+int get_nb_morts(const t_liste_personnes* liste) {
+    return liste->nb_morts;
+}
+
+/*=========================================================*/
+void afficher_liste_personnes(const t_liste_personnes* liste) {
+    printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts, prop_confine=%.2f):\n",
+        liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts, liste->prop_confine);
+    for (int i = 0; i < liste->nb_personnes; i++) {
+        printf("Personne %d: ", i);
+        afficher_personne(&liste->liste[i]);
+    }
+}
+/*=========================================================*/
+
