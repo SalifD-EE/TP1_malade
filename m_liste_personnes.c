@@ -213,15 +213,25 @@ int get_nb_morts(const t_liste_personnes* liste) {
 }
 
 /*=========================================================*/
+
+//void afficher_liste_personnes(const t_liste_personnes* liste) {
+//    printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts):\n",
+//        liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts);
+//    for (int i = 0; i < liste->nb_personnes; i++) {
+//        printf("Personne %d: ", i);
+//        afficher_personne(&liste->liste[i]);
+//    }
+//}
+
+/*=========================================================*/
 void afficher_liste_personnes(const t_liste_personnes* liste) {
-    printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts):\n",
-        liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts);
+    printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts, prop_confine=%.2f):\n",
+        liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts, liste->prop_confine);
     for (int i = 0; i < liste->nb_personnes; i++) {
         printf("Personne %d: ", i);
         afficher_personne(&liste->liste[i]);
     }
 }
-
 
 /*=========================================================*/
 double get_confinement(const t_liste_personnes* liste) {
@@ -242,7 +252,7 @@ double modifier_confinement(t_liste_personnes* liste, double nouvelle_prop) {
         if (nouvelle_prop > ancienne_prop || get_etat(personne) == SAIN) {
             modifier_prob_deplacer(personne, nouvelle_prop);
         }
-        somme_prob_deplacer += get_prob_deplacer(personne);
+        somme_prob_deplacer += get_prob_deplacement(personne);
     }
 
     // Retourner la probabilité moyenne de déplacement des vivants
@@ -250,33 +260,6 @@ double modifier_confinement(t_liste_personnes* liste, double nouvelle_prop) {
 }
 
 /*=========================================================*/
-int get_nb_personnes(const t_liste_personnes* liste) {
-    return liste->nb_personnes;
-}
 
-/*=========================================================*/
-int get_nb_malades(const t_liste_personnes* liste) {
-    return liste->nb_malades;
-}
 
-/*=========================================================*/
-int get_nb_sains(const t_liste_personnes* liste) {
-    return liste->nb_sains;
-}
-
-/*=========================================================*/
-int get_nb_morts(const t_liste_personnes* liste) {
-    return liste->nb_morts;
-}
-
-/*=========================================================*/
-void afficher_liste_personnes(const t_liste_personnes* liste) {
-    printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts, prop_confine=%.2f):\n",
-        liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts, liste->prop_confine);
-    for (int i = 0; i < liste->nb_personnes; i++) {
-        printf("Personne %d: ", i);
-        afficher_personne(&liste->liste[i]);
-    }
-}
-/*=========================================================*/
 

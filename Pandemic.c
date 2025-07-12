@@ -61,10 +61,10 @@ int main(void) {
     /* Boucle de simulation */
     while (get_nb_malades(&liste) > 0 ) {
         ++heures;
-        int infections_heure = traiter_contacts(&liste, PROP_CONFINEMENT);
-        int morts_heure = terminer_maladie(&liste, PROP_CONFINEMENT); 
+        int infections_heure = traiter_contacts(&liste);
+        int morts_heure = terminer_maladie(&liste); 
 
-        simuler_une_heure_pandemie(&liste, PROP_CONFINEMENT, LARGEUR, HAUTEUR);
+        simuler_une_heure_pandemie(&liste, LARGEUR, HAUTEUR);
        
 
         /* Mise à jour des statistiques */
