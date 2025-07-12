@@ -220,7 +220,7 @@ double get_confinement(const t_liste_personnes* liste) {
 /*=========================================================*/
 double get_prop_malades(const t_liste_personnes* liste) {
     if (liste->nb_personnes > 0) {
-        return liste->nb_malades / liste->nb_personnes;
+        return (double)liste->nb_malades / liste->nb_personnes;
     }
 
     return -1;
@@ -229,7 +229,7 @@ double get_prop_malades(const t_liste_personnes* liste) {
 /*=========================================================*/
 double get_prop_morts(const t_liste_personnes* liste) {
     if (liste->nb_personnes > 0) {
-        return liste->nb_morts / liste->nb_personnes;
+        return (double)liste->nb_morts / liste->nb_personnes;
     }
 
     return -1;

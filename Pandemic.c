@@ -71,7 +71,7 @@ int main(void) {
         max_infections_heure = infections_heure > max_infections_heure ? infections_heure : max_infections_heure;
         min_infections_heure = infections_heure < min_infections_heure ? infections_heure : min_infections_heure;
       
-        if (get_prop_malades(&liste) > 0.05 && get_prop_morts(&liste) > 0.05) {
+        if (get_prop_malades(&liste) > 0.005 && get_prop_morts(&liste) > 0.005) {
             modifier_confinement(&liste, NOUVELLE_PROP);
         }
 
