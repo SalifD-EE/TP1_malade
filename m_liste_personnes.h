@@ -23,8 +23,8 @@ typedef struct {
     int nb_personnes;    // nombre de personnes dans la liste
     int nb_malades;      // nombre de personnes malades
     int nb_sains;        // nombre de personnes saines
-    int nb_morts;
-    double prop_confine;// nombre de personnes mortes
+    int nb_morts;       // nombre de personnes mortes
+    double prop_confine; //nouvelle proportion de confinement
 } t_liste_personnes;
 /*=========================================================*/
 
