@@ -26,7 +26,6 @@ int main(void) {
     const int NB_PERSONNES = 40;     /* Nombre de personnes */
     const double LARGEUR = 100;     /* Largeur du quartier (mètres) */
     const double HAUTEUR = 100;     /* Hauteur du quartier (mètres) */
-    const double PROP_CONFINEMENT = 0.1; /* Proportion de confinement */
     const int INTERVALLE_AFFICHAGE = 100; /* Afficher toutes les 24 heures */
 
     /* Statistiques */
