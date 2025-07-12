@@ -54,4 +54,7 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="\\Mac\Home\Downloads\config_simulations.txt" />
+  </ItemGroup>
 </Project>

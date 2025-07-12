@@ -46,7 +46,7 @@ int ajouter_des_personnes(t_liste_personnes* liste, int nb, double largeur, doub
 /*fonction permettant de creer le premier patient atteint de la maladie sans infection par contact avec une personne infecte*/
 
 int creer_patient_zero(t_liste_personnes* liste) {
-    if (liste->nb_sains == 0 | liste->nb_malades > 0) {
+    if (liste->nb_sains == 0 || liste->nb_malades > 0) {
         return 0;
     }
     int idx = randi(liste->nb_personnes) - 1;
@@ -280,5 +280,65 @@ double modifier_confinement(t_liste_personnes* liste, double nouvelle_prop) {
 
 /*=========================================================*/
 
+double calculer_prob_moyenne(const t_liste_personnes* liste, const char* type) {
+    double somme = 0.0;
+    int nb_vivants = liste->nb_personnes - liste->nb_morts;
+    for (int i = 0; i < nb_vivants; i++) {
+        if (strcmp(type, "deplacer") == 0) {
+            somme += get_prob_deplacer(&liste->liste[i]);
+        }
+        else if (strcmp(type, "infection") == 0) {
+            somme += get_prob_infection(&liste->liste[i]);
+        }
+        else if (strcmp(type, "mort") == 0) {
+            somme += get_prob_mort(&liste->liste[i]);
+        }
+    }
+    return (nb_vivants > 0) ? somme / nb_vivants : 0.0;
+}
 
+
+
+int simuler_pandemie(double hauteur, double largeur, int population, double prop_initial, int periode_affichage, FILE* log) {
+    /* Initialisation de la liste */
+    t_liste_personnes liste = creer_liste_personnes(population);
+    ajouter_des_personnes(&liste, population, largeur, hauteur, prop_initial);
+    creer_patient_zero(&liste);
+    int heures  = 0;
+
+    /* Écriture de la première ligne du log */
+    fprintf(log, "%.2f %.2f %d %.2f %d\n", hauteur, largeur, population, prop_initial, periode_affichage);
+
+    /* Boucle de simulation */
+    while (get_nb_malades(&liste) > 0 && get_nb_morts(&liste) < population) {
+        simuler_une_heure_pandemie(&liste, largeur, hauteur);
+
+        /* Stratégie de confinement : faible -> forte si malades > PROP_MALADES_CHANGEMENT */
+        if (get_prop_malades(&liste) > PROP_MALADES_CHANGEMENT && get_prop_morts(&liste) > PROP_MORTS_CHANGEMENT) {
+            modifier_confinement(&liste, NOUVELLE_PROP);
+
+        }
+
+        /* Écriture périodique dans le log */
+        if (heures % periode_affichage == 0) {
+            fprintf(log, "%d %d %d %d %.3f %.3f %.3f\n",
+                heures, get_nb_sains(&liste), get_nb_malades(&liste), get_nb_morts(&liste),
+                calculer_prob_moyenne(&liste, "deplacer"),
+                calculer_prob_moyenne(&liste, "infection"),
+                calculer_prob_moyenne(&liste, "mort"));
+        }
+
+    }
+
+    /* Écriture de la dernière ligne du log */
+    fprintf(log, "%d %d %d %d %.3f %.3f %.3f\n",
+        heures, get_nb_sains(&liste), get_nb_malades(&liste), get_nb_morts(&liste),
+        calculer_prob_moyenne(&liste, "deplacer"),
+        calculer_prob_moyenne(&liste, "infection"),
+        calculer_prob_moyenne(&liste, "mort"));
+
+    /* Libération de la mémoire */
+    liberer_liste(&liste);
+
+}
 
