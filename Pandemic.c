@@ -9,7 +9,7 @@
 #include "m_R2.h"
 #include "m_R3.h"
 
-
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -72,7 +72,6 @@ int main_old(void) {
 
         simuler_une_heure_pandemie(&liste, LARGEUR, HAUTEUR);
        
-
         /* Mise à jour des statistiques */
         total_infections += infections_heure;
         max_infections_heure = infections_heure > max_infections_heure ? infections_heure : max_infections_heure;
@@ -123,6 +122,9 @@ int main(void) {
     int intervalle_affich = 0; /* Afficher toutes les 24 heures */
     int nb_simulations = 0;
     char prefixe[12];
+    char nom_fichier[256];
+    nom_fichier[0] = '\0';
+    char sim_courante[sizeof(int) * 4];
 
     FILE* config;
     FILE* log;
@@ -143,6 +145,7 @@ int main(void) {
 
     /* Lecture des conditions initiales*/
     for (int i = 0; i < nb_simulations; ++i) {
+        printf("");
         if (fscanf(config, "%lf %lf %d %lf %d",
             &hauteur,
             &largeur,
@@ -154,6 +157,12 @@ int main(void) {
             return 1;
         }
         
+        /*Création du fichier texte*/
+        sprintf(sim_courante, "%d", i);
+        strcpy(nom_fichier, prefixe);
+        strcat(nom_fichier, sim_courante);
+        log = fopen(strcat(nom_fichier, ".txt"), "w");
+
         simuler_pandemie(largeur, hauteur, nb_personnes, prop_initiale, intervalle_affich, log);
     }
 

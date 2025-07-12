@@ -11,7 +11,6 @@
 
 
 
-#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -285,7 +284,7 @@ double calculer_prob_moyenne(const t_liste_personnes* liste, const char* type) {
     int nb_vivants = liste->nb_personnes - liste->nb_morts;
     for (int i = 0; i < nb_vivants; i++) {
         if (strcmp(type, "deplacer") == 0) {
-            somme += get_prob_deplacer(&liste->liste[i]);
+            somme += get_prob_deplacement(&liste->liste[i]);
         }
         else if (strcmp(type, "infection") == 0) {
             somme += get_prob_infection(&liste->liste[i]);
@@ -299,22 +298,35 @@ double calculer_prob_moyenne(const t_liste_personnes* liste, const char* type) {
 
 
 
-int simuler_pandemie(double hauteur, double largeur, int population, double prop_initial, int periode_affichage, FILE* log) {
+void simuler_pandemie(double hauteur, double largeur, int population, double prop_initial, int periode_affichage, FILE* log) {
+    int heures  = 0;
+    int total_infections = 0;
+    int max_infections_heure = 0;
+    int min_infections_heure = 0;
+    int total_morts = 0;
+    int max_morts_heure = 0;
+    int min_morts_heure = 0;
+    
     /* Initialisation de la liste */
     t_liste_personnes liste = creer_liste_personnes(population);
     ajouter_des_personnes(&liste, population, largeur, hauteur, prop_initial);
     creer_patient_zero(&liste);
-    int heures  = 0;
-    
-    /* Écriture de la première ligne du log */
-    log = fopen("filename.txt", "a");
 
     /* Écriture de la première ligne du log */
-    fprintf(log, "%.2f %.2f %d %.2f %d\n", hauteur, largeur, population, prop_initial, periode_affichage);
+    fprintf(log, "Hauteur %.2f Largeur %.2f %d %.2f %d\n", hauteur, largeur, population, prop_initial, periode_affichage);
 
     /* Boucle de simulation */
     while (get_nb_malades(&liste) > 0 && get_nb_morts(&liste) < population) {
+        ++heures;
+        int infections_heure = traiter_contacts(&liste);
+        int morts_heure = terminer_maladie(&liste);
+        
         simuler_une_heure_pandemie(&liste, largeur, hauteur);
+
+        /* Mise à jour des statistiques */
+        total_infections += infections_heure;
+        max_infections_heure = infections_heure > max_infections_heure ? infections_heure : max_infections_heure;
+        min_infections_heure = infections_heure < min_infections_heure ? infections_heure : min_infections_heure;
 
         /* Stratégie de confinement : faible -> forte si malades > PROP_MALADES_CHANGEMENT */
         if (get_prop_malades(&liste) > PROP_MALADES_CHANGEMENT && get_prop_morts(&liste) > PROP_MORTS_CHANGEMENT) {
@@ -324,7 +336,7 @@ int simuler_pandemie(double hauteur, double largeur, int population, double prop
 
         /* Écriture périodique dans le log */
         if (heures % periode_affichage == 0) {
-            fprintf(log, "%d %d %d %d %.3f %.3f %.3f\n",
+            fprintf(log, "\nHeure=%d: Sains=%d, Malades=%d, Morts=%d, Moy deplacement=%.3f, Moy infection=%.3f, Moy mort=%.3f \n",
                 heures, get_nb_sains(&liste), get_nb_malades(&liste), get_nb_morts(&liste),
                 calculer_prob_moyenne(&liste, "deplacer"),
                 calculer_prob_moyenne(&liste, "infection"),
