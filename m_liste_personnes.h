@@ -132,6 +132,12 @@ int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double 
   */
 double modifier_confinement(t_liste_personnes* liste, double nouvelle_prop);
 
+/*SIMULER_PANDEMIE
+* DESCRIPTION PROVISOIRE
+* 
+* Fait une simulation complète d'une pandémie, puis enregistre le résultat dans un fichier
+*/
+int simuler_pandemie(double hauteur, double largeur, int population, double prop_initial, int periode_affichage, FILE* log);
 
 /* INFORMATICES */
 int get_nb_personnes(const t_liste_personnes* liste);

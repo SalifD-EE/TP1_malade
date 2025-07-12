@@ -11,7 +11,7 @@
 
 
 
-
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -305,6 +305,9 @@ int simuler_pandemie(double hauteur, double largeur, int population, double prop
     ajouter_des_personnes(&liste, population, largeur, hauteur, prop_initial);
     creer_patient_zero(&liste);
     int heures  = 0;
+    
+    /* Écriture de la première ligne du log */
+    log = fopen("filename.txt", "a");
 
     /* Écriture de la première ligne du log */
     fprintf(log, "%.2f %.2f %d %.2f %d\n", hauteur, largeur, population, prop_initial, periode_affichage);
@@ -337,8 +340,7 @@ int simuler_pandemie(double hauteur, double largeur, int population, double prop
         calculer_prob_moyenne(&liste, "infection"),
         calculer_prob_moyenne(&liste, "mort"));
 
-    /* Libération de la mémoire */
     liberer_liste(&liste);
-
+    fclose(log);
 }
 
