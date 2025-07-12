@@ -22,12 +22,12 @@ int main(void) {
     srand_sys();
 
     /* Paramètres de la simulation */
-    const int TAILLE_LISTE = 401;     /* Capacité initiale */
-    const int NB_PERSONNES = 400;     /* Nombre de personnes */
+    const int TAILLE_LISTE = 41;     /* Capacité initiale */
+    const int NB_PERSONNES = 40;     /* Nombre de personnes */
     const double LARGEUR = 100;     /* Largeur du quartier (mètres) */
     const double HAUTEUR = 100;     /* Hauteur du quartier (mètres) */
-    const double PROP_CONFINEMENT = 0.3; /* Proportion de confinement */
-    const int INTERVALLE_AFFICHAGE = 24; /* Afficher toutes les 24 heures */
+    const double PROP_CONFINEMENT = 0.1; /* Proportion de confinement */
+    const int INTERVALLE_AFFICHAGE = 100; /* Afficher toutes les 24 heures */
 
     /* Statistiques */
     int heures = 0;
@@ -60,7 +60,7 @@ int main(void) {
  
     /* Boucle de simulation */
     while (get_nb_malades(&liste) > 0 ) {
-        heures++;
+        ++heures;
         int infections_heure = traiter_contacts(&liste, PROP_CONFINEMENT);
         int morts_heure = terminer_maladie(&liste, PROP_CONFINEMENT); 
 
@@ -94,7 +94,7 @@ int main(void) {
     printf("  Total morts : %d\n", total_morts);
     printf("  Max morts/heure : %d\n", max_morts_heure);
     printf("  Min morts/heure : %d\n", min_morts_heure);
-    printf("  Moyenne morts/heure : %.2f\n", heures > 0 ? (double)total_morts / heures : 0.000);
+    printf("  Moyenne morts/heure : %.10f\n", heures > 0 ? (double)total_morts / heures : 0.000);
     //afficher_liste_personnes(&liste);
 
     /* Libération de la mémoire */
