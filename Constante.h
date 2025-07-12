@@ -10,6 +10,8 @@
 #define NB_HRS_MALADIE     15*24    // nombre d'heures de maladie 
 #define NB_HRS_TRANSMISSION 2*24 /* Minimum d'heures pour transmission */
 
+#define PROP_MALADES_CHANGEMENT 0.005
+#define PROP_MORTS_CHANGEMENT 0.005
 
 #define PROP_CONFINEMENT  0.3
 #define NOUVELLE_PROP 0.8
