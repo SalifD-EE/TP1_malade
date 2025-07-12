@@ -135,7 +135,7 @@ double modifier_confinement(t_liste_personnes* liste, double nouvelle_prop);
 /*SIMULER_PANDEMIE
 * DESCRIPTION PROVISOIRE
 * 
-* Fait une simulation complète d'une pandémie, puis enregistre le résultat dans un fichier
+* Fait une simulation complète d'une pandémie, puis enregistre le résultat dans un fichier.
 */
 void simuler_pandemie(double hauteur, double largeur, int population, double prop_initial, int periode_affichage, FILE* log);
 
@@ -146,7 +146,7 @@ int get_nb_sains(const t_liste_personnes* liste);
 int get_nb_morts(const t_liste_personnes* liste);
 double get_confinement(const t_liste_personnes* liste);
 
-//Les fonctions suivantes retournent -1 s'il n'y a personne dans la liste.
+//Les fonctions suivantes retournent 0 s'il n'y a personne dans la liste.
 double get_prop_malades(const t_liste_personnes* liste);
 double get_prop_morts(const t_liste_personnes* liste);
 
