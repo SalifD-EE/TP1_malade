@@ -1,174 +1,26 @@
-Hauteur=500.000000, Largeur=500.000000, Population=1000, Prop initiale=0.100000, Periode=150
+Hauteur=500.000000, Largeur=500.000000, Population=100, Prop initiale=0.100000, Periode=150
 
-Heure=150: Sains=995, Malades=5, Morts=0, Moy deplacement=0.801, Moy infection=0.002, Moy mort=0.055, Prop confinement=0.100
+Heure=150: Sains=97, Malades=3, Morts=0, Moy deplacement=0.632, Moy infection=0.012, Moy mort=0.061, Prop confinement=0.300
 
-Heure=300: Sains=969, Malades=31, Morts=0, Moy deplacement=0.656, Moy infection=0.012, Moy mort=0.055, Prop confinement=0.300
+Heure=300: Sains=92, Malades=8, Morts=0, Moy deplacement=0.670, Moy infection=0.032, Moy mort=0.061, Prop confinement=0.300
 
-Heure=450: Sains=772, Malades=228, Morts=0, Moy deplacement=0.624, Moy infection=0.091, Moy mort=0.055, Prop confinement=0.300
+Heure=450: Sains=91, Malades=9, Morts=0, Moy deplacement=0.660, Moy infection=0.036, Moy mort=0.061, Prop confinement=0.300
 
-Heure=600: Sains=220, Malades=779, Morts=1, Moy deplacement=0.637, Moy infection=0.311, Moy mort=0.055, Prop confinement=0.300
+Heure=600: Sains=90, Malades=8, Morts=2, Moy deplacement=0.688, Moy infection=0.033, Moy mort=0.054, Prop confinement=0.300
 
-Heure=750: Sains=46, Malades=949, Morts=5, Moy deplacement=0.642, Moy infection=0.369, Moy mort=0.053, Prop confinement=0.300
+Heure=750: Sains=92, Malades=6, Morts=2, Moy deplacement=0.577, Moy infection=0.024, Moy mort=0.054, Prop confinement=0.300
 
-Heure=900: Sains=176, Malades=794, Morts=30, Moy deplacement=0.629, Moy infection=0.255, Moy mort=0.044, Prop confinement=0.300
+Heure=900: Sains=94, Malades=4, Morts=2, Moy deplacement=0.664, Moy infection=0.016, Moy mort=0.054, Prop confinement=0.300
 
-Heure=1050: Sains=190, Malades=758, Morts=52, Moy deplacement=0.644, Moy infection=0.167, Moy mort=0.035, Prop confinement=0.300
+Heure=1050: Sains=95, Malades=2, Morts=3, Moy deplacement=0.492, Moy infection=0.008, Moy mort=0.047, Prop confinement=0.500
 
-Heure=1200: Sains=155, Malades=782, Morts=63, Moy deplacement=0.648, Moy infection=0.160, Moy mort=0.029, Prop confinement=0.300
-
-Heure=1350: Sains=280, Malades=649, Morts=71, Moy deplacement=0.649, Moy infection=0.117, Moy mort=0.025, Prop confinement=0.300
-
-Heure=1500: Sains=298, Malades=622, Morts=80, Moy deplacement=0.630, Moy infection=0.096, Moy mort=0.022, Prop confinement=0.300
-
-Heure=1650: Sains=291, Malades=623, Morts=86, Moy deplacement=0.649, Moy infection=0.090, Moy mort=0.022, Prop confinement=0.300
-
-Heure=1800: Sains=315, Malades=590, Morts=95, Moy deplacement=0.650, Moy infection=0.079, Moy mort=0.021, Prop confinement=0.300
-
-Heure=1950: Sains=340, Malades=560, Morts=100, Moy deplacement=0.623, Moy infection=0.069, Moy mort=0.021, Prop confinement=0.300
-
-Heure=2100: Sains=370, Malades=525, Morts=105, Moy deplacement=0.626, Moy infection=0.061, Moy mort=0.020, Prop confinement=0.300
-
-Heure=2250: Sains=412, Malades=476, Morts=112, Moy deplacement=0.638, Moy infection=0.052, Moy mort=0.019, Prop confinement=0.300
-
-Heure=2400: Sains=456, Malades=427, Morts=117, Moy deplacement=0.638, Moy infection=0.045, Moy mort=0.019, Prop confinement=0.300
-
-Heure=2550: Sains=463, Malades=416, Morts=121, Moy deplacement=0.659, Moy infection=0.041, Moy mort=0.019, Prop confinement=0.300
-
-Heure=2700: Sains=462, Malades=414, Morts=124, Moy deplacement=0.654, Moy infection=0.040, Moy mort=0.019, Prop confinement=0.300
-
-Heure=2850: Sains=458, Malades=414, Morts=128, Moy deplacement=0.650, Moy infection=0.039, Moy mort=0.018, Prop confinement=0.300
-
-Heure=3000: Sains=540, Malades=329, Morts=131, Moy deplacement=0.656, Moy infection=0.030, Moy mort=0.018, Prop confinement=0.300
-
-Heure=3150: Sains=543, Malades=323, Morts=134, Moy deplacement=0.664, Moy infection=0.028, Moy mort=0.017, Prop confinement=0.300
-
-Heure=3300: Sains=546, Malades=316, Morts=138, Moy deplacement=0.653, Moy infection=0.027, Moy mort=0.017, Prop confinement=0.300
-
-Heure=3450: Sains=555, Malades=305, Morts=140, Moy deplacement=0.635, Moy infection=0.025, Moy mort=0.016, Prop confinement=0.300
-
-Heure=3600: Sains=558, Malades=300, Morts=142, Moy deplacement=0.656, Moy infection=0.024, Moy mort=0.016, Prop confinement=0.300
-
-Heure=3750: Sains=561, Malades=297, Morts=142, Moy deplacement=0.651, Moy infection=0.023, Moy mort=0.016, Prop confinement=0.300
-
-Heure=3900: Sains=582, Malades=274, Morts=144, Moy deplacement=0.634, Moy infection=0.021, Moy mort=0.016, Prop confinement=0.300
-
-Heure=4050: Sains=604, Malades=250, Morts=146, Moy deplacement=0.631, Moy infection=0.019, Moy mort=0.016, Prop confinement=0.300
-
-Heure=4200: Sains=601, Malades=252, Morts=147, Moy deplacement=0.635, Moy infection=0.019, Moy mort=0.016, Prop confinement=0.300
-
-Heure=4350: Sains=597, Malades=256, Morts=147, Moy deplacement=0.617, Moy infection=0.019, Moy mort=0.016, Prop confinement=0.300
-
-Heure=4500: Sains=601, Malades=249, Morts=150, Moy deplacement=0.631, Moy infection=0.018, Moy mort=0.016, Prop confinement=0.300
-
-Heure=4650: Sains=609, Malades=241, Morts=150, Moy deplacement=0.630, Moy infection=0.017, Moy mort=0.016, Prop confinement=0.300
-
-Heure=4800: Sains=619, Malades=231, Morts=150, Moy deplacement=0.645, Moy infection=0.016, Moy mort=0.016, Prop confinement=0.300
-
-Heure=4950: Sains=634, Malades=216, Morts=150, Moy deplacement=0.639, Moy infection=0.015, Moy mort=0.016, Prop confinement=0.300
-
-Heure=5100: Sains=641, Malades=209, Morts=150, Moy deplacement=0.636, Moy infection=0.014, Moy mort=0.016, Prop confinement=0.300
-
-Heure=5250: Sains=653, Malades=194, Morts=153, Moy deplacement=0.641, Moy infection=0.013, Moy mort=0.016, Prop confinement=0.300
-
-Heure=5400: Sains=660, Malades=185, Morts=155, Moy deplacement=0.628, Moy infection=0.012, Moy mort=0.015, Prop confinement=0.300
-
-Heure=5550: Sains=683, Malades=161, Morts=156, Moy deplacement=0.632, Moy infection=0.010, Moy mort=0.015, Prop confinement=0.300
-
-Heure=5700: Sains=693, Malades=151, Morts=156, Moy deplacement=0.630, Moy infection=0.010, Moy mort=0.015, Prop confinement=0.300
-
-Heure=5850: Sains=719, Malades=122, Morts=159, Moy deplacement=0.638, Moy infection=0.008, Moy mort=0.015, Prop confinement=0.300
-
-Heure=6000: Sains=737, Malades=104, Morts=159, Moy deplacement=0.643, Moy infection=0.007, Moy mort=0.015, Prop confinement=0.300
-
-Heure=6150: Sains=728, Malades=113, Morts=159, Moy deplacement=0.619, Moy infection=0.007, Moy mort=0.015, Prop confinement=0.300
-
-Heure=6300: Sains=733, Malades=108, Morts=159, Moy deplacement=0.637, Moy infection=0.007, Moy mort=0.015, Prop confinement=0.300
-
-Heure=6450: Sains=732, Malades=109, Morts=159, Moy deplacement=0.637, Moy infection=0.007, Moy mort=0.015, Prop confinement=0.300
-
-Heure=6600: Sains=737, Malades=103, Morts=160, Moy deplacement=0.628, Moy infection=0.006, Moy mort=0.015, Prop confinement=0.300
-
-Heure=6750: Sains=741, Malades=98, Morts=161, Moy deplacement=0.638, Moy infection=0.006, Moy mort=0.015, Prop confinement=0.300
-
-Heure=6900: Sains=748, Malades=89, Morts=163, Moy deplacement=0.649, Moy infection=0.006, Moy mort=0.014, Prop confinement=0.300
-
-Heure=7050: Sains=748, Malades=88, Morts=164, Moy deplacement=0.637, Moy infection=0.005, Moy mort=0.014, Prop confinement=0.300
-
-Heure=7200: Sains=734, Malades=102, Morts=164, Moy deplacement=0.644, Moy infection=0.006, Moy mort=0.014, Prop confinement=0.300
-
-Heure=7350: Sains=728, Malades=106, Morts=166, Moy deplacement=0.654, Moy infection=0.006, Moy mort=0.013, Prop confinement=0.300
-
-Heure=7500: Sains=740, Malades=93, Morts=167, Moy deplacement=0.656, Moy infection=0.005, Moy mort=0.013, Prop confinement=0.300
-
-Heure=7650: Sains=746, Malades=87, Morts=167, Moy deplacement=0.647, Moy infection=0.005, Moy mort=0.013, Prop confinement=0.300
-
-Heure=7800: Sains=752, Malades=81, Morts=167, Moy deplacement=0.619, Moy infection=0.005, Moy mort=0.013, Prop confinement=0.300
-
-Heure=7950: Sains=759, Malades=74, Morts=167, Moy deplacement=0.650, Moy infection=0.004, Moy mort=0.013, Prop confinement=0.300
-
-Heure=8100: Sains=763, Malades=69, Morts=168, Moy deplacement=0.648, Moy infection=0.004, Moy mort=0.013, Prop confinement=0.300
-
-Heure=8250: Sains=756, Malades=75, Morts=169, Moy deplacement=0.648, Moy infection=0.004, Moy mort=0.013, Prop confinement=0.300
-
-Heure=8400: Sains=762, Malades=69, Morts=169, Moy deplacement=0.642, Moy infection=0.004, Moy mort=0.013, Prop confinement=0.300
-
-Heure=8550: Sains=768, Malades=62, Morts=170, Moy deplacement=0.661, Moy infection=0.004, Moy mort=0.013, Prop confinement=0.300
-
-Heure=8700: Sains=771, Malades=58, Morts=171, Moy deplacement=0.638, Moy infection=0.003, Moy mort=0.013, Prop confinement=0.300
-
-Heure=8850: Sains=784, Malades=45, Morts=171, Moy deplacement=0.645, Moy infection=0.003, Moy mort=0.013, Prop confinement=0.300
-
-Heure=9000: Sains=781, Malades=47, Morts=172, Moy deplacement=0.647, Moy infection=0.003, Moy mort=0.013, Prop confinement=0.300
-
-Heure=9150: Sains=785, Malades=43, Morts=172, Moy deplacement=0.634, Moy infection=0.003, Moy mort=0.013, Prop confinement=0.300
-
-Heure=9300: Sains=793, Malades=35, Morts=172, Moy deplacement=0.636, Moy infection=0.002, Moy mort=0.013, Prop confinement=0.300
-
-Heure=9450: Sains=806, Malades=22, Morts=172, Moy deplacement=0.657, Moy infection=0.001, Moy mort=0.013, Prop confinement=0.300
-
-Heure=9600: Sains=809, Malades=19, Morts=172, Moy deplacement=0.488, Moy infection=0.001, Moy mort=0.013, Prop confinement=0.500
-
-Heure=9750: Sains=809, Malades=19, Morts=172, Moy deplacement=0.484, Moy infection=0.001, Moy mort=0.013, Prop confinement=0.500
-
-Heure=9900: Sains=809, Malades=19, Morts=172, Moy deplacement=0.506, Moy infection=0.001, Moy mort=0.013, Prop confinement=0.500
-
-Heure=10050: Sains=810, Malades=18, Morts=172, Moy deplacement=0.512, Moy infection=0.001, Moy mort=0.013, Prop confinement=0.500
-
-Heure=10200: Sains=813, Malades=15, Morts=172, Moy deplacement=0.502, Moy infection=0.001, Moy mort=0.013, Prop confinement=0.500
-
-Heure=10350: Sains=819, Malades=9, Morts=172, Moy deplacement=0.481, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=10500: Sains=822, Malades=6, Morts=172, Moy deplacement=0.519, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=10650: Sains=824, Malades=4, Morts=172, Moy deplacement=0.460, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=10800: Sains=826, Malades=2, Morts=172, Moy deplacement=0.512, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=10950: Sains=826, Malades=2, Morts=172, Moy deplacement=0.489, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=11100: Sains=823, Malades=5, Morts=172, Moy deplacement=0.479, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=11250: Sains=824, Malades=4, Morts=172, Moy deplacement=0.489, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=11400: Sains=826, Malades=2, Morts=172, Moy deplacement=0.501, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=11550: Sains=823, Malades=5, Morts=172, Moy deplacement=0.478, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=11700: Sains=824, Malades=4, Morts=172, Moy deplacement=0.485, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=11850: Sains=824, Malades=4, Morts=172, Moy deplacement=0.484, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=12000: Sains=825, Malades=2, Morts=173, Moy deplacement=0.498, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Heure=12150: Sains=826, Malades=1, Morts=173, Moy deplacement=0.466, Moy infection=0.000, Moy mort=0.013, Prop confinement=0.500
-
-Simulation terminee apres 12178 heures.
+Simulation terminee apres 1192 heures.
 Statistiques finales :
-  Total infections : 7053
-  Max infections/heure : 9
+  Total infections : 15
+  Max infections/heure : 1
   Min infections/heure : 0
-  Moyenne infections/heure : 0.58
-  Total morts : 173
+  Moyenne infections/heure : 0.01
+  Total morts : 3
   Max morts/heure : 0
   Min morts/heure : 0
-  Moyenne morts/heure : 0.0142059451
+  Moyenne morts/heure : 0.0025167785

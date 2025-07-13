@@ -27,7 +27,48 @@ t_liste_personnes creer_liste_personnes(int taille) {
     liste.prop_confine = PROP_CONFINEMENT_BAS;
     return liste;
 }
+/*=========================================================*/
+/*=============== FONCTION INFORMATRICES ==================*/
+/*=========================================================*/
 
+/*=========================================================*/
+int get_nb_personnes(const t_liste_personnes* liste) {
+    return liste->nb_personnes;
+}
+
+/*=========================================================*/
+int get_nb_malades(const t_liste_personnes* liste) {
+    return liste->nb_malades;
+}
+
+/*=========================================================*/
+int get_nb_sains(const t_liste_personnes* liste) {
+    return liste->nb_sains;
+}
+
+/*=========================================================*/
+int get_nb_morts(const t_liste_personnes* liste) {
+    return liste->nb_morts;
+}
+
+/*=========================================================*/
+double get_confinement(const t_liste_personnes* liste) {
+    return liste->prop_confine;
+}
+
+/*=========================================================*/
+double get_prop_malades(const t_liste_personnes* liste) {
+    return (liste->nb_personnes > 0) ? (double)liste->nb_malades / liste->nb_personnes : 0;
+}
+
+/*=========================================================*/
+double get_prop_morts(const t_liste_personnes* liste) {
+    return (liste->nb_personnes > 0) ? (double)liste->nb_morts / liste->nb_personnes : 0;
+}
+
+/*=========================================================*/
+/*=============== FONCTION MUTATRICES =====================*/
+/*=========================================================*/
 
 /*=========================================================*/
 int ajouter_des_personnes(t_liste_personnes* liste, int nb, double largeur, double hauteur, double prop_confinement) {
@@ -192,41 +233,6 @@ int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double 
 }
 
 /*=========================================================*/
-int get_nb_personnes(const t_liste_personnes* liste) {
-    return liste->nb_personnes;
-}
-
-/*=========================================================*/
-int get_nb_malades(const t_liste_personnes* liste) {
-    return liste->nb_malades;
-}
-
-/*=========================================================*/
-int get_nb_sains(const t_liste_personnes* liste) {
-    return liste->nb_sains;
-}
-
-/*=========================================================*/
-int get_nb_morts(const t_liste_personnes* liste) {
-    return liste->nb_morts;
-}
-
-/*=========================================================*/
-double get_confinement(const t_liste_personnes* liste) {
-    return liste->prop_confine;
-}
-
-/*=========================================================*/
-double get_prop_malades(const t_liste_personnes* liste) {
-    return (liste->nb_personnes > 0) ? (double)liste->nb_malades / liste->nb_personnes : 0;
-}
-
-/*=========================================================*/
-double get_prop_morts(const t_liste_personnes* liste) {
-    return (liste->nb_personnes > 0) ? (double)liste->nb_morts / liste->nb_personnes : 0;
-}
-
-/*=========================================================*/
 void afficher_liste_personnes(const t_liste_personnes* liste) {
     printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts, prop_confine=%.2f):\n",
         liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts, liste->prop_confine);
@@ -235,7 +241,6 @@ void afficher_liste_personnes(const t_liste_personnes* liste) {
         afficher_personne(&liste->liste[i]);
     }
 }
-
 
 /*=========================================================*/
 double modifier_confinement(t_liste_personnes* liste, double nouvelle_prop) {
@@ -277,7 +282,9 @@ double calculer_prob_moyenne(const t_liste_personnes* liste, const char* type) {
     return (nb_vivants > 0) ? somme / nb_vivants : 0.0;
 }
 
-void simuler_pandemie(double hauteur, double largeur, int population, double prop_initial, int periode_affichage, FILE* log) {
+/*=========================================================*/
+
+void simuler_pandemie(double hauteur, double largeur, int population, double prop_initiale, int periode_affichage, FILE* log) {
     int heures = 0;
     int total_infections = 0;
     int max_infections_heure = 0;
@@ -290,11 +297,11 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
 
     /* Initialisation de la liste */
     t_liste_personnes liste = creer_liste_personnes(population);
-    ajouter_des_personnes(&liste, population, largeur, hauteur, prop_initial);
+    ajouter_des_personnes(&liste, population, largeur, hauteur, prop_initiale);
     creer_patient_zero(&liste);
 
     /* Écriture de la première ligne du log */
-    fprintf(log, "Hauteur=%lf, Largeur=%lf, Population=%d, Prop initiale=%lf, Periode=%d\n", hauteur, largeur, population, prop_initial, periode_affichage);
+    fprintf(log, "Hauteur=%lf, Largeur=%lf, Population=%d, Prop initiale=%lf, Periode=%d\n", hauteur, largeur, population, prop_initiale, periode_affichage);
     fflush(log);
 
     /* Boucle de simulation */
@@ -327,7 +334,7 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
             modifier_confinement(&liste, PROP_CONFINEMENT_TOTAL);
         }
         else {
-            modifier_confinement(&liste, prop_initial);
+            modifier_confinement(&liste, prop_initiale);
         }
 
         /* Écriture périodique dans le log */

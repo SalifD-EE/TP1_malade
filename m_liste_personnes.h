@@ -133,11 +133,16 @@ int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double 
 double modifier_confinement(t_liste_personnes* liste, double nouvelle_prop);
 
 /*SIMULER_PANDEMIE
-* DESCRIPTION PROVISOIRE
-* 
 * Fait une simulation complète d'une pandémie, puis enregistre le résultat dans un fichier.
+* PARAMETRES : hauteur, largeur - dimensions de la région en mètres
+*              population - taille de la population
+*              prop_initiale - proportion initiale de confinement telle que définie dans config_simulations
+*              periode_affichage - période d'affichage des bilans provisoires
+*              log - pointeur vers le fichier où le log est écrit
+* RETOUR : aucun
+* SPECS : le préfixe du fichier log n'a jamais plus de 12 caractères et doit être sans caractères blancs
 */
-void simuler_pandemie(double hauteur, double largeur, int population, double prop_initial, int periode_affichage, FILE* log);
+void simuler_pandemie(double hauteur, double largeur, int population, double prop_initiale, int periode_affichage, FILE* log);
 
 /* INFORMATICES */
 int get_nb_personnes(const t_liste_personnes* liste);
