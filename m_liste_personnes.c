@@ -177,7 +177,7 @@ int traiter_contacts(t_liste_personnes* liste) {
 }
 
 /*=========================================================*/
-int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double hauteur) {
+int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double hauteur, int* infection_heure, int* morts_heure) {
     /* Séquence :
        1. Déplacer les personnes vivantes
        2. Traiter les contacts et infections
@@ -185,9 +185,9 @@ int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double 
        4. Gérer les rétablissements et décès
     */
     deplacer_les_personnes(liste, largeur, hauteur);
-    traiter_contacts(liste);
+    *infection_heure = traiter_contacts(liste);
     assurer_temps_maladie(liste);
-    terminer_maladie(liste);
+    *morts_heure = terminer_maladie(liste);
     return get_nb_malades(liste);
 }
 
@@ -285,6 +285,8 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
     int total_morts = 0;
     int max_morts_heure = 0;
     int min_morts_heure = 0;
+    int infections_heure = 0;
+    int morts_heure = 0;
 
     /* Initialisation de la liste */
     t_liste_personnes liste = creer_liste_personnes(population);
@@ -298,12 +300,10 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
     /* Boucle de simulation */
     while (get_nb_malades(&liste) > 0 && get_nb_morts(&liste) < population) {
         ++heures;
-        int infections_heure = traiter_contacts(&liste);
-        int morts_heure = terminer_maladie(&liste);
         double prop_malades = get_prop_malades(&liste);
         double prop_morts = get_prop_morts(&liste);
 
-        simuler_une_heure_pandemie(&liste, largeur, hauteur);
+        simuler_une_heure_pandemie(&liste, largeur, hauteur, &infections_heure, &morts_heure);
 
         /* Mise à jour des statistiques */
         total_infections += infections_heure;
@@ -339,7 +339,7 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
                 calculer_prob_moyenne(&liste, "mort"),
                 get_confinement(&liste));
             fflush(log);
-            max_morts_heure = get_nb_morts(&liste) > max_morts_heure ? get_nb_morts(&liste) : max_morts_heure;
+            max_morts_heure = morts_heure > max_morts_heure ? morts_heure : max_morts_heure;
         }
 
     }

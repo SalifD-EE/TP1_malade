@@ -9,7 +9,6 @@
 #include "m_R2.h"
 #include "m_R3.h"
 
-#include <omp.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -152,7 +151,7 @@ int main(void) {
     for (int i = 0; i < nb_simulations; ++i) {
         printf("\nExecution de la simulation %d ...\n", i);
         
-        /* Lecture des conditions initiales*/
+        /* Lecture des conditions initiales */
         if (fscanf(config, "%lf %lf %d %lf %d",
             &hauteur,
             &largeur,
@@ -177,6 +176,7 @@ int main(void) {
             return 1;
         }
 
+        /* Début de la simulation */
         simuler_pandemie(largeur, hauteur, nb_personnes, prop_initiale, intervalle_affich, log);
 
         fclose(log);

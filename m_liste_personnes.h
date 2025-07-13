@@ -122,10 +122,10 @@ int traiter_contacts(t_liste_personnes* liste);
    RETOUR : nombre de malades actuels
    SPECS : définit la séquence des appels
 */
-int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double hauteur);
+int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double hauteur, int* infection_heure, int* morts_heure);
 
 /*MODIFIER_CONFINEMENT
-  ajuste la proportion de confinement de la population en fonction de l etat de santw de la personne
+  ajuste la proportion de confinement de la population en fonction de l etat de sante de la personne
   PARAMETRES : liste - pointeur sur la liste
              nouvelle_prop - nouvelle propriete de confinement
   RETOUR : moyenne de la proababilite de mouvement des personnes vivantes
