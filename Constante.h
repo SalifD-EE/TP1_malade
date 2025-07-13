@@ -1,7 +1,7 @@
 ﻿#ifndef _CONSTANTE_2025_1571_
 #define _CONSTANTE_2025_1571_
 
-#define SWITCH 0 //permet de passer de la simultation avec lecture de fichoier texte a l ancien mode de simulation
+#define MODE_SIMULATION 1 //1 = Sortie dans fichiers log, 0 = Sortie dans console
 
 #define M_PI 3.1416922653589793
 #define INC_CAT_AGE      10     //écart entre chaque tranche d'age suivante
@@ -12,11 +12,24 @@
 #define NB_HRS_MALADIE     15*24    // nombre d'heures de maladie 
 #define NB_HRS_TRANSMISSION 2*24 /* Minimum d'heures pour transmission */
 
-#define PROP_MALADES_CHANGEMENT 0.005
-#define PROP_MORTS_CHANGEMENT 0.005
+//Définition des paliers qui causent les changements de confinement
+#define PALIER_MALADES_1 0.02
+#define PALIER_MORTS_1 0.00
 
-#define PROP_CONFINEMENT  0.3
-#define NOUVELLE_PROP 1.0
+#define PALIER_MALADES_2 0.10
+#define PALIER_MORTS_2 0.01
+
+#define PALIER_MALADES_3 0.30
+#define PALIER_MORTS_3 0.03
+
+#define PALIER_MALADES_4 0.50
+#define PALIER_MORTS_4 0.08
+
+//Définition des proportions de confinement
+#define PROP_CONFINEMENT_BAS  0.3
+#define PROP_CONFINEMENT_INTERMEDIAIRE  0.5
+#define PROP_CONFINEMENT_ELEVE  0.8
+#define PROP_CONFINEMENT_TOTAL 1.0
 
 
 /* uniquement pour  établir la norme du vecteur vitesse */

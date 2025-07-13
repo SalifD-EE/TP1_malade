@@ -18,7 +18,7 @@
 /*=========================================================*/
 
 /*=========================================================*/
-#if (SWITCH) == 0 
+#if (MODE_SIMULATION) == 0 
 int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();
@@ -115,7 +115,7 @@ int main(void) {
 #endif
 
 
-#if (SWITCH) == 1
+#if (MODE_SIMULATION) == 1
 int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();

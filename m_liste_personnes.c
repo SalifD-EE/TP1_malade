@@ -24,7 +24,7 @@ t_liste_personnes creer_liste_personnes(int taille) {
     liste.nb_sains = 0;
     liste.nb_malades = 0;
     liste.nb_morts = 0;
-    liste.prop_confine = PROP_CONFINEMENT;
+    liste.prop_confine = PROP_CONFINEMENT_BAS;
     return liste;
 }
 
@@ -227,18 +227,6 @@ double get_prop_morts(const t_liste_personnes* liste) {
 }
 
 /*=========================================================*/
-/*
-void afficher_liste_personnes(const t_liste_personnes* liste) {
-    printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts):\n",
-        liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts);
-    for (int i = 0; i < liste->nb_personnes; i++) {
-        printf("Personne %d: ", i);
-        afficher_personne(&liste->liste[i]);
-    }
-}
-*/
-
-/*=========================================================*/
 void afficher_liste_personnes(const t_liste_personnes* liste) {
     printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts, prop_confine=%.2f):\n",
         liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts, liste->prop_confine);
@@ -289,68 +277,6 @@ double calculer_prob_moyenne(const t_liste_personnes* liste, const char* type) {
     return (nb_vivants > 0) ? somme / nb_vivants : 0.0;
 }
 
-
-
-//void simuler_pandemie(double hauteur, double largeur, int population, double prop_initial, int periode_affichage, FILE* log) {
-//    int heures  = 0;
-//    int total_infections = 0;
-//    int max_infections_heure = 0;
-//    int min_infections_heure = 0;
-//    int total_morts = 0;
-//    int max_morts_heure = 0;
-//    int min_morts_heure = 0;
-//    
-//    /* Initialisation de la liste */
-//    t_liste_personnes liste = creer_liste_personnes(population);
-//    ajouter_des_personnes(&liste, population, largeur, hauteur, prop_initial);
-//    creer_patient_zero(&liste);
-//
-//    /* Écriture de la première ligne du log */
-//    fprintf(log, "Hauteur %.2f Largeur %.2f %d %.2f %d\n", hauteur, largeur, population, prop_initial, periode_affichage);
-//
-//    /* Boucle de simulation */
-//    while (get_nb_malades(&liste) > 0 && get_nb_morts(&liste) < population) {
-//        ++heures;
-//        int infections_heure = traiter_contacts(&liste);
-//        int morts_heure = terminer_maladie(&liste);
-//        
-//        simuler_une_heure_pandemie(&liste, largeur, hauteur);
-//
-//        /* Mise à jour des statistiques */
-//        total_infections += infections_heure;
-//        max_infections_heure = infections_heure > max_infections_heure ? infections_heure : max_infections_heure;
-//        min_infections_heure = infections_heure < min_infections_heure ? infections_heure : min_infections_heure;
-//
-//        /* Stratégie de confinement : faible -> forte si malades > PROP_MALADES_CHANGEMENT */
-//        if (get_prop_malades(&liste) > PROP_MALADES_CHANGEMENT && get_prop_morts(&liste) > PROP_MORTS_CHANGEMENT) {
-//            modifier_confinement(&liste, NOUVELLE_PROP);
-//
-//        }
-//
-//        /* Écriture périodique dans le log */
-//        if (heures % periode_affichage == 0) {
-//            fprintf(log, "\nHeure=%d: Sains=%d, Malades=%d, Morts=%d, Moy deplacement=%.3f, Moy infection=%.3f, Moy mort=%.3f \n",
-//                heures, get_nb_sains(&liste), get_nb_malades(&liste), get_nb_morts(&liste),
-//                calculer_prob_moyenne(&liste, "deplacer"),
-//                calculer_prob_moyenne(&liste, "infection"),
-//                calculer_prob_moyenne(&liste, "mort"));
-//        }
-//
-//    }
-//
-//    /* Écriture de la dernière ligne du log */
-//    fprintf(log, "%d %d %d %d %.3f %.3f %.3f\n",
-//        heures, get_nb_sains(&liste), get_nb_malades(&liste), get_nb_morts(&liste),
-//        calculer_prob_moyenne(&liste, "deplacer"),
-//        calculer_prob_moyenne(&liste, "infection"),
-//        calculer_prob_moyenne(&liste, "mort"));
-//
-//    liberer_liste(&liste);
-//    
-//}
-
-
-
 void simuler_pandemie(double hauteur, double largeur, int population, double prop_initial, int periode_affichage, FILE* log) {
     int heures = 0;
     int total_infections = 0;
@@ -374,6 +300,8 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
         ++heures;
         int infections_heure = traiter_contacts(&liste);
         int morts_heure = terminer_maladie(&liste);
+        double prop_malades = get_prop_malades(&liste);
+        double prop_morts = get_prop_morts(&liste);
 
         simuler_une_heure_pandemie(&liste, largeur, hauteur);
 
@@ -382,18 +310,34 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
         max_infections_heure = infections_heure > max_infections_heure ? infections_heure : max_infections_heure;
         min_infections_heure = infections_heure < min_infections_heure ? infections_heure : min_infections_heure;
 
-        /* Stratégie de confinement : faible -> forte si malades > PROP_MALADES_CHANGEMENT */
-        if (get_prop_malades(&liste) > PROP_MALADES_CHANGEMENT && get_prop_morts(&liste) > PROP_MORTS_CHANGEMENT) {
-            modifier_confinement(&liste, NOUVELLE_PROP);
+        /* 
+            Stratégie de confinement : plusieurs paliers de confinement en fonction de
+            la proportion de malades et de morts
+        */
+        if (prop_malades > PALIER_MALADES_1) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_BAS);
+        }
+        else if (prop_malades > PALIER_MALADES_2 || prop_morts > PALIER_MORTS_2) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_INTERMEDIAIRE);
+        }
+        else if (prop_malades > PALIER_MALADES_3 || prop_morts > PALIER_MORTS_3) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_ELEVE);
+        }
+        else if (prop_malades > PALIER_MALADES_4 || prop_morts > PALIER_MORTS_4) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_TOTAL);
+        }
+        else {
+            modifier_confinement(&liste, prop_initial);
         }
 
         /* Écriture périodique dans le log */
         if (heures % periode_affichage == 0) {
-            fprintf(log, "\nHeure=%d: Sains=%d, Malades=%d, Morts=%d, Moy deplacement=%.3f, Moy infection=%.3f, Moy mort=%.3f \n",
+            fprintf(log, "\nHeure=%d: Sains=%d, Malades=%d, Morts=%d, Moy deplacement=%.3f, Moy infection=%.3f, Moy mort=%.3f, Prop confinement=%.3f\n",
                 heures, get_nb_sains(&liste), get_nb_malades(&liste), get_nb_morts(&liste),
                 calculer_prob_moyenne(&liste, "deplacer"),
                 calculer_prob_moyenne(&liste, "infection"),
-                calculer_prob_moyenne(&liste, "mort"));
+                calculer_prob_moyenne(&liste, "mort"),
+                get_confinement(&liste));
             fflush(log);
             max_morts_heure = get_nb_morts(&liste) > max_morts_heure ? get_nb_morts(&liste) : max_morts_heure;
         }
