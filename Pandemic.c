@@ -18,14 +18,15 @@
 /*=========================================================*/
 
 /*=========================================================*/
-int main_old(void) {
+#if (SWITCH) == 0 
+int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();
 
     /* Paramètres de la simulation */
     const int TAILLE_LISTE = 401;     /* Capacité initiale */
     const int NB_PERSONNES = 400;     /* Nombre de personnes */
-    const double LARGEUR = 100;     /* Largeur du quartier (mètres) */
+    const double LARGEUR = 1000;     /* Largeur du quartier (mètres) */
     const double HAUTEUR = 100;     /* Hauteur du quartier (mètres) */
     const int INTERVALLE_AFFICHAGE = 100; /* Afficher toutes les 24 heures */
 
@@ -111,6 +112,10 @@ int main_old(void) {
     return EXIT_SUCCESS;
 }
 
+#endif
+
+
+#if (SWITCH) == 1
 int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();
@@ -181,5 +186,7 @@ int main(void) {
 
     return EXIT_SUCCESS;
 }
+
+#endif
 
 /*=========================================================*/

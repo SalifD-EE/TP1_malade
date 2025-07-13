@@ -227,15 +227,16 @@ double get_prop_morts(const t_liste_personnes* liste) {
 }
 
 /*=========================================================*/
-
-//void afficher_liste_personnes(const t_liste_personnes* liste) {
-//    printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts):\n",
-//        liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts);
-//    for (int i = 0; i < liste->nb_personnes; i++) {
-//        printf("Personne %d: ", i);
-//        afficher_personne(&liste->liste[i]);
-//    }
-//}
+/*
+void afficher_liste_personnes(const t_liste_personnes* liste) {
+    printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts):\n",
+        liste->nb_personnes, liste->nb_sains, liste->nb_malades, liste->nb_morts);
+    for (int i = 0; i < liste->nb_personnes; i++) {
+        printf("Personne %d: ", i);
+        afficher_personne(&liste->liste[i]);
+    }
+}
+*/
 
 /*=========================================================*/
 void afficher_liste_personnes(const t_liste_personnes* liste) {
@@ -347,6 +348,8 @@ double calculer_prob_moyenne(const t_liste_personnes* liste, const char* type) {
 //    liberer_liste(&liste);
 //    
 //}
+
+
 
 void simuler_pandemie(double hauteur, double largeur, int population, double prop_initial, int periode_affichage, FILE* log) {
     int heures = 0;

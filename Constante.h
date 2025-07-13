@@ -1,6 +1,8 @@
 ﻿#ifndef _CONSTANTE_2025_1571_
 #define _CONSTANTE_2025_1571_
 
+#define SWITCH 0 //permet de passer de la simultation avec lecture de fichoier texte a l ancien mode de simulation
+
 #define M_PI 3.1416922653589793
 #define INC_CAT_AGE      10     //écart entre chaque tranche d'age suivante
 #define DEUX_PI 6.283185307179586 /* Valeur approchée de 2π */
@@ -14,7 +16,7 @@
 #define PROP_MORTS_CHANGEMENT 0.005
 
 #define PROP_CONFINEMENT  0.3
-#define NOUVELLE_PROP 0.8
+#define NOUVELLE_PROP 1.0
 
 
 /* uniquement pour  établir la norme du vecteur vitesse */
