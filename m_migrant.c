@@ -14,7 +14,7 @@
 
 t_migrant init_migrant(const t_personne* src, int ville_dep, int ville_dest, int hrs_trans) {
     t_migrant voyageur;
-    voyageur.voyageur = (t_migrant*)malloc(sizeof(t_migrant));
+    voyageur.voyageur = (t_personne*)malloc(sizeof(t_personne));
     voyageur.ville_depart = ville_dep;
     voyageur.ville_destination = ville_dest;
     voyageur.hrs_transit = hrs_trans;
