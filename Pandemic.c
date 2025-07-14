@@ -7,7 +7,6 @@
 #include "m_personnes.h"
 #include "m_liste_personnes.h"
 #include "m_R2.h"
-#include "m_R3.h"
 
 #include <string.h>
 #include <stdio.h>
@@ -17,14 +16,14 @@
 /*=========================================================*/
 
 /*=========================================================*/
-#if (MODE_SIMULATION) == 0 
+#if (MODE_SIMULATION) == 0 //Peut être modifié dans dans Constante.h
 int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();
 
     /* Paramètres de la simulation */
-    const int TAILLE_LISTE = 2501;     /* Capacité initiale */
-    const int NB_PERSONNES = 2500;     /* Nombre de personnes */
+    const int TAILLE_LISTE = 251;     /* Capacité initiale */
+    const int NB_PERSONNES = 250;     /* Nombre de personnes */
     const double LARGEUR = 1000;     /* Largeur du quartier (mètres) */
     const double HAUTEUR = 1000;     /* Hauteur du quartier (mètres) */
     const int INTERVALLE_AFFICHAGE = 100; /* Afficher toutes les 100 heures */

@@ -1,7 +1,7 @@
 ﻿#ifndef _CONSTANTE_2025_1571_
 #define _CONSTANTE_2025_1571_
 
-#define MODE_SIMULATION 0 //1 = Sortie dans fichiers log, 0 = Sortie dans console
+#define MODE_SIMULATION 1 //1 = Sortie dans fichiers log, 0 = Sortie dans console
 
 #define M_PI 3.1416922653589793
 #define PROP_INITIALE 0.4  //pourcentage pou la proportion de confinement initiale pour la simulation console

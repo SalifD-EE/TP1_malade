@@ -188,7 +188,6 @@
     <ClCompile Include="m_liste_personnes.c" />
     <ClCompile Include="m_personne.c" />
     <ClCompile Include="m_R2.c" />
-    <ClCompile Include="m_R3.c" />
     <ClCompile Include="Pandemic.c" />
   </ItemGroup>
   <ItemGroup>
@@ -197,7 +196,6 @@
     <ClInclude Include="m_liste_personnes.h" />
     <ClInclude Include="m_personnes.h" />
     <ClInclude Include="m_R2.h" />
-    <ClInclude Include="m_R3.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="\\Mac\Home\Downloads\config_simulations.txt" />
