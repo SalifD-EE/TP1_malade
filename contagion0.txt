@@ -1,1 +1,0 @@
-Hauteur=500.000000, Largeur=500.000000, Population=2000, Prop initiale=0.650000, Periode=150
