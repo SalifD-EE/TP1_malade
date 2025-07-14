@@ -294,6 +294,8 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
     int min_morts_heure = 0;
     int infections_heure = 0;
     int morts_heure = 0;
+    double prop_malades = 0;
+    double prop_morts = 0;
 
     /* Initialisation de la liste */
     t_liste_personnes liste = creer_liste_personnes(population);
@@ -307,8 +309,8 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
     /* Boucle de simulation */
     while (get_nb_malades(&liste) > 0 && get_nb_morts(&liste) < population) {
         ++heures;
-        double prop_malades = get_prop_malades(&liste);
-        double prop_morts = get_prop_morts(&liste);
+        prop_malades = get_prop_malades(&liste);
+        prop_morts = get_prop_morts(&liste);
 
         simuler_une_heure_pandemie(&liste, largeur, hauteur, &infections_heure, &morts_heure);
 
@@ -321,20 +323,20 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
             Stratégie de confinement : plusieurs paliers de confinement en fonction de
             la proportion de malades et de morts
         */
-        if (prop_malades > PALIER_MALADES_1) {
-            modifier_confinement(&liste, PROP_CONFINEMENT_BAS);
-        }
-        else if (prop_malades > PALIER_MALADES_2 || prop_morts > PALIER_MORTS_2) {
-            modifier_confinement(&liste, PROP_CONFINEMENT_INTERMEDIAIRE);
-        }
-        else if (prop_malades > PALIER_MALADES_3 || prop_morts > PALIER_MORTS_3) {
-            modifier_confinement(&liste, PROP_CONFINEMENT_ELEVE);
-        }
-        else if (prop_malades > PALIER_MALADES_4 || prop_morts > PALIER_MORTS_4) {
+        if (prop_malades > PALIER_MALADES_4) {
             modifier_confinement(&liste, PROP_CONFINEMENT_TOTAL);
         }
+        else if (prop_malades > PALIER_MALADES_3) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_ELEVE);
+        }
+        else if (prop_malades > PALIER_MALADES_2) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_INTERMEDIAIRE);
+        }
+        else if (prop_malades > PALIER_MALADES_1) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_BAS);
+        }
         else {
-            modifier_confinement(&liste, prop_initiale);
+            modifier_confinement(&liste, 0.00);
         }
 
         /* Écriture périodique dans le log */
@@ -358,11 +360,11 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
     fprintf(log, "  Total infections : %d\n", total_infections);
     fprintf(log, "  Max infections/heure : %d\n", max_infections_heure);
     fprintf(log, "  Min infections/heure : %d\n", min_infections_heure);
-    fprintf(log, "  Moyenne infections/heure : %.2f\n", heures > 0 ? (double)total_infections / heures : 0.000);
+    fprintf(log, "  Moyenne infections/heure : %.5f\n", heures > 0 ? (double)total_infections / heures : 0.000);
     fprintf(log, "  Total morts : %d\n", total_morts);
     fprintf(log, "  Max morts/heure : %d\n", max_morts_heure);
     fprintf(log, "  Min morts/heure : %d\n", min_morts_heure);
-    fprintf(log, "  Moyenne morts/heure : %.10f\n", heures > 0 ? (double)total_morts / heures : 0.000);
+    fprintf(log, "  Moyenne morts/heure : %.5f\n", heures > 0 ? (double)total_morts / heures : 0.000);
     fflush(log);
 
     liberer_liste(&liste);

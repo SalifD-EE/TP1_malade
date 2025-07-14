@@ -13,17 +13,10 @@
 #define NB_HRS_TRANSMISSION 2*24 /* Minimum d'heures pour transmission */
 
 //Définition des paliers qui causent les changements de confinement
-#define PALIER_MALADES_1 0.02
-#define PALIER_MORTS_1 0.00
-
-#define PALIER_MALADES_2 0.10
-#define PALIER_MORTS_2 0.01
-
-#define PALIER_MALADES_3 0.30
-#define PALIER_MORTS_3 0.03
-
-#define PALIER_MALADES_4 0.50
-#define PALIER_MORTS_4 0.08
+#define PALIER_MALADES_1 0.005
+#define PALIER_MALADES_2 0.01
+#define PALIER_MALADES_3 0.03
+#define PALIER_MALADES_4 0.10
 
 //Définition des proportions de confinement
 #define PROP_CONFINEMENT_BAS  0.3
