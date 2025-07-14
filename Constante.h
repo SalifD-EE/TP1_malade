@@ -9,7 +9,7 @@
 #define DEUX_PI 6.283185307179586 /* Valeur approchée de 2π */
 #define DISTANCE_CONTACT 2.5   //  distance maximale du risque d'infection 
 #define PROB_INFECTION  0.25    // probabilité initiale de contracter la maladie pour la simulation console
-#define REDUCTEUR_INFECTION  2.25  // facteur réducteur de la prob. précédente suite 
+#define REDUCTEUR_INFECTION  2.25  // facteur réducteur de la proba d'infection suite a une précédente infection 
 #define NB_HRS_MALADIE     15*24    // nombre d'heures de maladie 
 #define NB_HRS_TRANSMISSION 2*24 /* Minimum d'heures pour transmission */
 
