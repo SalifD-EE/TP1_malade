@@ -1,4 +1,6 @@
-﻿#ifndef _CONSTANTE_2025_1571_
+﻿/* Salif Diarra et Léo Bouamrane */
+
+#ifndef _CONSTANTE_2025_1571_
 #define _CONSTANTE_2025_1571_
 
 #define MODE_SIMULATION 0 //1 = Sortie dans fichiers log, 0 = Sortie dans console

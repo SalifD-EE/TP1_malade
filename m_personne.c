@@ -1,12 +1,12 @@
 ﻿
 /*=========================================================*/
 /* Module m_personne pour INF147 - Été 2025 */
+/* Salif Diarra et Léo Bouamrane */
 /*=========================================================*/
 #include "m_personnes.h"
 #include "m_alea_pop.h"
 #include "m_liste_personnes.h"
 #include "m_R2.h"
-#include "m_R3.h"
 #include "Constante.h"
 
 

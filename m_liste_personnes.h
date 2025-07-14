@@ -2,6 +2,7 @@
 /*=========================================================*/
 /* Module m_liste_personnes pour INF147 - Été 2025 */
 /* Gestion d'une liste dynamique de personnes */
+/* Salif Diarra et Léo Bouamrane */
 /*=========================================================*/
 #ifndef _M_LISTE_PERSONNES_2025_1571_
 #define _M_LISTE_PERSONNES_2025_1571_
@@ -164,6 +165,5 @@ double get_prop_morts(const t_liste_personnes* liste);
 */
 void afficher_liste_personnes(const t_liste_personnes* liste);
 
-/*=========================================================*/
 #endif
 /*=========================================================*/

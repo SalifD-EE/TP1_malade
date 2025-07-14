@@ -1,13 +1,12 @@
 /*=========================================================*/
 /* pandemie.c - Programme principal pour INF147 TP1 */
-
+/* Salif Diarra et Léo Bouamrane */
 /*=========================================================*/
 
 #include "m_alea_pop.h"
 #include "m_personnes.h"
 #include "m_liste_personnes.h"
 #include "m_R2.h"
-#include "m_R3.h"
 
 #include <string.h>
 #include <stdio.h>
@@ -17,7 +16,7 @@
 /*=========================================================*/
 
 /*=========================================================*/
-#if (MODE_SIMULATION) == 0 
+#if (MODE_SIMULATION) == 0 //Peut être modifié dans dans Constante.h
 int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();
