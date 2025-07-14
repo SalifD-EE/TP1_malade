@@ -1,6 +1,8 @@
 
 /*=========================================================*/
 /* Module m_liste_personnes pour INF147 - Été 2025 */
+/* Par Salif Diarra et Léo Bouamrane */
+
 /*=========================================================*/
 #include "m_liste_personnes.h"
 #include "m_alea_pop.h"

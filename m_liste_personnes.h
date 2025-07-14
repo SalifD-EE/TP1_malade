@@ -2,6 +2,9 @@
 /*=========================================================*/
 /* Module m_liste_personnes pour INF147 - Été 2025 */
 /* Gestion d'une liste dynamique de personnes */
+
+/* Par Salif Diarra et Léo Bouamrane */
+
 /*=========================================================*/
 #ifndef _M_LISTE_PERSONNES_2025_1571_
 #define _M_LISTE_PERSONNES_2025_1571_

@@ -1,6 +1,9 @@
 ﻿/*=========================================================*/
 /* Module m_R2 pour INF147 - Été 2025 */
 /* Gestion des vecteurs et points en 2D */
+
+/* par hs du SEG  */
+/* Modifié par Salif Diarra et Léo Bouamrane */
 /*=========================================================*/
 #include "m_R2.h"
 #include <stdlib.h>
