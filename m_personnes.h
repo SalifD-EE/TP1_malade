@@ -2,7 +2,7 @@
 /* M_PERSONNE.H                                                                 */
 /* module de gestion des personnes devant le virus                            */
 
-// complétez l'entête
+/* Salif Diarra et Léo Bouamrane */
 
 /******************************************************************************/
 #ifndef _M_PERSONNE_2025_1571_
