@@ -34,6 +34,8 @@ int main(void) {
     int total_infections = 0;
     int max_infections_heure = 0;
     int min_infections_heure = 0; 
+    double prop_malades = 0;
+    double prop_morts = 0;
     int total_morts = 0;
     int max_morts_heure = 0;
     int min_morts_heure = 0;
@@ -43,7 +45,7 @@ int main(void) {
     printf("Liste creee avec une capacite de %d personnes.\n", TAILLE_LISTE);
 
     /* Ajout de personnes */
-    int nb_ajoutes = ajouter_des_personnes(&liste, NB_PERSONNES, LARGEUR, HAUTEUR, PROP_CONFINEMENT);
+    int nb_ajoutes = ajouter_des_personnes(&liste, NB_PERSONNES, LARGEUR, HAUTEUR, PROP_INITIALE);
     printf("%d personnes ajoutees.\n", nb_ajoutes);
    // afficher_liste_personnes(&liste);
 
@@ -57,12 +59,6 @@ int main(void) {
         return EXIT_FAILURE;
     }
 
-    /* Ouverture du fichier de configuration */
-    FILE* config = fopen("config_simulations.txt", "r");
-    if (!config) {
-        printf("Erreur : impossible d'ouvrir config_simulations.txt\n");
-        return EXIT_FAILURE;
-    }
    //afficher_liste_personnes(&liste);
  
     /* Boucle de simulation */
@@ -71,15 +67,36 @@ int main(void) {
         int infections_heure = traiter_contacts(&liste);
         int morts_heure = terminer_maladie(&liste); 
 
-        simuler_une_heure_pandemie(&liste, LARGEUR, HAUTEUR);
+        prop_malades = get_prop_malades(&liste);
+        prop_morts = get_prop_morts(&liste);
+
+        simuler_une_heure_pandemie(&liste, LARGEUR, HAUTEUR, &infections_heure, &morts_heure);
+
+     
        
         /* Mise à jour des statistiques */
         total_infections += infections_heure;
         max_infections_heure = infections_heure > max_infections_heure ? infections_heure : max_infections_heure;
         min_infections_heure = infections_heure < min_infections_heure ? infections_heure : min_infections_heure;
       
-        if (get_prop_malades(&liste) > PROP_MALADES_CHANGEMENT && get_prop_morts(&liste) > PROP_MORTS_CHANGEMENT) {
-            modifier_confinement(&liste, NOUVELLE_PROP);
+        /*
+      Stratégie de confinement : plusieurs paliers de confinement en fonction de
+      la proportion de malades et de morts
+  */
+        if (prop_malades > PALIER_MALADES_4) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_TOTAL);
+        }
+        else if (prop_malades > PALIER_MALADES_3) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_ELEVE);
+        }
+        else if (prop_malades > PALIER_MALADES_2) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_INTERMEDIAIRE);
+        }
+        else if (prop_malades > PALIER_MALADES_1) {
+            modifier_confinement(&liste, PROP_CONFINEMENT_BAS);
+        }
+        else {
+            modifier_confinement(&liste, 0.00);
         }
 
          /*Affichage périodique*/
@@ -87,7 +104,9 @@ int main(void) {
             printf("\nHeure %d: Sains=%d, Malades=%d, Morts=%d, Infections=%d, Confinement=%.2f \n",
                 heures, get_nb_sains(&liste), get_nb_malades(&liste), get_nb_morts(&liste),
                 infections_heure, get_confinement(&liste));
-         max_morts_heure = get_nb_morts(&liste) > max_morts_heure ? get_nb_morts(&liste) : max_morts_heure;
+            max_morts_heure = morts_heure > max_morts_heure ? morts_heure : max_morts_heure;
+            min_morts_heure = morts_heure < min_morts_heure ? morts_heure : min_morts_heure;
+
         }
     }
      total_morts = get_nb_morts(&liste);

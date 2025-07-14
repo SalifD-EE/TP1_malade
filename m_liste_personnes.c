@@ -349,6 +349,8 @@ void simuler_pandemie(double hauteur, double largeur, int population, double pro
                 get_confinement(&liste));
             fflush(log);
             max_morts_heure = morts_heure > max_morts_heure ? morts_heure : max_morts_heure;
+            min_morts_heure = morts_heure < min_morts_heure ? morts_heure : min_morts_heure;
+
         }
 
     }

@@ -152,7 +152,7 @@ void afficher_personne(const t_personne* lui) {
 /*=========================================================*/
 
 int deplacer_personne(t_personne* personne, double largeur, double hauteur) {
-    if (personne->etat == MORT | randf() > personne->prob_deplacer) {
+    if (personne->etat == MORT || randf() > personne->prob_deplacer) {
         return 0; /* Pas de déplacement */
     }
 
@@ -161,11 +161,11 @@ int deplacer_personne(t_personne* personne, double largeur, double hauteur) {
     personne->position.y += personne->vitesse.y;
 
     /* Vérification des limites du quartier */
-    if (personne->position.x < 0 | personne->position.x >= largeur) {
+    if (personne->position.x < 0 || personne->position.x >= largeur) {
         personne->vitesse.x = -personne->vitesse.x; /* Inverse vitesse */
         personne->position.x = fmax(0, fmin(largeur, personne->position.x)); 
     }
-    if (personne->position.y < 0 | personne->position.y >= hauteur) {
+    if (personne->position.y < 0 || personne->position.y >= hauteur) {
         personne->vitesse.y = -personne->vitesse.y; /* Inverse vitesse */
         personne->position.y = fmax(0, fmin(hauteur, personne->position.y)); /* Clamp */
     }
@@ -175,7 +175,7 @@ int deplacer_personne(t_personne* personne, double largeur, double hauteur) {
 
 /*=========================================================*/
 int inverser_les_vitesses(t_personne* lui, t_personne* autre) {
-    if (lui->etat == MORT || autre->etat == MORT | distance_personnes(lui, autre) > DISTANCE_CONTACT) {
+    if (lui->etat == MORT || autre->etat == MORT || distance_personnes(lui, autre) > DISTANCE_CONTACT) {
         return 0; /* Pas de changement */
     }
 
