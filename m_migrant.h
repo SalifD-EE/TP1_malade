@@ -16,8 +16,12 @@
 #ifndef __MIGRER_2020IS__
 #define __MIGRER_2020IS__
 
+/*=========================================================*/
+
 #include"m_ensemble_noms.h"
 #include"m_personnes.h"
+#include"m_liste_personnes.h"
+
 //**********************************
 
 
@@ -69,18 +73,23 @@ int dec_hrs_transit_migrant(t_migrant* lui);
    PARAMÈTRES : pointeur sur un migrant
    RETOUR : numéro de la ville_destination */
 int get_destination_migrant(const t_migrant* lui);
+
 //**********************************
 /* informatrice
    obtenir  la ville depart du migrant
    PARAMÈTRES : pointeur sur un migrant
    RETOUR : numéro de la ville_depart */
 int get_depart_migrant(const t_migrant* lui);
+
 //**********************************
 /* informatrice
    retourner 1 s'il est vivant et 0 s'il est mort
    PARAMÈTRES : pointeur sur un migrant
    RETOUR : 0 ou 1  */
 int est_vivant_migrant(t_migrant* lui);
+
+
+//**********************************
 //**********************************
 
 /* informatrice

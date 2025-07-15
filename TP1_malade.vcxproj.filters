@@ -30,9 +30,6 @@
     <ClCompile Include="m_liste_personnes.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="m_R3.c">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="m_ensemble_noms_FILL.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -54,9 +51,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Constante.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="m_R3.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="m_ensemble_noms.h">
