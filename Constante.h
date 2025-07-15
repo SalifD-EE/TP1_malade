@@ -5,6 +5,9 @@
 
 #define MODE_SIMULATION 0 //1 = Sortie dans fichiers log, 0 = Sortie dans console
 
+#define EXEDENT_TAB 100 //Constante pour l'agrandissement du tableau dynamique 
+
+
 #define M_PI 3.1416922653589793
 #define PROP_INITIALE 0.4  //pourcentage pou la proportion de confinement initiale pour la simulation console
 #define INC_CAT_AGE      10     //écart entre chaque tranche d'age suivante

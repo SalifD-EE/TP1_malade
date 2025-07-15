@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <assert.h>
+
 
 /*=========================================================*/
 t_liste_personnes creer_liste_personnes(int taille) {
@@ -232,6 +234,7 @@ int simuler_une_heure_pandemie(t_liste_personnes* liste, double largeur, double 
     return get_nb_malades(liste);
 }
 
+
 /*=========================================================*/
 void afficher_liste_personnes(const t_liste_personnes* liste) {
     printf("\n\nListe de personnes (%d personnes, %d sains, %d malades, %d morts, prop_confine=%.2f):\n",
@@ -240,6 +243,64 @@ void afficher_liste_personnes(const t_liste_personnes* liste) {
         printf("Personne %d: ", i);
         afficher_personne(&liste->liste[i]);
     }
+}
+
+
+/*=========================================================*/
+/* Nouvelle fonction : Ajoute une personne à la liste avec realloc si nécessaire */
+int ajouter_une_personne(t_liste_personnes* liste, const t_personne* src) {
+    assert(liste != NULL && src != NULL); // Vérifie les pointeurs
+    assert(est_vivant_personne(src)); // Vérifie que la personne est vivante
+
+    // Si le tableau est plein, agrandir avec realloc
+    if (liste->nb_personnes >= liste->taille) {
+        int nouvelle_taille = liste->taille + EXEDENT_TAB;
+        t_personne* nouveau_tableau = (t_personne*)realloc(liste->liste, nouvelle_taille * sizeof(t_personne));
+        assert(nouveau_tableau != NULL); // Vérifie l'allocation
+        liste->liste = nouveau_tableau;
+        liste->taille = nouvelle_taille;
+    }
+
+    // Ajoute la personne
+    liste->liste[liste->nb_personnes] = *src;
+    liste->nb_personnes++;
+    if (est_malade_personne(src)) {
+        liste->nb_malades++;
+    }
+    else {
+        liste->nb_sains++;
+    }
+    return 1; // Insertion réussie
+}
+
+
+/*=========================================================*/
+/* Nouvelle fonction : Extrait une personne vivante au hasard */
+int enlever_une_personne(t_liste_personnes* liste, t_personne* dest) {
+    assert(liste != NULL && dest != NULL); // Vérifie les pointeurs
+
+    int nb_vivants = liste->nb_personnes - liste->nb_morts;
+    if (nb_vivants <= 0) {
+        return 0; // Aucune personne vivante
+    }
+
+    // Choisir un indice au hasard parmi les vivants
+    int idx = randi(nb_vivants) - 1;
+    assert(idx >= 0 && idx < nb_vivants); // Vérifie l'indice
+
+    // Copier la personne dans dest
+    *dest = liste->liste[idx];
+
+    // Remplacer par la dernière personne vivante
+    liste->liste[idx] = liste->liste[nb_vivants - 1];
+    liste->nb_personnes--;
+    if (est_malade_personne(dest)) {
+        liste->nb_malades--;
+    }
+    else {
+        liste->nb_sains--;
+    }
+    return 1; // Extraction réussie
 }
 
 /*=========================================================*/

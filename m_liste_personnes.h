@@ -165,5 +165,10 @@ double get_prop_morts(const t_liste_personnes* liste);
 */
 void afficher_liste_personnes(const t_liste_personnes* liste);
 
+
+int ajouter_une_personne(t_liste_personnes* liste, const t_personne* src);
+
+int enlever_une_personne(t_liste_personnes* liste, t_personne* dest);
+
 #endif
 /*=========================================================*/
