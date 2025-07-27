@@ -18,9 +18,6 @@
     <ClCompile Include="m_alea_pop.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="m_R3.c">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="m_personne.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -33,12 +30,15 @@
     <ClCompile Include="m_liste_personnes.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="m_ensemble_noms_FILL.c">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="m_migrant.c">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="m_alea_pop.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="m_R3.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="m_R2.h">
@@ -53,8 +53,15 @@
     <ClInclude Include="Constante.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="m_ensemble_noms.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="m_migrant.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="\\Mac\Home\Downloads\config_simulations.txt" />
+    <Text Include="config_simulations_new.txt" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 /*=========================================================*/
 /* pandemie.c - Programme principal pour INF147 TP1 */
-/* Par Salif Diarra et Léo Bouamrane */
-
+/* Salif Diarra et Léo Bouamrane */
 /*=========================================================*/
 
 #include "m_alea_pop.h"
@@ -17,17 +16,17 @@
 /*=========================================================*/
 
 /*=========================================================*/
-#if (MODE_SIMULATION) == 0 
+#if (MODE_SIMULATION) == 0 //Peut être modifié dans dans Constante.h
 int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();
 
     /* Paramètres de la simulation */
-    const int TAILLE_LISTE = 2001;     /* Capacité initiale */
-    const int NB_PERSONNES = 2000;     /* Nombre de personnes */
+    const int TAILLE_LISTE = 2501;     /* Capacité initiale */
+    const int NB_PERSONNES = 2500;     /* Nombre de personnes */
     const double LARGEUR = 1000;     /* Largeur du quartier (mètres) */
     const double HAUTEUR = 1000;     /* Hauteur du quartier (mètres) */
-    const int INTERVALLE_AFFICHAGE = 500; /* Afficher toutes les 24 heures */
+    const int INTERVALLE_AFFICHAGE = 100; /* Afficher toutes les 100 heures */
 
     /* Statistiques */
     int heures = 0;

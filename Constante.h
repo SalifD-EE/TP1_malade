@@ -1,20 +1,20 @@
-﻿/*=========================================================*/
-/* Constante.h - Programme principal pour INF147 TP1 */
-/* Par Salif Diarra et Léo Bouamrane */
-
-/*=========================================================*/
+﻿/* Salif Diarra et Léo Bouamrane */
 
 #ifndef _CONSTANTE_2025_1571_
 #define _CONSTANTE_2025_1571_
 
 #define MODE_SIMULATION 0 //1 = Sortie dans fichiers log, 0 = Sortie dans console
 
+#define EXEDENT_TAB 100 //Constante pour l'agrandissement du tableau dynamique 
+
+
 #define M_PI 3.1416922653589793
+#define PROP_INITIALE 0.4  //pourcentage pou la proportion de confinement initiale pour la simulation console
 #define INC_CAT_AGE      10     //écart entre chaque tranche d'age suivante
 #define DEUX_PI 6.283185307179586 /* Valeur approchée de 2π */
 #define DISTANCE_CONTACT 2.5   //  distance maximale du risque d'infection 
-#define PROB_INFECTION  0.9    // probabilité initiale de contracter la maladie
-#define REDUCTEUR_INFECTION  2.25  // facteur réducteur de la prob. précédente suite 
+#define PROB_INFECTION  0.25    // probabilité initiale de contracter la maladie pour la simulation console
+#define REDUCTEUR_INFECTION  2.25  // facteur réducteur de la proba d'infection suite a une précédente infection 
 #define NB_HRS_MALADIE     15*24    // nombre d'heures de maladie 
 #define NB_HRS_TRANSMISSION 2*24 /* Minimum d'heures pour transmission */
 

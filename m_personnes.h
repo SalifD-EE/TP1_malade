@@ -2,8 +2,7 @@
 /* M_PERSONNE.H                                                                 */
 /* module de gestion des personnes devant le virus                            */
 
-/* par hs du SEG  */
-/* Modifié par Salif Diarra et Léo Bouamrane */
+/* Salif Diarra et Léo Bouamrane */
 
 /******************************************************************************/
 #ifndef _M_PERSONNE_2025_1571_
