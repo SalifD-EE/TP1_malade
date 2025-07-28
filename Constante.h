@@ -25,6 +25,7 @@
 #define PALIER_MALADES_4 0.10
 
 //Définition des proportions de confinement
+#define PROP_INITIALE_CONSOLE 0.6
 #define PROP_CONFINEMENT_BAS  0.3
 #define PROP_CONFINEMENT_INTERMEDIAIRE  0.5
 #define PROP_CONFINEMENT_ELEVE  0.8

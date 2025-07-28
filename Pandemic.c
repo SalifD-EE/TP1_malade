@@ -45,7 +45,7 @@ int main(void) {
     printf("Liste creee avec une capacite de %d personnes.\n", TAILLE_LISTE);
 
     /* Ajout de personnes */
-    int nb_ajoutes = ajouter_des_personnes(&liste, NB_PERSONNES, LARGEUR, HAUTEUR, PROP_INITIALE);
+    int nb_ajoutes = ajouter_des_personnes(&liste, NB_PERSONNES, LARGEUR, HAUTEUR, PROP_INITIALE_CONSOLE);
     printf("%d personnes ajoutees.\n", nb_ajoutes);
    // afficher_liste_personnes(&liste);
 
