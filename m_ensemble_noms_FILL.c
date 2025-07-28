@@ -44,14 +44,14 @@ int init_ensemble_noms_villes(unsigned int taille) {
 	if (groupe_noms.max_noms) return 0;
 
 	//allocation du tableau dynamique de char *
-	assert(groupe_noms.tab_noms =               );
+	assert(groupe_noms.tab_noms = (char **)malloc(taille * sizeof(char *)));
 	// boucle d'allocation de chaque tableau dynamique de char
 	for (i = 0; i < taille; ++i) {
-		assert(                               );
+		assert(groupe_noms.tab_noms[i] = (char *)malloc(TAILLE_MAX_NOM * sizeof(char)));
 	}
 
-	groupe_noms.max_noms = 
-	groupe_noms.nb_noms = 
+	groupe_noms.max_noms = taille;
+	groupe_noms.nb_noms = 0;
 	return 1;
 }
 
@@ -60,11 +60,11 @@ int init_ensemble_noms_villes(unsigned int taille) {
 // get des valeurs d'un des deux membres entiers de groupe_noms
 
 unsigned int get_nombre_villes(void) {
-	return                           ; 
+	return groupe_noms.nb_noms; 
 }
 
 unsigned int get_nombre_max_villes(void) {
-	return                           ; 
+	return groupe_noms.max_noms;
 }
 
 /******************************************************************************/
@@ -75,8 +75,8 @@ unsigned int get_nombre_max_villes(void) {
 */
 const char* get_nom_ville(unsigned int position) {
 
-	if (position < groupe_noms        ) {
-		return                         ;
+	if (position < groupe_noms.max_noms && position >= 0) {
+		return groupe_noms.tab_noms[position];
 	}
 	return NULL;
 }
@@ -92,7 +92,9 @@ unsigned int get_position_ville(const char* nom) {
 	unsigned int i;
 
 	for (i = 0; i < groupe_noms.nb_noms; ++i) {
-
+		if (strcmp(nom, groupe_noms.tab_noms[i]) == 0) {
+			return i;
+		}
 	}
 	return NOM_ABSENT;
 }
@@ -102,9 +104,7 @@ unsigned int get_position_ville(const char* nom) {
    Retourne 1 si les deux stings sont égales , 0 sinon (inverse d'un "strcmp").
 */
 int comparer_noms_villes(const char* villeA, const char* villeB) {
-	
-
-
+	return (strcmp(villeA, villeB) == 0) ? 1 : 0;
 }
 
 /******************************************************************************/
@@ -118,8 +118,14 @@ int comparer_noms_villes(const char* villeA, const char* villeB) {
    Retour de 1 si le nom a été ajouté, 0 sinon
 */
 int ajouter_nom_ville(const char* nom) {
+	if (groupe_noms.nb_noms < groupe_noms.max_noms && strlen(nom) < TAILLE_MAX_NOM && get_position_ville(nom) == NOM_ABSENT)
+	{
+		strcpy(groupe_noms.tab_noms[groupe_noms.nb_noms], nom);
+		++groupe_noms.nb_noms;
+		return 1;
+	}
 
-
+	return 0;
 }
 /******************************************************************************/
 /*  considérer que  l'ensemble de noms  est redevenu vide */
@@ -128,7 +134,10 @@ void vider_ensemble_noms_villes(void) {
 	/* groupe_noms.nb_noms est mis à 0 */
 	/* chaque ligne  de la matrice  va commencer avec le caractere 0*/
 
-	
+	groupe_noms.nb_noms = 0;
+	for (i = 0; i < groupe_noms.max_noms; ++i) {
+		groupe_noms.tab_noms[i][0] = '\0';
+	}
 }
 
 /******************************************************************************/
@@ -138,8 +147,16 @@ void vider_ensemble_noms_villes(void) {
 	mettre deux membres de groupe_noms à  0 et le troisième à NULL 
 */
 void detruire_ensemble_noms_villes(void) {
+	int i;
 
+	for (i = 0; i < groupe_noms.max_noms; ++i) {
+		free(groupe_noms.tab_noms[i]);
+	}
+	free(groupe_noms.tab_noms);
 
+	groupe_noms.max_noms = 0;
+	groupe_noms.nb_noms = 0;
+	groupe_noms.tab_noms = NULL;
 }
 
 /******************************************************************************/
@@ -157,13 +174,14 @@ int main(void) {
 
 	const char* ville;
 
-	assert( init_ensemble_noms_villes(145));
+	assert(init_ensemble_noms_villes(145));
 
 	nb = get_nombre_villes();
 	nb_max = get_nombre_max_villes();
 
 	rep = ajouter_nom_ville("toronto");
 	rep = ajouter_nom_ville("london");
+	rep = ajouter_nom_ville("levis");
 
 	nb = get_nombre_villes();
 	nb_max = get_nombre_max_villes();

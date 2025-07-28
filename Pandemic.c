@@ -17,6 +17,7 @@
 
 /*=========================================================*/
 #if (MODE_SIMULATION) == 0 //Peut être modifié dans dans Constante.h
+#if 0
 int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();
@@ -128,7 +129,7 @@ int main(void) {
 
     return EXIT_SUCCESS;
 }
-
+#endif
 #endif
 
 

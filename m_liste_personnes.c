@@ -250,7 +250,7 @@ void afficher_liste_personnes(const t_liste_personnes* liste) {
 /* Nouvelle fonction : Ajoute une personne à la liste avec realloc si nécessaire */
 int ajouter_une_personne(t_liste_personnes* liste, const t_personne* src) {
     assert(liste != NULL && src != NULL); // Vérifie les pointeurs
-    assert(est_vivant_personne(src)); // Vérifie que la personne est vivante
+    //assert(est_vivant_personne(src)); // Vérifie que la personne est vivante
 
     // Si le tableau est plein, agrandir avec realloc
     if (liste->nb_personnes >= liste->taille) {
@@ -264,13 +264,13 @@ int ajouter_une_personne(t_liste_personnes* liste, const t_personne* src) {
     // Ajoute la personne
     liste->liste[liste->nb_personnes] = *src;
     liste->nb_personnes++;
-    if (est_malade_personne(src)) {
-        liste->nb_malades++;
-    }
-    else {
-        liste->nb_sains++;
-    }
-    return 1; // Insertion réussie
+    //if (est_malade_personne(src)) {
+    //    liste->nb_malades++;
+    //}
+    //else {
+    //    liste->nb_sains++;
+    //}
+    //return 1; // Insertion réussie
 }
 
 
@@ -294,13 +294,13 @@ int enlever_une_personne(t_liste_personnes* liste, t_personne* dest) {
     // Remplacer par la dernière personne vivante
     liste->liste[idx] = liste->liste[nb_vivants - 1];
     liste->nb_personnes--;
-    if (est_malade_personne(dest)) {
-        liste->nb_malades--;
-    }
-    else {
-        liste->nb_sains--;
-    }
-    return 1; // Extraction réussie
+    //if (est_malade_personne(dest)) {
+    //    liste->nb_malades--;
+    //}
+    //else {
+    //    liste->nb_sains--;
+    //}
+    //return 1; // Extraction réussie
 }
 
 /*=========================================================*/
