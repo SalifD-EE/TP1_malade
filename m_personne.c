@@ -3,7 +3,7 @@
 /* Module m_personne pour INF147 - Été 2025 */
 /* Salif Diarra et Léo Bouamrane */
 /*=========================================================*/
-#include "m_personnes.h"
+#include "m_personne.h"
 #include "m_alea_pop.h"
 #include "m_liste_personnes.h"
 #include "m_R2.h"
@@ -114,6 +114,14 @@ int get_cause_infections(const t_personne* lui) {
 int get_hrs_maladie(const t_personne* lui) {
     if (lui->etat != MALADE) return 0;
     return lui->hrs_maladie;
+}
+
+void modifier_position_personne(t_personne* lui, t_R2 position) {
+    lui->position = position;
+}
+
+void modifier_vitesse_personne(t_personne* lui, t_R2 vitesse) {
+    lui->vitesse = vitesse;
 }
 
 /*=========================================================*/
@@ -240,3 +248,9 @@ int inc_cause_infections(t_personne* lui) {
     return lui->cause_infections;
 }
 /*=========================================================*/
+
+#if 0
+int main(void) {
+    
+}
+#endif

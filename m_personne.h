@@ -194,6 +194,24 @@ int get_hrs_maladie(const t_personne * lui);
 //--------------------------------------------
 
 //--------------------------------------------
+/* MODIFIER_POSITION_PERSONNE
+   Reçoit une personne ainsi qu'une position à lui assigner.
+   PARAMÈTRES : pointeur sur une personne, position à assigner
+   RETOUR : aucun
+   SPECS  : aucun
+*/
+void modifier_position_personne(t_personne* lui, t_R2 position);
+
+//--------------------------------------------
+/* MODIFIER_VITESSE_PERSONNE
+   Reçoit une personne ainsi qu'une vitesse à lui assigner.
+   PARAMÈTRES : pointeur sur une personne, vitesse à assigner
+   RETOUR : aucun
+   SPECS  : aucun
+*/
+void modifier_vitesse_personne(t_personne* lui, t_R2 vitesse);
+
+//--------------------------------------------
 /* DETERMINER_MORT_RETABLI
    Reçoit une personne et détermine au terme de la maladie
    s'il va mourir ou se rétablir

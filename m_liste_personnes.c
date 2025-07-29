@@ -5,7 +5,7 @@
 /*=========================================================*/
 #include "m_liste_personnes.h"
 #include "m_alea_pop.h"
-#include "m_personnes.h"
+#include "m_personne.h"
 #include "m_R2.h"
 #include "Constante.h"
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
+#include <string.h>
 
 
 /*=========================================================*/

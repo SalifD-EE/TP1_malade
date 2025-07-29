@@ -191,6 +191,7 @@
     <ClCompile Include="m_migrant.c" />
     <ClCompile Include="m_personne.c" />
     <ClCompile Include="m_R2.c" />
+    <ClCompile Include="m_ville.c" />
     <ClCompile Include="Pandemic.c" />
   </ItemGroup>
   <ItemGroup>
@@ -200,8 +201,9 @@
     <ClInclude Include="m_liste_personnes.h" />
     <ClInclude Include="m_matrice_transition.h" />
     <ClInclude Include="m_migrant.h" />
-    <ClInclude Include="m_personnes.h" />
+    <ClInclude Include="m_personne.h" />
     <ClInclude Include="m_R2.h" />
+    <ClInclude Include="m_ville.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="config_simulations_new.txt" />
