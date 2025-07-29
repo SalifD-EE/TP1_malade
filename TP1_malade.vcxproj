@@ -186,6 +186,7 @@
   <ItemGroup>
     <ClCompile Include="m_alea_pop.c" />
     <ClCompile Include="m_ensemble_noms.c" />
+    <ClCompile Include="m_liste_migrants.c" />
     <ClCompile Include="m_liste_personnes.c" />
     <ClCompile Include="m_matrice_transition_FILL.c" />
     <ClCompile Include="m_migrant.c" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Constante.h" />
     <ClInclude Include="m_alea_pop.h" />
     <ClInclude Include="m_ensemble_noms.h" />
+    <ClInclude Include="m_liste_migrants.h" />
     <ClInclude Include="m_liste_personnes.h" />
     <ClInclude Include="m_matrice_transition.h" />
     <ClInclude Include="m_migrant.h" />
