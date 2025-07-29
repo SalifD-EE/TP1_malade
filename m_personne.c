@@ -249,8 +249,24 @@ int inc_cause_infections(t_personne* lui) {
 }
 /*=========================================================*/
 
+// Tests unitaires pour les nouvelles fonctions du TP2
 #if 0
 int main(void) {
-    
+    t_personne john_doe = init_personne(200, 200, 0.2);
+    t_R2 nouvelle_pos;
+    t_R2 nouvelle_vit;
+    int nb_tests = 1000;
+
+    for (int i = 0; i < nb_tests; ++i) {
+        nouvelle_pos = R2_rand(10);
+        nouvelle_vit = R2_rand(5);
+        modifier_position_personne(&john_doe, nouvelle_pos);
+        modifier_vitesse_personne(&john_doe, nouvelle_vit);
+        assert(R2_eq(john_doe.position, nouvelle_pos) == 1);
+        assert(R2_eq(john_doe.vitesse, nouvelle_vit) == 1);
+    }
+
+    system("pause");
+    return EXIT_SUCCESS;
 }
 #endif

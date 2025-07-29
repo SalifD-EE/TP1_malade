@@ -162,7 +162,7 @@ void detruire_ensemble_noms_villes(void) {
 /******************************************************************************/
 /******************************************************************************/
 
-#if 1
+#if 0
 
 /* ce petit test est fait pour être tracé 
    pour en saisir la portée
