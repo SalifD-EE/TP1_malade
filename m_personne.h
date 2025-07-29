@@ -16,21 +16,6 @@
 
 
 /******************************************************************************/
-/*                      DÉCLARATIONS DES CONSTANTES                           */
-/******************************************************************************/
- 
-
-
-/* uniquement pour établir les décès*/
-/* constantes relatives aux probabilités de décès selon l'age */
-//#define AGE_JEUNE        29     //limite de la premiere tranche d'age
-//#define INC_CAT_AGE      10     //écart entre chaque tranche d'age suivante
-
-
-/******************************************************************************/
-
-
-/******************************************************************************/
 /*                         DÉCLARATIONS DE TYPES                              */
 /******************************************************************************/
 // va caracteriser l'etat de la personne 
