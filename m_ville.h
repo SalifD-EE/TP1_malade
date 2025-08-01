@@ -13,7 +13,7 @@
 #include "m_R2.h"
 #include "Constante.h"
 #include "m_liste_personnes.h"
-//#include "m_liste_migrants.h"
+#include "m_liste_migrants.h"
 
 
 /******************************************************************************/
@@ -32,7 +32,7 @@ struct ville {
     double proportion_confinement;	// proportion de désiré dans cette ville  
     double prob_emigrer;	 // probabilité de vouloir quitter la ville
     t_liste_personnes population;  // les habitants de la ville
-    //t_liste_migrants migrants;   // SD des t_migrants, liste chainée quelconque
+    t_liste_migrants migrants;   // SD des t_migrants, liste chainée quelconque
     int nb_hre_transit;     //  nombre d'heures de transit d'un migrant dans la SD
     
     //les compteurs du transit de personnes
@@ -66,5 +66,18 @@ struct ville {
    SPECS  : aucune
 */
 t_ville  init_ville(const char* nom_ville, int largeur, int hauteur, int taille_pop_initiale, double proportion_confinement, double prob_emigrer, int nb_hre_transit);
+
+const char* get_nom_ville(t_ville ville);
+int get_largeur(t_ville ville);
+int get_hauteur(t_ville ville);
+double get_proportion_confinement(t_ville ville);
+double get_prob_emigrer(t_ville ville);
+t_liste_personnes get_population(t_ville ville);
+t_liste_migrants get_migrants(t_ville ville);
+int get_nb_hre_transit(t_ville ville);
+int get_nb_migrants_out(t_ville ville);
+int get_nb_migrants_in(t_ville ville);
+int get_nb_morts_transit(t_ville ville);
+FILE* get_logfile(t_ville ville);
 
 #endif 
