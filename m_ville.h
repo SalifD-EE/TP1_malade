@@ -10,6 +10,7 @@
 
 /******************************************************************************/
 
+#define _CRT_SECURE_NO_WARNINGS
 #include "m_R2.h"
 #include "Constante.h"
 #include "m_liste_personnes.h"
@@ -67,7 +68,8 @@ struct ville {
 */
 t_ville  init_ville(const char* nom_ville, int largeur, int hauteur, int taille_pop_initiale, double proportion_confinement, double prob_emigrer, int nb_hre_transit);
 
-const char* get_nom_ville(t_ville ville);
+//const char* get_nom_ville(t_ville ville);
+
 int get_largeur(t_ville ville);
 int get_hauteur(t_ville ville);
 double get_proportion_confinement(t_ville ville);
