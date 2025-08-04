@@ -95,7 +95,7 @@ t_liste_migrants init_liste_migrants(void);
 	Spécifications :
 	Vide la liste et l'élimine du programme .
 	c'est une erreur d'utiliser ce handle de liste
-	aprÈs cet appel.
+	après cet appel.
 */
 void detruire_liste_migrants(t_liste_migrants list);
 
@@ -230,7 +230,7 @@ t_el_liste_migrants* modifier_liste_migrants(t_liste_migrants list);
 	Retour : 1 insertion réussie, 0 sinon
 */
 /*-----------------------------------------------------------------*/
-int inserer_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src);
+int inserer_liste_migrants(t_liste_migrants list, int position, const t_el_liste_migrants* src);
 /*-----------------------------------------------------------------*/
 int inserer_debut_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src);
 /*-----------------------------------------------------------------*/

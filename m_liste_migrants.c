@@ -66,6 +66,18 @@ static t_noeud_migrant init_noeud(const t_el_liste_migrants* src, t_noeud_migran
 	return temp;
 }
 
+// privé au module
+// retourne l'adresse du noeud à cette position dans la liste
+static t_noeud_migrant get_noeud(const t_liste_migrants list, int position) {
+	t_noeud_migrant temp = list->tete;
+	int i;
+	assert(position < list->taille);
+	assert(!(position < 0));
+
+	for (i = 0; i < position; ++i) { (temp = temp->next); }
+	return temp;
+}
+
 /*-----------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------*/
@@ -175,11 +187,10 @@ int positionner_liste_migrants(t_liste_migrants list, int position) {
 	/* si la position est inatteignable  .*/
 	if ((position < 0) || (position >= list->taille)) return 0;
 
-	/*sinon il ne reste qu'à avancer ou à reculer */
-	if (position < list->position)
-		while (list->position > position) reculer_liste_migrants(list);
-	else
-		while (list->position < position) avancer_liste_migrants(list);
+	// si la liste est vide
+	if (!aller_debut_liste_migrants(list)) return 0;
+
+	while (list->position < position) avancer_liste_migrants(list);
 
 	return 1;
 }
@@ -223,7 +234,7 @@ CAS 4 sinon inserer, static inserer_interieur
 /*-----------------------------------------------------------------*/
 /* CAS 0  si la listeD00 est vide, tous les membres sont ajustés */
 static int inserer_premier_noeud(t_liste_migrants list, const t_el_liste_migrants* src) {
-	t_noeud_migrant temp = init_noeud(src, NULL, NULL);
+	t_noeud_migrant temp = init_noeud(src, NULL);
 	if (temp) {
 		list->tete = list->queue = list->iterateur = temp;
 		list->taille = 1;
@@ -241,7 +252,7 @@ int inserer_debut_liste_migrants(t_liste_migrants list, const t_el_liste_migrant
 	if (list->taille == 0)
 		return inserer_premier_noeud(list, src);
 
-	temp = init_noeud(src, NULL, list->tete);
+	temp = init_noeud(src, list->tete);
 
 	if (temp) {
 		//list->tete->preced = temp;
@@ -260,7 +271,7 @@ int inserer_fin_liste_migrants(t_liste_migrants list, const t_el_liste_migrants*
 	if (list->taille == 0)
 		return inserer_premier_noeud(list, src);
 
-	temp = init_noeud(src, list->queue, NULL);
+	temp = init_noeud(src, NULL);
 
 	if (temp) {
 
@@ -277,21 +288,27 @@ int inserer_fin_liste_migrants(t_liste_migrants list, const t_el_liste_migrants*
 }
 /*-----------------------------------------------------------------*/
 
-//PAS TERMINÉ! À REVOIR EN PARTIE 2
-
 /*CAS #3 inserer à l'intérieur de la liste */
-//static int inserer_interieur(t_liste_migrants list, int position, const t_el_liste_migrants* src) {
-//	t_noeud_migrant temp = init_noeud(src, list->iterateur);
-//
-//	if (temp) {
-//		list->iterateur = temp;
-//		courant->next = temp;
-//		list->taille += 1;
-//		return 1;
-//	}
-//	return 0;
-//
-//}
+//Si jamais le programme devient lent, regarder ici en premier
+int inserer_position_liste_migrants(t_liste_migrants list, int position, const t_el_liste_migrants* src) {
+	t_noeud_migrant precedent;
+	t_noeud_migrant temp;
+
+	precedent = get_noeud(list, position - 1);
+	if (!precedent) return 0;
+
+	//Le nouveau noeud pointe vers celui qui suit l'ancien noeud à cette position.
+	temp = init_noeud(src, precedent->next);
+	if (temp) {
+		//L'ancien noeud à cette position pointe vers le nouveau noeud.
+		precedent->next = temp;
+		positionner_liste_migrants(list, position);
+		list->taille += 1;
+		return 1;
+	}
+
+	return 0;
+}
 /*-----------------------------------------------------------------*/
 
 
@@ -304,7 +321,7 @@ int inserer_liste_migrants(t_liste_migrants list, int position, const t_el_liste
 	if (list->iterateur == list->queue)
 		return inserer_fin_liste_migrants(list, src);
 
-	return inserer_interieur(list, position, src);
+	return inserer_position_liste_migrants(list, position, src);
 
 }
 /*-----------------------------------------------------------------*/
@@ -349,7 +366,7 @@ int supprimer_debut_liste_migrants(t_liste_migrants list) {
 /*  supprimer a la fin et l'iterateur ira en queue */
 int supprimer_fin_liste_migrants(t_liste_migrants list) {
 
-	t_noeud_migrant 	temp = list->queue;
+	t_noeud_migrant temp = list->queue;
 
 	if (list->taille == 0) return 0;
 	if (list->taille == 1) {
@@ -369,23 +386,24 @@ int supprimer_fin_liste_migrants(t_liste_migrants list) {
 }
 /*-----------------------------------------------------------------*/
 /*  ici on traite le cas #4 */
-static int supprimer_interieur(t_liste_migrants list) {
+int supprimer_position_liste_migrants(t_liste_migrants list, int position) {
+	t_noeud_migrant precedent;
+	t_noeud_migrant supprime;
 
-	t_noeud_migrant temp = list->iterateur;
+	supprime = get_noeud(list, position);
+	if (!supprime) return 0;
 
-	/* le champs precedent du next de l'itérateur change */
-	//temp->preced->next = temp->next;
-	/* le champs next du precedent de l'itérateur change */
-	//temp->next->preced = temp->preced;
+	precedent = get_noeud(list, position - 1);
+	if (!precedent) return 0;
 
-	/*l'itérateur avance, la position ne change pas  */
-	list->iterateur = list->iterateur->next;
+	//Le noeud précédent "saute" par dessus celui à supprimer
+	precedent->next = supprime->next;
 
-	free(temp);
-	list->taille -= 1;
-	return 1;
+	//Je suis épuisé. À continuer demain...
+	return 0;
 
 }
+
 /*-----------------------------------------------------------------*/
 /* supprimer le noeud sous l'itérateur
 Pour supprimer ce noeud,  on considère
@@ -441,5 +459,14 @@ int vider_liste_migrants(t_liste_migrants list) {
 }
 /*-----------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------*/
-/*-----------------------------------------------------------------*/
+#if 1
+int main(void) {
+	t_liste_migrants liste_test = init_liste_migrants();
+	assert(liste_test);
+
+	assert(est_vide_liste_migrants);
+
+	system("pause");
+	return EXIT_SUCCESS;
+}
+#endif
