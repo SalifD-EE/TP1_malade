@@ -449,7 +449,7 @@ int vider_liste_migrants(t_liste_migrants list) {
 }
 /*-----------------------------------------------------------------*/
 
-#if 1
+#if 0
 int main(void) {
 	t_liste_migrants list = init_liste_migrants();
 	
