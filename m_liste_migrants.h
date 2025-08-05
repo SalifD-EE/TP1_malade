@@ -230,13 +230,13 @@ t_el_liste_migrants* modifier_liste_migrants(t_liste_migrants list);
 	Retour : 1 insertion réussie, 0 sinon
 */
 /*-----------------------------------------------------------------*/
-int inserer_liste_migrants(t_liste_migrants list, int position, const t_el_liste_migrants* src);
+int inserer_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src);
 /*-----------------------------------------------------------------*/
 int inserer_debut_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src);
 /*-----------------------------------------------------------------*/
 int inserer_fin_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src);
 /*-----------------------------------------------------------------*/
-int inserer_position_liste_migrants(t_liste_migrants list, int position, const t_el_liste_migrants* src);
+int inserer_position_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src);
 /*-----------------------------------------------------------------*/
 /*-----------------------------------------------------------------*/
 
@@ -262,7 +262,7 @@ int supprimer_debut_liste_migrants(t_liste_migrants list);
 /*-----------------------------------------------------------------*/
 int supprimer_fin_liste_migrants(t_liste_migrants list);
 /*-----------------------------------------------------------------*/
-int supprimer_position_liste_migrants(t_liste_migrants list, int position);
+int supprimer_position_liste_migrants(t_liste_migrants list);
 /*-----------------------------------------------------------------*
 
 /*-----------------------------------------------------------------*/

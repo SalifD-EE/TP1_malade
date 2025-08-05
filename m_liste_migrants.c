@@ -90,7 +90,8 @@ t_liste_migrants init_liste_migrants(void) {
 	/* la nouvelle liste est vide */
 	if (nouveau) {
 		nouveau->tete = nouveau->queue = nouveau->iterateur = NULL;
-		nouveau->taille = 0;  nouveau->position = -1;
+		nouveau->taille = 0;
+		nouveau->position = -1;
 	}
 	return nouveau;
 }
@@ -144,18 +145,6 @@ int avancer_liste_migrants(t_liste_migrants list) {
 
 }
 /*-----------------------------------------------------------------*/
-
-///* 1 si recule , 0 sinon */
-///* idem au précédent sauf qu'on teste l'itérateur en début de listeD00 */
-//int reculer_liste_migrants(t_liste_migrants list) {
-//	/*si la liste != vide et si l'itérateur n'est pas à la fin */
-//	if (list->iterateur == list->tete) return 0;
-//
-//	/* l'itérateur passe au precedent */
-//	list->iterateur = list->iterateur->preced;
-//	--list->position;
-//	return 1;
-//}
 
 ///*-----------------------------------------------------------------*/
 /* 0 si vide , 1 sinon */
@@ -232,7 +221,7 @@ CAS 4 sinon inserer, static inserer_interieur
 */
 /*-----------------------------------------------------------------*/
 /*-----------------------------------------------------------------*/
-/* CAS 0  si la listeD00 est vide, tous les membres sont ajustés */
+/* CAS 0  si la liste_migrants est vide, tous les membres sont ajustés */
 static int inserer_premier_noeud(t_liste_migrants list, const t_el_liste_migrants* src) {
 	t_noeud_migrant temp = init_noeud(src, NULL);
 	if (temp) {
@@ -289,20 +278,18 @@ int inserer_fin_liste_migrants(t_liste_migrants list, const t_el_liste_migrants*
 /*-----------------------------------------------------------------*/
 
 /*CAS #3 inserer à l'intérieur de la liste */
-//Si jamais le programme devient lent, regarder ici en premier
-int inserer_position_liste_migrants(t_liste_migrants list, int position, const t_el_liste_migrants* src) {
-	t_noeud_migrant precedent;
+static int inserer_position_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src) {
 	t_noeud_migrant temp;
 
-	precedent = get_noeud(list, position - 1);
-	if (!precedent) return 0;
+	//Positionner l'itérateur au noeud qui PRÉCÈDE celui où on veut insérer.
+	if(!positionner_liste_migrants(list, list->position - 1)) return 0;
 
 	//Le nouveau noeud pointe vers celui qui suit l'ancien noeud à cette position.
-	temp = init_noeud(src, precedent->next);
+	temp = init_noeud(src, list->iterateur->next);
 	if (temp) {
 		//L'ancien noeud à cette position pointe vers le nouveau noeud.
-		precedent->next = temp;
-		positionner_liste_migrants(list, position);
+		list->iterateur->next = temp;
+		avancer_liste_migrants(list);
 		list->taille += 1;
 		return 1;
 	}
@@ -311,8 +298,7 @@ int inserer_position_liste_migrants(t_liste_migrants list, int position, const t
 }
 /*-----------------------------------------------------------------*/
 
-
-int inserer_liste_migrants(t_liste_migrants list, int position, const t_el_liste_migrants* src) {
+int inserer_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src) {
 
 	if (list->taille == 0)
 		return inserer_premier_noeud(list, src);
@@ -321,7 +307,7 @@ int inserer_liste_migrants(t_liste_migrants list, int position, const t_el_liste
 	if (list->iterateur == list->queue)
 		return inserer_fin_liste_migrants(list, src);
 
-	return inserer_position_liste_migrants(list, position, src);
+	return inserer_position_liste_migrants(list, src);
 
 }
 /*-----------------------------------------------------------------*/
@@ -386,27 +372,26 @@ int supprimer_fin_liste_migrants(t_liste_migrants list) {
 }
 /*-----------------------------------------------------------------*/
 /*  ici on traite le cas #4 */
-int supprimer_position_liste_migrants(t_liste_migrants list, int position) {
+static int supprimer_position_liste_migrants(t_liste_migrants list) {
 	t_noeud_migrant precedent;
 	t_noeud_migrant supprime;
 
-	supprime = get_noeud(list, position);
-	if (!supprime) return 0;
-
-	precedent = get_noeud(list, position - 1);
-	if (!precedent) return 0;
+	//Positionner l'itérateur au noeud qui PRÉCÈDE celui à supprimer.
+	if (!positionner_liste_migrants(list, list->position - 1)) return 0;
+	
+	precedent = list->iterateur;
+	supprime = list->iterateur->next;
 
 	//Le noeud précédent "saute" par dessus celui à supprimer
 	precedent->next = supprime->next;
 
+	//Remettre l'itérateur à la position sélectionnée
+	avancer_liste_migrants(list);
+	
 	free(supprime);
 	list->taille -= 1;
 
-	// placer  l'iterateur au debut
-	aller_debut_liste_migrants(list);
-
 	return 1;
-
 }
 
 /*-----------------------------------------------------------------*/
@@ -437,7 +422,7 @@ int supprimer_liste_migrants(t_liste_migrants list) {
 	if (list->iterateur == list->queue) return supprimer_fin_liste_migrants(list);
 
 	/*sinon on supprime un noeud intérieur  */
-	return supprimer_interieur(list);
+	return supprimer_position_liste_migrants(list);
 
 }
 /*-----------------------------------------------------------------*/
@@ -466,10 +451,74 @@ int vider_liste_migrants(t_liste_migrants list) {
 
 #if 1
 int main(void) {
-	t_liste_migrants liste_test = init_liste_migrants();
-	assert(liste_test);
+	t_liste_migrants list = init_liste_migrants();
+	
+	t_personne personne_0 = init_personne(10, 10, PROP_INITIALE);
+	t_personne personne_1 = init_personne(10, 10, PROP_INITIALE);
+	t_personne personne_2 = init_personne(10, 10, PROP_INITIALE);
+	t_personne personne_3 = init_personne(10, 10, PROP_INITIALE);
+	t_personne personne_4 = init_personne(10, 10, PROP_INITIALE);
+	t_personne personne_A = init_personne(10, 10, PROP_INITIALE);
+	
+	t_migrant migrant_0 = init_migrant(&personne_0, 0, 0, 0);
+	t_migrant migrant_1 = init_migrant(&personne_1, 1, 1, 1);
+	t_migrant migrant_2 = init_migrant(&personne_2, 2, 2, 2);
+	t_migrant migrant_3 = init_migrant(&personne_3, 3, 3, 3);
+	t_migrant migrant_4 = init_migrant(&personne_4, 4, 4, 4);
+	
+	t_migrant migrant_A = init_migrant(&personne_A, 9, 9, 9);
+	t_migrant migrant_A_copie;
+	t_migrant migrant_2_copie;
+	
+	assert(list);
+	assert(est_vide_liste_migrants(list));
 
-	assert(est_vide_liste_migrants);
+	//Insérer des migrants dans la liste
+	assert(inserer_liste_migrants(list, &migrant_0));
+	assert(inserer_liste_migrants(list, &migrant_1));
+	assert(inserer_liste_migrants(list, &migrant_2));
+	assert(inserer_liste_migrants(list, &migrant_3));
+	assert(inserer_liste_migrants(list, &migrant_4));
+
+	//Vérifier qu'ils sont bien présents
+	assert(get_dans_liste_migrants(list) == 5);
+	assert(!est_vide_liste_migrants(list));
+
+	//Insérer un migrant en plein milieu de la liste
+	positionner_liste_migrants(list, 2);
+	assert(inserer_liste_migrants(list, &migrant_A));
+
+	//Vérifier que la bonne valeur est à la bonne place.
+	assert(get_position_liste_migrants(list) == 2);
+	assert(get_valeur_liste_migrants(list, &migrant_A_copie));
+
+	//Toutes ces valeurs devraient être 9
+	assert(migrant_A_copie.ville_destination == migrant_A.ville_destination);
+	assert(migrant_A_copie.ville_depart == migrant_A.ville_depart);
+	assert(migrant_A_copie.hrs_transit == migrant_A.hrs_transit);
+
+	//Tester le positionnement d'itérateur
+	assert(aller_debut_liste_migrants(list));
+	assert(get_position_liste_migrants(list) == 0);
+
+	assert(aller_fin_liste_migrants(list));
+	assert(get_position_liste_migrants(list) == 5);
+
+	positionner_liste_migrants(list, 2);
+	assert(supprimer_liste_migrants(list));
+	assert(get_position_liste_migrants(list) == 2);
+
+	//Vérifier que le migrant 2 original est revenu à sa place.
+	assert(get_valeur_liste_migrants(list, &migrant_2_copie));
+	assert(migrant_2_copie.ville_destination == migrant_2.ville_destination);
+	assert(migrant_2_copie.ville_depart == migrant_2.ville_depart);
+	assert(migrant_2_copie.hrs_transit == migrant_2.hrs_transit);
+
+	//Vérifier la supression et la destruction de la liste
+	assert(vider_liste_migrants(list) == 5);
+	assert(est_vide_liste_migrants(list));
+
+	detruire_liste_migrants(list);
 
 	system("pause");
 	return EXIT_SUCCESS;
