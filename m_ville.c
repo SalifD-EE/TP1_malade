@@ -37,6 +37,11 @@ t_ville init_ville(const char* nom_ville, int largeur, int hauteur, int taille_p
 
 	//Initialiser le fichier d'écriture
 	ville->logfile = fopen(strcat(nom_ville, EXTENSION_FICHIER), "w");
+	if (!ville->logfile) {
+		printf("Erreur : impossible d'ouvrir le fichier logfile.%s\n", nom_ville);
+		fclose(ville->nom_ville);
+		return 0;
+	}
 
 	return ville;
 }
@@ -133,4 +138,42 @@ int obtenir_des_migrants_ville(t_ville ville) {
 	}
 
 	return ctr_migrants_out;
+}
+
+void ecrire_logfile_ville(t_ville ville) {
+
+		fprintf(ville->logfile, "Ville ID: %d\n", ville->nom_ville);
+		fprintf(ville->logfile, "Population: %d\n", ville->population);
+		fprintf(ville->logfile, "Migrants entrant: %d\n", ville->nb_migrants_in);
+		fprintf(ville->logfile, "Migrants morts en transit: %d\n", ville->nb_morts_transit);
+		fprintf(ville->logfile, "----------------\n");
+	
+}
+
+void detruire_ville (t_ville ville) {
+
+	// Libérer la population
+	t_ville* current = ville->population;
+	t_ville* next = NULL;
+	while (current != NULL) {
+		t_migrant* tempo = current;
+		current = next;
+		free(tempo);
+	}
+	
+	// Libérer la liste des migrants
+	t_ville* courant = ville->migrants;
+	t_ville* suivant= NULL;
+	while (courant != NULL) {
+		t_ville* temp = courant;
+		courant = suivant;
+		free(temp);
+	}
+	ville->migrants = NULL;
+
+	// Fermer le fichier de log
+	if (ville->logfile != NULL) {
+		fclose(ville->logfile);
+		ville->logfile = NULL;
+	}
 }
