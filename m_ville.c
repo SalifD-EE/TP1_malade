@@ -127,7 +127,7 @@ int obtenir_des_migrants_ville(t_ville ville) {
 	t_migrant nouveau_migrant;
 	int ville_dest = get_destination_transition(get_position_ville(ville->nom_ville));
 	int ctr_migrants_out = 0;
-	
+
 	if (randf() < ville->prob_emigrer) {
 		for (int i = 0; i < randi(MAX_BORNE_EMIGRER); i++) {
 			enlever_une_personne(&ville->population, &personne_cour);
@@ -141,3 +141,73 @@ int obtenir_des_migrants_ville(t_ville ville) {
 
 	return ctr_migrants_out;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	void ecrire_logfile_ville(t_ville ville) {
+
+		fprintf(ville->logfile, "Ville ID: %d\n", ville->nom_ville);
+		fprintf(ville->logfile, "Population: %d\n", ville->population);
+		fprintf(ville->logfile, "Migrants entrant: %d\n", ville->nb_migrants_in);
+		fprintf(ville->logfile, "Migrants morts en transit: %d\n", ville->nb_morts_transit);
+		fprintf(ville->logfile, "----------------\n");
+
+	}
+
+	void detruire_ville(t_ville ville) {
+
+		// Libérer la population
+		t_ville* current = ville->population;
+		t_ville* next = NULL;
+		while (current != NULL) {
+			t_migrant* tempo = current;
+			current = next;
+			free(tempo);
+		}
+
+		// Libérer la liste des migrants
+		t_ville* courant = ville->migrants;
+		t_ville* suivant = NULL;
+		while (courant != NULL) {
+			t_ville* temp = courant;
+			courant = suivant;
+			free(temp);
+		}
+		ville->migrants = NULL;
+
+		// Fermer le fichier de log
+		if (ville->logfile != NULL) {
+			fclose(ville->logfile);
+			ville->logfile = NULL;
+		}
+	}
