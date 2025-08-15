@@ -141,3 +141,21 @@ int obtenir_des_migrants_ville(t_ville ville) {
 
 	return ctr_migrants_out;
 }
+
+int transferer_des_migrants_entre_villes(t_ville src, t_ville dest) {
+	t_migrant migrant_cour;
+	int ctr_migrants_transf = 0;
+	
+	if (get_position_ville(dest) == get_position_ville(src) + 1) {
+		
+		aller_debut_liste_migrants(src->migrants);
+		for (int i = 0; i < get_dans_liste_migrants(src->migrants); ++i) {
+			get_valeur_liste_migrants(src->migrants, &migrant_cour);
+			
+			if (get_hrs_transit(&migrant_cour) == 0 && comparer_noms_villes(get_destination_migrant(&migrant_cour), dest->nom_ville) == 0) {
+				supprimer_liste_migrants(src->migrants);
+				set_transit_migrant(&migrant_cour, dest->nb_hre_transit);
+			}
+		}
+	}
+}
