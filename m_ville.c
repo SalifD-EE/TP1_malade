@@ -7,6 +7,7 @@
 #include "m_R2.h"
 #include "Constante.h"
 #include "m_ensemble_noms.h"
+#include "m_matrice_transition.h"
 
 #include <math.h>
 #include <string.h>
@@ -115,9 +116,21 @@ int obtenir_des_personnes_ville(t_ville ville) {
 }
 
 int obtenir_des_migrants_ville(t_ville ville) {
+	t_personne personne_cour;
+	t_migrant nouveau_migrant;
+	int ville_dest = get_destination_transition(get_position_ville(ville->nom_ville));
+	int ctr_migrants_out = 0;
+	
 	if (randf() < ville->prob_emigrer) {
 		for (int i = 0; i < randi(MAX_BORNE_EMIGRER); i++) {
+			enlever_une_personne(&ville->population, &personne_cour);
+			nouveau_migrant = init_migrant(&personne_cour, get_position_ville(ville->nom_ville), ville_dest, 0);
 
+			inserer_position_liste_migrants(&ville->migrants, &nouveau_migrant);
+			++ville->nb_migrants_out;
+			++ctr_migrants_out;
 		}
 	}
+
+	return ctr_migrants_out;
 }
