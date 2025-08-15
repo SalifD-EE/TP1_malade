@@ -36,7 +36,7 @@
     <ClCompile Include="m_ensemble_noms.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="m_matrice_transition_FILL.c">
+    <ClCompile Include="m_matrice_transition.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="m_ville.c">

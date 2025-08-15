@@ -275,7 +275,7 @@ void modifier_etat_personne(t_personne * lui, t_etat etat, double proportion_con
 //--------------------------------------------
 //--------------------------------------------
 /* MODIFIER_PROB_DEPLACER
-   Reçoit une personne et la proportion de confinement voulu
+   Reçoit une personne et la proportion de confinement voulue
    elle redéfinit la  probabilité de se déplacer de la personne
    selon les mêmes règles que celles du constructeur
 

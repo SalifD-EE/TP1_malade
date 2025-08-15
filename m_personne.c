@@ -9,8 +9,6 @@
 #include "m_R2.h"
 #include "Constante.h"
 
-
-
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -115,6 +113,7 @@ int get_hrs_maladie(const t_personne* lui) {
     if (lui->etat != MALADE) return 0;
     return lui->hrs_maladie;
 }
+/*=========================================================*/
 
 void modifier_position_personne(t_personne* lui, t_R2 position) {
     lui->position = position;
@@ -124,7 +123,6 @@ void modifier_vitesse_personne(t_personne* lui, t_R2 vitesse) {
     lui->vitesse = vitesse;
 }
 
-/*=========================================================*/
 /* Détermine si une personne meurt ou se rétablit */
 int determiner_mort_ou_retabli( const t_personne* lui) {
     if (lui->etat != MALADE || lui->hrs_maladie < NB_HRS_MALADIE ) {

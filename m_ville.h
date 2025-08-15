@@ -23,7 +23,8 @@
 
 // concaténé au nom de la ville pour obtenir le nom du fichier de résultats 
 #define EXTENSION_FICHIER    "_log.txt"   
-#define MAX_NOM_VILLE 50   
+#define MAX_NOM_VILLE 50
+#define MAX_BORNE_EMIGRER 5
 
 typedef struct ville* t_ville;
 
@@ -70,6 +71,9 @@ t_ville  init_ville(const char* nom_ville, int largeur, int hauteur, int taille_
 
 //const char* get_nom_ville(t_ville ville);
 
+/*=========================================================*/
+/* INFORMATRICES
+/*=========================================================*/
 int get_largeur(t_ville ville);
 int get_hauteur(t_ville ville);
 double get_proportion_confinement(t_ville ville);
@@ -81,5 +85,22 @@ int get_nb_migrants_out(t_ville ville);
 int get_nb_migrants_in(t_ville ville);
 int get_nb_morts_transit(t_ville ville);
 FILE* get_logfile(t_ville ville);
+
+/*=========================================================*/
+/* MUTATRICES
+/*=========================================================*/
+void inoculer_ville(t_ville ville);
+
+void simuler_une_heure_pandemie_ville(t_ville ville);
+
+int obtenir_des_personnes_ville(t_ville ville);
+
+int obtenir_des_migrants_ville(t_ville ville);
+
+int transferer_des_migrants_entre_villes(t_ville src, t_ville dest);
+
+void ecrire_logfile_ville(t_ville ville);
+
+void detruire_ville(t_ville  ville);
 
 #endif 
