@@ -90,6 +90,7 @@ void simuler_une_heure_pandemie_ville(t_ville ville) {
 
 int obtenir_des_personnes_ville(t_ville ville) {
 	t_migrant migrant_cour;
+	t_personne personne_cour;
 	t_R2 nouvelle_pos;
 	t_R2 nouvelle_vit;
 	int ctr_migrants_in = 0;
@@ -102,16 +103,17 @@ int obtenir_des_personnes_ville(t_ville ville) {
 		get_valeur_liste_migrants(ville->migrants, &migrant_cour);
 
 		//Vérifier si le migrant est dans sa ville de destination.
-		if (comparer_noms_villes(migrant_cour.ville_destination, ville->nom_ville)) {
+		if (comparer_noms_villes(get_destination_migrant(&migrant_cour), ville->nom_ville)) {
 			nouvelle_pos = R2_nouveau(randf() * ville->largeur, randf() * ville->hauteur);
 			nouvelle_vit = R2_nouveau(norme_vit * cos(angle), norme_vit * sin(angle));
-			
-			supprimer_position_liste_migrants(ville->migrants);
-			modifier_position_personne(&migrant_cour.voyageur, nouvelle_pos);
-			modifier_vitesse_personne(&migrant_cour.voyageur, nouvelle_vit);
-			modifier_prob_deplacer(&migrant_cour.voyageur, ville->proportion_confinement);
+			personne_cour = get_personne_migrant(&migrant_cour);
 
-			ajouter_une_personne(&ville->population, &migrant_cour.voyageur);
+			supprimer_position_liste_migrants(ville->migrants);
+			modifier_position_personne(&personne_cour, nouvelle_pos);
+			modifier_vitesse_personne(&personne_cour, nouvelle_vit);
+			modifier_prob_deplacer(&personne_cour, ville->proportion_confinement);
+
+			ajouter_une_personne(&ville->population, &personne_cour);
 			++ville->nb_migrants_in;
 			++ctr_migrants_in;
 		}
@@ -138,42 +140,4 @@ int obtenir_des_migrants_ville(t_ville ville) {
 	}
 
 	return ctr_migrants_out;
-}
-
-void ecrire_logfile_ville(t_ville ville) {
-
-		fprintf(ville->logfile, "Ville ID: %d\n", ville->nom_ville);
-		fprintf(ville->logfile, "Population: %d\n", ville->population);
-		fprintf(ville->logfile, "Migrants entrant: %d\n", ville->nb_migrants_in);
-		fprintf(ville->logfile, "Migrants morts en transit: %d\n", ville->nb_morts_transit);
-		fprintf(ville->logfile, "----------------\n");
-	
-}
-
-void detruire_ville (t_ville ville) {
-
-	// Libérer la population
-	t_ville* current = ville->population;
-	t_ville* next = NULL;
-	while (current != NULL) {
-		t_migrant* tempo = current;
-		current = next;
-		free(tempo);
-	}
-	
-	// Libérer la liste des migrants
-	t_ville* courant = ville->migrants;
-	t_ville* suivant= NULL;
-	while (courant != NULL) {
-		t_ville* temp = courant;
-		courant = suivant;
-		free(temp);
-	}
-	ville->migrants = NULL;
-
-	// Fermer le fichier de log
-	if (ville->logfile != NULL) {
-		fclose(ville->logfile);
-		ville->logfile = NULL;
-	}
 }

@@ -43,6 +43,10 @@ int dec_hrs_transit_migrant(t_migrant* lui) {
 
 /*=========================================================*/
 
+int get_hrs_transit(const t_migrant* lui) {
+    return lui->hrs_transit;
+}
+
 int get_destination_migrant(const t_migrant* lui) {
 
     return lui->ville_destination;

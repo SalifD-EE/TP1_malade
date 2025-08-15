@@ -90,6 +90,11 @@ int est_vivant_migrant(t_migrant* lui);
 
 
 //**********************************
+/* informatrice
+   obtenir le nombre d'heures de transit d'un migrant
+   PARAMÈTRES : pointeur sur un migrant
+   RETOUR : nombre d'hrs de transit */
+int get_hrs_transit(const t_migrant* lui);
 //**********************************
 
 /* informatrice
