@@ -3,13 +3,11 @@
 /* Module m_personne pour INF147 - Été 2025 */
 /* Salif Diarra et Léo Bouamrane */
 /*=========================================================*/
-#include "m_personnes.h"
+#include "m_personne.h"
 #include "m_alea_pop.h"
 #include "m_liste_personnes.h"
 #include "m_R2.h"
 #include "Constante.h"
-
-
 
 #include <math.h>
 #include <stdio.h>
@@ -115,8 +113,16 @@ int get_hrs_maladie(const t_personne* lui) {
     if (lui->etat != MALADE) return 0;
     return lui->hrs_maladie;
 }
-
 /*=========================================================*/
+
+void modifier_position_personne(t_personne* lui, t_R2 position) {
+    lui->position = position;
+}
+
+void modifier_vitesse_personne(t_personne* lui, t_R2 vitesse) {
+    lui->vitesse = vitesse;
+}
+
 /* Détermine si une personne meurt ou se rétablit */
 int determiner_mort_ou_retabli( const t_personne* lui) {
     if (lui->etat != MALADE || lui->hrs_maladie < NB_HRS_MALADIE ) {
@@ -240,3 +246,25 @@ int inc_cause_infections(t_personne* lui) {
     return lui->cause_infections;
 }
 /*=========================================================*/
+
+// Tests unitaires pour les nouvelles fonctions du TP2
+#if 0
+int main(void) {
+    t_personne john_doe = init_personne(200, 200, 0.2);
+    t_R2 nouvelle_pos;
+    t_R2 nouvelle_vit;
+    int nb_tests = 1000;
+
+    for (int i = 0; i < nb_tests; ++i) {
+        nouvelle_pos = R2_rand(10);
+        nouvelle_vit = R2_rand(5);
+        modifier_position_personne(&john_doe, nouvelle_pos);
+        modifier_vitesse_personne(&john_doe, nouvelle_vit);
+        assert(R2_eq(john_doe.position, nouvelle_pos) == 1);
+        assert(R2_eq(john_doe.vitesse, nouvelle_vit) == 1);
+    }
+
+    system("pause");
+    return EXIT_SUCCESS;
+}
+#endif

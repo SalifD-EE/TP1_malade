@@ -4,7 +4,7 @@
 /*=========================================================*/
 
 #include "m_alea_pop.h"
-#include "m_personnes.h"
+#include "m_personne.h"
 #include "m_liste_personnes.h"
 #include "m_R2.h"
 
@@ -17,6 +17,9 @@
 
 /*=========================================================*/
 #if (MODE_SIMULATION) == 0 //Peut être modifié dans dans Constante.h
+
+//Temporairement désactivé pour les tests unitaires du TP2
+#if 0
 int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();
@@ -128,7 +131,7 @@ int main(void) {
 
     return EXIT_SUCCESS;
 }
-
+#endif
 #endif
 
 

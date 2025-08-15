@@ -16,21 +16,6 @@
 
 
 /******************************************************************************/
-/*                      DÉCLARATIONS DES CONSTANTES                           */
-/******************************************************************************/
- 
-
-
-/* uniquement pour établir les décès*/
-/* constantes relatives aux probabilités de décès selon l'age */
-//#define AGE_JEUNE        29     //limite de la premiere tranche d'age
-//#define INC_CAT_AGE      10     //écart entre chaque tranche d'age suivante
-
-
-/******************************************************************************/
-
-
-/******************************************************************************/
 /*                         DÉCLARATIONS DE TYPES                              */
 /******************************************************************************/
 // va caracteriser l'etat de la personne 
@@ -194,6 +179,24 @@ int get_hrs_maladie(const t_personne * lui);
 //--------------------------------------------
 
 //--------------------------------------------
+/* MODIFIER_POSITION_PERSONNE
+   Reçoit une personne ainsi qu'une position à lui assigner.
+   PARAMÈTRES : pointeur sur une personne, position à assigner
+   RETOUR : aucun
+   SPECS  : aucun
+*/
+void modifier_position_personne(t_personne* lui, t_R2 position);
+
+//--------------------------------------------
+/* MODIFIER_VITESSE_PERSONNE
+   Reçoit une personne ainsi qu'une vitesse à lui assigner.
+   PARAMÈTRES : pointeur sur une personne, vitesse à assigner
+   RETOUR : aucun
+   SPECS  : aucun
+*/
+void modifier_vitesse_personne(t_personne* lui, t_R2 vitesse);
+
+//--------------------------------------------
 /* DETERMINER_MORT_RETABLI
    Reçoit une personne et détermine au terme de la maladie
    s'il va mourir ou se rétablir
@@ -272,7 +275,7 @@ void modifier_etat_personne(t_personne * lui, t_etat etat, double proportion_con
 //--------------------------------------------
 //--------------------------------------------
 /* MODIFIER_PROB_DEPLACER
-   Reçoit une personne et la proportion de confinement voulu
+   Reçoit une personne et la proportion de confinement voulue
    elle redéfinit la  probabilité de se déplacer de la personne
    selon les mêmes règles que celles du constructeur
 

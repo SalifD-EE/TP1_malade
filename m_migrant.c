@@ -4,7 +4,7 @@
 
 #include "m_migrant.h"
 #include"m_ensemble_noms.h"
-#include"m_personnes.h"
+#include"m_personne.h"
 #include"m_liste_personnes.h"
 
 
@@ -84,7 +84,7 @@ int inc_hrs_maladie_migrant(t_migrant* lui) {
         // Incrémente les heures de maladie via le module m_personnes
         int changement = inc_hrs_maladie(&lui->voyageur);
         // Si le nombre d'heures de maladie atteint NB_HRS_MALADIE, déterminer l'état
-        if (lui->voyageur.hrs_maladie >= NB_HRS_MALADIE) {
+        if (get_hrs_maladie(&lui->voyageur) >= NB_HRS_MALADIE) {
             determiner_mort_ou_retabli(&lui->voyageur); // Fonction du module m_personnes
             return 1; // État changé
         }
