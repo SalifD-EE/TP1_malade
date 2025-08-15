@@ -98,7 +98,7 @@ int obtenir_des_personnes_ville(t_ville ville) {
 		get_valeur_liste_migrants(ville->migrants, &migrant_cour);
 
 		//Vérifier si le migrant est dans sa ville de destination.
-		if (comparer_noms_villes(get_destination_migrant(&migrant_cour), ville->nom_ville)) {
+		if (comparer_noms_villes(get_destination_migrant(&migrant_cour), ville->nom_ville) == 1) {
 			nouvelle_pos = R2_nouveau(randf() * ville->largeur, randf() * ville->hauteur);
 			nouvelle_vit = R2_nouveau(norme_vit * cos(angle), norme_vit * sin(angle));
 			personne_cour = get_personne_migrant(&migrant_cour);
@@ -145,7 +145,7 @@ int transferer_des_migrants_entre_villes(t_ville src, t_ville dest) {
 		aller_debut_liste_migrants(src->migrants);
 		for (int i = 0; i < get_dans_liste_migrants(src->migrants); ++i) {
 			get_valeur_liste_migrants(src->migrants, &migrant_cour);
-			if (get_hrs_transit(&migrant_cour) == 0) {
+			if (get_hrs_transit(&migrant_cour) == 0 && comparer_noms_villes(get_destination_migrant(&migrant_cour), dest->nom_ville) == 0) {
 
 			}
 		}
