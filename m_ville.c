@@ -133,7 +133,7 @@ int obtenir_des_migrants_ville(t_ville ville) {
 			enlever_une_personne(&ville->population, &personne_cour);
 			nouveau_migrant = init_migrant(&personne_cour, get_position_ville(ville->nom_ville), ville_dest, 0);
 
-			inserer_position_liste_migrants(&ville->migrants, &nouveau_migrant);
+			inserer_liste_migrants(&ville->migrants, &nouveau_migrant);
 			++ville->nb_migrants_out;
 			++ctr_migrants_out;
 		}
@@ -155,42 +155,30 @@ int transferer_des_migrants_entre_villes(t_ville src, t_ville dest) {
 			if (get_hrs_transit(&migrant_cour) == 0 && comparer_noms_villes(get_destination_migrant(&migrant_cour), dest->nom_ville) == 0) {
 				supprimer_liste_migrants(src->migrants);
 				set_transit_migrant(&migrant_cour, dest->nb_hre_transit);
+				inserer_liste_migrants(&dest->migrants, &migrant_cour);
+				++ctr_migrants_transf;
 			}
 		}
 	}
+
+	return ctr_migrants_transf;
 }
 
 void ecrire_logfile_ville(t_ville ville) {
-
 	fprintf(ville->logfile, "Ville ID: %d\n", ville->nom_ville);
 	fprintf(ville->logfile, "Population: %d\n", ville->population);
 	fprintf(ville->logfile, "Migrants entrant: %d\n", ville->nb_migrants_in);
 	fprintf(ville->logfile, "Migrants morts en transit: %d\n", ville->nb_morts_transit);
 	fprintf(ville->logfile, "----------------\n");
-
 }
 
 void detruire_ville(t_ville ville) {
-
 	// Libérer la population
-	t_ville* current = &ville->population;
-	t_ville* next = NULL;
-	while (current != NULL) {
-		t_migrant* tempo = current;
-		current = next;
-		free(tempo);
-	}
+	liberer_liste(&ville->population);
 
 	// Libérer la liste des migrants
-	t_ville* courant = ville->migrants;
-	t_ville* suivant = NULL;
-	while (courant != NULL) {
-		t_ville* temp = courant;
-		courant = suivant;
-		free(temp);
-	}
-	ville->migrants = NULL;
-
+	detruire_liste_migrants(ville->migrants);
+	
 	// Fermer le fichier de log
 	if (ville->logfile != NULL) {
 		fclose(ville->logfile);
