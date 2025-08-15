@@ -37,6 +37,11 @@ t_ville init_ville(const char* nom_ville, int largeur, int hauteur, int taille_p
 
 	//Initialiser le fichier d'écriture
 	ville->logfile = fopen(strcat(nom_ville, EXTENSION_FICHIER), "w");
+	if (!ville->logfile) {
+		printf("Erreur : impossible d'ouvrir le fichier logfile.%s\n", nom_ville);
+		fclose(ville->nom_ville);
+		return 0;
+	}
 
 	return ville;
 }
