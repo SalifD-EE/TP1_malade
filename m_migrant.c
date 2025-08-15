@@ -25,14 +25,14 @@ t_migrant init_migrant(const t_personne* src, int ville_dep, int ville_dest, int
 
 /*=========================================================*/
 
-void set_transit_migrant(t_migrant* lui, int hrs); {
+void set_transit_migrant(t_migrant* lui, int hrs) {
     lui->hrs_transit = hrs;
 
 }
 
 /*=========================================================*/
 
-int dec_hrs_transit_migrant(t_migrant* lui); {
+int dec_hrs_transit_migrant(t_migrant* lui) {
     if (lui->hrs_transit > 0) {
         lui->hrs_transit--;
     }
@@ -43,7 +43,7 @@ int dec_hrs_transit_migrant(t_migrant* lui); {
 
 /*=========================================================*/
 
-int get_destination_migrant(const t_migrant* lui); {
+int get_destination_migrant(const t_migrant* lui) {
 
     return lui->ville_destination;
 }
@@ -51,7 +51,7 @@ int get_destination_migrant(const t_migrant* lui); {
 
 /*=========================================================*/
 
-int get_depart_migrant(const t_migrant* lui); {
+int get_depart_migrant(const t_migrant* lui) {
 
     return lui->ville_depart;
 }
@@ -59,7 +59,7 @@ int get_depart_migrant(const t_migrant* lui); {
 
 /*=========================================================*/
 
-int est_vivant_migrant(t_migrant* lui); {
+int est_vivant_migrant(t_migrant* lui) {
 
     return get_etat(&lui->voyageur);
   
@@ -68,7 +68,7 @@ int est_vivant_migrant(t_migrant* lui); {
 
 /*=========================================================*/
 
-int est_malade_migrant(const t_migrant* lui); {
+int est_malade_migrant(const t_migrant* lui) {
 
     return get_etat(&lui->voyageur);
 
@@ -78,13 +78,13 @@ int est_malade_migrant(const t_migrant* lui); {
 
 /*=========================================================*/
 
-int inc_hrs_maladie_migrant(t_migrant* lui); {
+int inc_hrs_maladie_migrant(t_migrant* lui) {
     int changement = 0;
     if ( est_malade_migrant(lui) ) {
         // Incrémente les heures de maladie via le module m_personnes
         int changement = inc_hrs_maladie(&lui->voyageur);
         // Si le nombre d'heures de maladie atteint NB_HRS_MALADIE, déterminer l'état
-        if (lui->voyageur.nb_hrs_maladie >= NB_HRS_MALADIE) {
+        if (lui->voyageur.hrs_maladie >= NB_HRS_MALADIE) {
             determiner_mort_ou_retabli(&lui->voyageur); // Fonction du module m_personnes
             return 1; // État changé
         }
@@ -96,7 +96,7 @@ int inc_hrs_maladie_migrant(t_migrant* lui); {
 
 /*=========================================================*/
 
-t_personne get_personne_migrant(const t_migrant* lui); {
+t_personne get_personne_migrant(const t_migrant* lui) {
     return lui->voyageur;
 }
 
