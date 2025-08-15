@@ -85,6 +85,7 @@ void simuler_une_heure_pandemie_ville(t_ville ville) {
 
 int obtenir_des_personnes_ville(t_ville ville) {
 	t_migrant migrant_cour;
+	t_personne personne_cour;
 	t_R2 nouvelle_pos;
 	t_R2 nouvelle_vit;
 	int ctr_migrants_in = 0;
@@ -97,16 +98,17 @@ int obtenir_des_personnes_ville(t_ville ville) {
 		get_valeur_liste_migrants(ville->migrants, &migrant_cour);
 
 		//Vérifier si le migrant est dans sa ville de destination.
-		if (comparer_noms_villes(migrant_cour.ville_destination, ville->nom_ville)) {
+		if (comparer_noms_villes(get_destination_migrant(&migrant_cour), ville->nom_ville)) {
 			nouvelle_pos = R2_nouveau(randf() * ville->largeur, randf() * ville->hauteur);
 			nouvelle_vit = R2_nouveau(norme_vit * cos(angle), norme_vit * sin(angle));
-			
-			supprimer_position_liste_migrants(ville->migrants);
-			modifier_position_personne(&migrant_cour.voyageur, nouvelle_pos);
-			modifier_vitesse_personne(&migrant_cour.voyageur, nouvelle_vit);
-			modifier_prob_deplacer(&migrant_cour.voyageur, ville->proportion_confinement);
+			personne_cour = get_personne_migrant(&migrant_cour);
 
-			ajouter_une_personne(&ville->population, &migrant_cour.voyageur);
+			supprimer_position_liste_migrants(ville->migrants);
+			modifier_position_personne(&personne_cour, nouvelle_pos);
+			modifier_vitesse_personne(&personne_cour, nouvelle_vit);
+			modifier_prob_deplacer(&personne_cour, ville->proportion_confinement);
+
+			ajouter_une_personne(&ville->population, &personne_cour);
 			++ville->nb_migrants_in;
 			++ctr_migrants_in;
 		}
@@ -133,4 +135,19 @@ int obtenir_des_migrants_ville(t_ville ville) {
 	}
 
 	return ctr_migrants_out;
+}
+
+int transferer_des_migrants_entre_villes(t_ville src, t_ville dest) {
+	t_migrant migrant_cour;
+	
+	if (get_position_ville(dest) == get_position_ville(src) + 1) {
+		
+		aller_debut_liste_migrants(src->migrants);
+		for (int i = 0; i < get_dans_liste_migrants(src->migrants); ++i) {
+			get_valeur_liste_migrants(src->migrants, &migrant_cour);
+			if (get_hrs_transit(&migrant_cour) == 0) {
+
+			}
+		}
+	}
 }

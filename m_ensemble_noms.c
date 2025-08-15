@@ -63,7 +63,7 @@ unsigned int get_nombre_villes(void) {
 	return groupe_noms.nb_noms; 
 }
 
-unsigned int get_nombre_max_villes(void) {
+unsigned int get_max_villes(void) {
 	return groupe_noms.max_noms;
 }
 
