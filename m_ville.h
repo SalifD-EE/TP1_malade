@@ -91,22 +91,119 @@ FILE* get_logfile(t_ville ville);
 /*=========================================================*/
 /* MUTATRICES
 /*=========================================================*/
+
+/* INOCULER_VILLE
+   Fonction qui va créer le patient zéro dans une ville
+   PARAMÈTRES : ville - pointeur vers la ville à inoculer
+   RETOUR : aucun
+   SPECS  : choisit aléatoirement une personne saine de la population et la rend malade
+            utilise creer_patient_zero() de m_liste_personnes
+            ne fait rien si la ville est vide ou s'il y a déjà des malades
+*/
 void inoculer_ville(t_ville ville);
 
+/* SIMULER_UNE_HEURE_PANDEMIE_VILLE
+   Fonction qui simule une heure complète de pandémie dans une ville
+   PARAMÈTRES : ville - pointeur vers la ville à simuler
+   RETOUR : aucun
+   SPECS  : effectue dans l'ordre :
+            1. simulation d'une heure de pandémie sur la population
+            2. traitement des heures de transit des migrants
+            3. traitement des maladies des migrants en transit
+            met à jour les compteurs infection_heure et morts_heure de la ville
+*/
 void simuler_une_heure_pandemie_ville(t_ville ville);
 
+/* TRAITER_HEURES_TRANSIT
+   Fonction privée qui décrémente les heures de transit de tous les migrants
+   PARAMÈTRES : liste - liste des migrants à traiter
+   RETOUR : aucun
+   SPECS  : parcourt tous les migrants de la liste et décrémente leur temps de transit
+            utilise dec_hrs_transit_liste_migrants() pour chaque migrant
+            fonction statique, usage interne au module seulement
+*/
 void traiter_heures_transit(t_liste_migrants liste);
 
+/* TRAITER_HEURES_MALADIE_MIGRANTS
+   Fonction privée qui gère l'évolution des maladies des migrants en transit
+   PARAMÈTRES : liste - liste des migrants à traiter
+                proportion_confinement - proportion de confinement de la ville
+   RETOUR : nombre de migrants morts en transit
+   SPECS  : pour chaque migrant malade :
+            - incrémente ses heures de maladie
+            - si la maladie est terminée, détermine s'il meurt ou guérit
+            - retire les morts de la liste des migrants
+            fonction statique, usage interne au module seulement
+*/
 int traiter_heures_maladie_migrants(t_liste_migrants liste, double proportion_confinement);
 
+/* OBTENIR_DES_PERSONNES_VILLE
+   Fonction qui intègre les migrants arrivés à destination dans la population
+   PARAMÈTRES : ville - pointeur vers la ville de destination
+   RETOUR : nombre de migrants intégrés à la population
+   SPECS  : parcourt la liste des migrants et pour chaque migrant :
+            - vérifie s'il est arrivé à destination (nom de ville correspond)
+            - lui assigne une position et vitesse aléatoires
+            - l'ajoute à la population locale
+            - le retire de la liste des migrants
+            met à jour le compteur nb_migrants_in
+*/
 int obtenir_des_personnes_ville(t_ville ville);
 
+/* OBTENIR_DES_MIGRANTS_VILLE
+   Fonction qui génère des migrants à partir de la population locale
+   PARAMÈTRES : ville - pointeur vers la ville source
+   RETOUR : nombre de migrants générés
+   SPECS  : avec une probabilité prob_emigrer de la ville :
+            - choisit aléatoirement des personnes de la population
+            - détermine leur destination via la matrice de transition
+            - les convertit en migrants avec temps de transit à 0
+            - les ajoute à la liste des migrants
+            - les retire de la population locale
+            met à jour le compteur nb_migrants_out
+*/
 int obtenir_des_migrants_ville(t_ville ville);
 
+/* TRANSFERER_DES_MIGRANTS_ENTRE_VILLES
+   Fonction qui transfère des migrants d'une ville source vers une ville destination
+   PARAMÈTRES : src - pointeur vers la ville source
+                dest - pointeur vers la ville destination
+   RETOUR : nombre de migrants transférés
+   SPECS  : parcourt les migrants de la ville source et pour chaque migrant :
+            - vérifie s'il a terminé son transit (hrs_transit == 0)
+            - vérifie si sa destination ne correspond pas à la ville dest
+            - le transfère vers la liste des migrants de dest
+            - lui assigne le temps de transit de la ville dest
+            - le retire de la liste source
+            ne transfère que si dest est la ville suivante dans l'ordre
+*/
 int transferer_des_migrants_entre_villes(t_ville src, t_ville dest);
 
+/* ECRIRE_LOGFILE_VILLE
+   Fonction qui écrit les statistiques actuelles de la ville dans son fichier log
+   PARAMÈTRES : ville - pointeur vers la ville à documenter
+   RETOUR : aucun
+   SPECS  : écrit dans le fichier logfile de la ville :
+            - l'ID de la ville (nom_ville)
+            - le nombre de personnes dans la population
+            - le nombre de migrants entrés
+            - le nombre de migrants morts en transit
+            ajoute une ligne de séparation
+            ne ferme pas le fichier après écriture
+*/
 void ecrire_logfile_ville(t_ville ville);
 
-void detruire_ville(t_ville  ville);
+/* DETRUIRE_VILLE
+   Fonction destructrice qui libère toutes les ressources d'une ville
+   PARAMÈTRES : ville - pointeur vers la ville à détruire
+   RETOUR : aucun
+   SPECS  : effectue dans l'ordre :
+            1. libère la liste de population (liberer_liste)
+            2. libère la liste des migrants (detruire_liste_migrants)
+            3. ferme le fichier logfile s'il est ouvert
+            4. libère la structure ville elle-même
+            après appel, le pointeur ville ne doit plus être utilisé
+*/
+void detruire_ville(t_ville ville);
 
 #endif 
