@@ -95,15 +95,15 @@ void inoculer_ville(t_ville ville);
 
 void simuler_une_heure_pandemie_ville(t_ville ville);
 
+void traiter_heures_transit(t_liste_migrants liste);
+
+int traiter_heures_maladie_migrants(t_liste_migrants liste, double proportion_confinement);
+
 int obtenir_des_personnes_ville(t_ville ville);
 
 int obtenir_des_migrants_ville(t_ville ville);
 
 int transferer_des_migrants_entre_villes(t_ville src, t_ville dest);
-
-static void traiter_heures_transit(t_liste_migrants list);
-
-static void traiter_heures_maladie(t_liste_migrants list);
 
 void ecrire_logfile_ville(t_ville ville);
 

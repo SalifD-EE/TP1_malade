@@ -8,6 +8,7 @@
 #ifndef M_GROUPE_VILLES_H
 #define M_GROUPE_VILLES_H
 
+#define _CRT_SECURE_NO_WARNINGS
 #include "m_ville.h" // Inclusion pour t_ville
 
 typedef struct {
@@ -17,7 +18,7 @@ typedef struct {
 
     FILE* log_villes;    // Fichier d’écriture des comptes globaux du groupe
 
-    // Ajout de membres pour les stats (exemples, à adapter)
+    // Ajout de membres pour les stats 
     int total_malades;   // Nombre total de malades
     int total_retablis;  // Nombre total de rétablis
     int total_vivants;   // Nombre total de vivants
