@@ -29,6 +29,8 @@ t_ville init_ville(const char* nom_ville, int largeur, int hauteur, int taille_p
 	ville->nb_migrants_in = 0;
 	ville->nb_migrants_out = 0;
 	ville->nb_morts_transit = 0;
+	ville->infection_heure = 0;
+	ville->morts_heure = 0;
 	ville->population = creer_liste_personnes(taille_pop_initiale);
 
 	//Copier le nom de la ville dans la structure ainsi que ensemble_nom
@@ -80,12 +82,41 @@ void inoculer_ville(t_ville ville) {
 	creer_patient_zero(&ville->population);
 }
 
-//Pas terminé
 void simuler_une_heure_pandemie_ville(t_ville ville) {
+	simuler_une_heure_pandemie(&ville->population, ville->largeur, ville->hauteur, &ville->infection_heure, &ville->morts_heure);
+	traiter_heures_transit(ville->migrants);
+	ville->nb_morts_transit += traiter_heures_maladie(ville->migrants, ville->proportion_confinement);
+}
 
-	//Deux derniers params temporairement à NULL. WIP.
-	simuler_une_heure_pandemie(&ville->population, ville->largeur, ville->hauteur, NULL, NULL);
+static void traiter_heures_transit(t_liste_migrants liste) {
+	aller_debut_liste_migrants(liste);
+	for (int i = 0; i < get_dans_liste_migrants(liste); i++) {
+		dec_hrs_transit_liste_migrants(liste);
+		avancer_liste_migrants(liste);
+	}
+}
 
+static int traiter_heures_maladie(t_liste_migrants liste, double proportion_confinement) {
+	int ctr_morts_transit = 0;
+	
+	aller_debut_liste_migrants(liste);
+
+	for (int i = 0; i < get_dans_liste_migrants(liste); i++) {
+		
+		//Si la maladie du migrant est terminée, terminer sa maladie.
+		if (assurer_temps_maladie_migrants(liste)) {
+			
+			/*Si le migrant meurt en transit, incrémenter le nombre de morts en transit
+				et le retirer de la liste de migrants*/
+			if (terminer_maladie_migrants(liste, proportion_confinement)) {
+				++ctr_morts_transit;
+				supprimer_liste_migrants(liste);
+			}
+		}
+		avancer_liste_migrants(liste);
+	}
+
+	return ctr_morts_transit;
 }
 
 int obtenir_des_personnes_ville(t_ville ville) {
@@ -117,6 +148,7 @@ int obtenir_des_personnes_ville(t_ville ville) {
 			++ville->nb_migrants_in;
 			++ctr_migrants_in;
 		}
+		avancer_liste_migrants(ville->migrants);
 	}
 
 	return ctr_migrants_in;
@@ -158,6 +190,7 @@ int transferer_des_migrants_entre_villes(t_ville src, t_ville dest) {
 				inserer_liste_migrants(&dest->migrants, &migrant_cour);
 				++ctr_migrants_transf;
 			}
+			avancer_liste_migrants(src->migrants);
 		}
 	}
 

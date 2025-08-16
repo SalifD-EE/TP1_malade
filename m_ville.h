@@ -41,7 +41,9 @@ struct ville {
     int nb_migrants_out;	       //  qui ont quitté la ville
     int nb_migrants_in;	       // qui ont rejoint la ville 
     int nb_morts_transit;	// nb. de migrants qui sont morts en transit 
-    
+    int infection_heure;
+    int morts_heure;
+
     // le fichier de log des résultats de la simulation  
     FILE* logfile;	            // lien au fichier texte des résultats
 };
@@ -98,6 +100,10 @@ int obtenir_des_personnes_ville(t_ville ville);
 int obtenir_des_migrants_ville(t_ville ville);
 
 int transferer_des_migrants_entre_villes(t_ville src, t_ville dest);
+
+static void traiter_heures_transit(t_liste_migrants list);
+
+static void traiter_heures_maladie(t_liste_migrants list);
 
 void ecrire_logfile_ville(t_ville ville);
 
