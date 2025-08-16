@@ -9,17 +9,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "m_groupe_villes.h"
-#include "m_ensemble_noms.h" // Pour init_ensemble_noms_villes et autres
-#include "m_ville.h"       // Pour init_ville, inoculer_ville, etc.
+#include "m_ensemble_noms.h" 
+#include "m_ville.h"     
 
-// Fonction statique pour simuler une heure dans le groupe
+
+/******************************************************************************/
+/*                    DÉCLARATION DES FONCTIONS                               */
+/******************************************************************************/
+
+
 static void simuler_une_heure_groupe_villes(t_groupe_villes* gr) {
-    // 1. Tenter de transférer des migrants entre villes
+  
     for (int i = 0; i < gr->nb_villes - 1; i++) {
         transferer_des_migrants_entre_villes(gr->tab_villes[i], gr->tab_villes[i + 1]);
     }
 
-    // 2. Pour chaque ville, réaliser les opérations dans l'ordre choisi
     for (int i = 0; i < gr->nb_villes; i++) {
         obtenir_des_personnes_ville(gr->tab_villes[i]);
         obtenir_des_migrants_ville(gr->tab_villes[i]);
@@ -51,7 +55,7 @@ t_groupe_villes init_groupe_villes(FILE* config, const char* nom_log) {
         gr.tab_villes[i] = init_ville(nom, hauteur, largeur, population, confinement, prob_emigrer, heures_transit);
 
         // Ajouter le nom à l'ensemble
-        ajouter_nom_ensemble(nom); // Suppose une fonction dans ensemble_noms
+        ajouter_nom_ensemble(nom); 
 
         // Inoculer le patient zéro
         inoculer_ville(gr.tab_villes[i]);
@@ -61,9 +65,9 @@ t_groupe_villes init_groupe_villes(FILE* config, const char* nom_log) {
     gr.log_villes = fopen(nom_log, "w");
 
     // Initialiser les stats (exemples)
-    gr.total_malades = nb_villes; // Un malade par ville au départ
+    gr.total_malades = nb_villes; 
     gr.total_retablis = 0;
-    gr.total_vivants = 0; // À calculer
+    gr.total_vivants = 0; 
     gr.total_morts = 0;
 
     return gr;
@@ -73,12 +77,12 @@ t_groupe_villes init_groupe_villes(FILE* config, const char* nom_log) {
 int simuler_pandemie_groupe_villes(t_groupe_villes* gr, int nb_heures_max, int periode_affich) {
     int heures = 0;
     while (get_nb_total_malades_groupe(gr) > 0 && heures < nb_heures_max) {
-        // 1. Affichage si période atteinte
+       
         if (heures % periode_affich == 0) {
             for (int i = 0; i < gr->nb_villes; i++) {
                 ecrire_logfile_ville(gr->tab_villes[i]);
             }
-            // Écrire log du groupe (à implémenter selon besoins)
+          
             fprintf(gr->log_villes, "Heure %d: Malades %d, Rétablis %d, Vivants %d, Morts %d\n",
                 heures, gr->total_malades, gr->total_retablis, gr->total_vivants, gr->total_morts);
         }
@@ -86,7 +90,7 @@ int simuler_pandemie_groupe_villes(t_groupe_villes* gr, int nb_heures_max, int p
         // 2. Simuler une heure
         simuler_une_heure_groupe_villes(gr);
 
-        // 3. Interroger les informatrices (mettre à jour les stats)
+       
         gr->total_malades = get_nb_total_malades_groupe(gr);
         gr->total_retablis = get_nb_total_retablis_groupe(gr);
         gr->total_vivants = get_nb_total_vivants_groupe(gr);
@@ -97,7 +101,7 @@ int simuler_pandemie_groupe_villes(t_groupe_villes* gr, int nb_heures_max, int p
     return heures;
 }
 
-// Destructeur
+
 void detruire_groupe_villes(t_groupe_villes* gr) {
     for (int i = 0; i < gr->nb_villes; i++) {
         detruire_ville(gr->tab_villes[i]);
@@ -113,7 +117,10 @@ void detruire_groupe_villes(t_groupe_villes* gr) {
     }
 }
 
-// Informatrices
+/*=========================================================*/
+/* INFORMATRICES
+/*=========================================================*/
+
 int get_nb_total_malades_groupe(t_groupe_villes* gr) {
     int total = 0;
     for (int i = 0; i < gr->nb_villes; i++) {

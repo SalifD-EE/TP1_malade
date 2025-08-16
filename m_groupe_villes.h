@@ -8,7 +8,7 @@
 #ifndef M_GROUPE_VILLES_H
 #define M_GROUPE_VILLES_H
 
-#include "m_ville.h" // Inclusion pour t_ville
+#include "m_ville.h" /
 
 typedef struct {
     t_ville* tab_villes; // Tableau dynamique des t_ville du groupe
@@ -17,7 +17,7 @@ typedef struct {
 
     FILE* log_villes;    // Fichier d’écriture des comptes globaux du groupe
 
-    // Ajout de membres pour les stats (exemples, à adapter)
+
     int total_malades;   // Nombre total de malades
     int total_retablis;  // Nombre total de rétablis
     int total_vivants;   // Nombre total de vivants
