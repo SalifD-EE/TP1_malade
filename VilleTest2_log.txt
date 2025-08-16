@@ -1,0 +1,10 @@
+Ville ID: 13584920
+Population: 13585112
+Migrants entrant: 0
+Migrants morts en transit: 0
+----------------
+Ville ID: 13584920
+Population: 13585112
+Migrants entrant: 0
+Migrants morts en transit: 0
+----------------

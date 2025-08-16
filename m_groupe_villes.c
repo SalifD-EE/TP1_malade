@@ -51,7 +51,7 @@ t_groupe_villes init_groupe_villes(FILE* config, const char* nom_log) {
         gr.tab_villes[i] = init_ville(nom, hauteur, largeur, population, confinement, prob_emigrer, heures_transit);
 
         // Ajouter le nom à l'ensemble
-        //ajouter_nom_ensemble(nom); // Suppose une fonction dans ensemble_noms
+        //ajouter_nom_ensemble(nom);
 
         // Inoculer le patient zéro
         inoculer_ville(gr.tab_villes[i]);
