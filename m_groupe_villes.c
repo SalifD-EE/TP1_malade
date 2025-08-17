@@ -168,7 +168,7 @@ void detruire_groupe_villes(t_groupe_villes* gr) {
 int get_nb_total_malades_groupe(t_groupe_villes* gr) {
     int malades = 0;
     for (int i = 0; i < gr->nb_villes; i++) {
-        malades += gr->tab_villes[i].nb_infectes; 
+        malades += get_nb_malades(gr->tab_villes[i]);
     }
     return malades;
 }
@@ -176,7 +176,7 @@ int get_nb_total_malades_groupe(t_groupe_villes* gr) {
 int get_nb_total_retablis_groupe(t_groupe_villes* gr) { 
     int retablis = 0;
     for (int i = 0; i < gr->nb_villes; i++) {
-        retablis += gr->tab_villes[i].nb_gueris;
+        retablis += get_nb_retablis(gr->tab_villes[i]);
     }
     return retablis;
 }
@@ -184,7 +184,7 @@ int get_nb_total_retablis_groupe(t_groupe_villes* gr) {
 int get_nb_total_vivants_groupe(t_groupe_villes* gr) {
     int vivants = 0;
     for (int i = 0; i < gr->nb_villes; i++) {
-        vivants += gr->tab_villes[i].taille_population + gr->tab_villes[i].nb_migrants - gr->tab_villes[i].nb_morts;
+        vivants += (get_nb_malades(gr->tab_villes[i]) + get_nb_sains(gr->tab_villes[i]));
     }
     return vivants;
 }
@@ -192,7 +192,7 @@ int get_nb_total_vivants_groupe(t_groupe_villes* gr) {
 int get_nb_total_morts_groupe(t_groupe_villes* gr) {
     int morts = 0;
     for (int i = 0; i < gr->nb_villes; i++) {
-        morts += gr->tab_villes[i].nb_morts;
+        morts += get_nb_morts(gr->tab_villes[i]);
     }
     return morts;
 }
