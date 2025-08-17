@@ -179,7 +179,7 @@ int  get_nb_destination_transition(void) {
 /******************************************************************************/
 
 /****************** DESTRUCTEUR ***************************/
-void liberer_mat_transition(void) {
+void detruire_mat_transition(void) {
 	int i;
 
 	// free de chaque ligne i, near_markov.probs[i]

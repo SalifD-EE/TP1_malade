@@ -1,9 +1,12 @@
-﻿/* Salif Diarra et Léo Bouamrane */
+﻿/*=========================================================*/
+/* Constante.h pour INF147 TP2
+/* Salif Diarra et Léo Bouamrane */
+/*=========================================================*/
 
 #ifndef _CONSTANTE_2025_1571_
 #define _CONSTANTE_2025_1571_
 
-#define MODE_SIMULATION 0 //1 = Sortie dans fichiers log, 0 = Sortie dans console
+#define MODE_SIMULATION 2 //0 = Sortie dans console, 1 = Sortie dans fichiers log, 2 = Groupes de villes
 
 #define EXEDENT_TAB 100 //Constante pour l'agrandissement du tableau dynamique 
 
@@ -44,9 +47,7 @@
 #define PROB_BASSE_MAX   0.2    
 #define PROB_HAUTE_MIN   0.75    
 
-
 #define AGE_JEUNE        29     //limite de la premiere tranche d'age
-#define INC_CAT_AGE      10     //écart entre chaque tranche d'age suivante
 
 
 #endif 

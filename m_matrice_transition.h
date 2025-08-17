@@ -85,7 +85,7 @@ int get_destination_transition(int point_depart);
 
 /******************************************************************************/
 /* Libérer toute la mémoire dynamique de la matrice */
-void liberer_mat_transition(void);
+void detruire_mat_transition(void);
 
 /******************************************************************************/
 #endif

@@ -45,6 +45,9 @@
     <ClCompile Include="m_liste_migrants.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="m_groupe_villes.c">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="m_alea_pop.h">
@@ -77,9 +80,14 @@
     <ClInclude Include="m_liste_migrants.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="m_groupe_villes.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="\\Mac\Home\Downloads\config_simulations.txt" />
     <Text Include="config_simulations_new.txt" />
+    <Text Include="mat_transition.txt" />
+    <Text Include="config_villes.txt" />
   </ItemGroup>
 </Project>

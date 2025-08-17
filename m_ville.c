@@ -35,15 +35,15 @@ t_ville init_ville(const char* nom_ville, int largeur, int hauteur, int taille_p
 	ville->infection_heure = 0;
 	ville->morts_heure = 0;
 	ville->population = creer_liste_personnes(taille_pop_initiale);
+	ajouter_des_personnes(&ville->population, taille_pop_initiale, largeur, hauteur, proportion_confinement);
 
 	//Copier le nom de la ville dans la structure ainsi que ensemble_nom
 	strcpy(ville->nom_ville, nom_ville);
 	assert(ajouter_nom_ville(nom_ville) == 1);
 
 	//Initialiser le fichier d'écriture
-
 	nom_logfile = (char*)malloc((strlen(nom_ville) + strlen(EXTENSION_FICHIER) + 1) * sizeof(char));
-	strcpy(nom_logfile, nom_ville);  // Use strcpy for the first string, not strcat
+	strcpy(nom_logfile, nom_ville);
 	strcat(nom_logfile, EXTENSION_FICHIER);
 
 	ville->logfile = fopen(nom_logfile, "w");
@@ -209,10 +209,10 @@ int transferer_des_migrants_entre_villes(t_ville src, t_ville dest) {
 }
 
 void ecrire_logfile_ville(t_ville ville) {
-	fprintf(ville->logfile, "Ville ID: %d\n", ville->nom_ville);
-	fprintf(ville->logfile, "Population: %d\n", ville->population);
-	fprintf(ville->logfile, "Migrants entrant: %d\n", ville->nb_migrants_in);
-    fprintf(ville->logfile, "Migrants sortant: %d\n", ville->nb_migrants_out);
+	fprintf(ville->logfile, "Nom: %s\n", ville->nom_ville);
+	fprintf(ville->logfile, "Population: %d\n", get_nb_personnes(&ville->population));
+	fprintf(ville->logfile, "Migrants entrants: %d\n", ville->nb_migrants_in);
+    fprintf(ville->logfile, "Migrants sortants: %d\n", ville->nb_migrants_out);
 	fprintf(ville->logfile, "Migrants morts en transit: %d\n", ville->nb_morts_transit);
 	fprintf(ville->logfile, "----------------\n");
 }
@@ -231,157 +231,8 @@ void detruire_ville(t_ville ville) {
 	}
 }
 
+
 #if 0
-int main(void) {
-	init_ensemble_noms_villes(10);
-	
-	// Initialize test data
-    t_ville ville1 = init_ville("TestVille1", 100, 100, 50, 0.5, 0.1, 5);
-    t_ville ville2 = init_ville("TestVille2", 80, 80, 30, 0.3, 0.2, 3);
-
-    assert(ville1);
-    assert(ville2);
-
-    // Add initial population to both cities
-    assert(ajouter_des_personnes(&ville1->population, 20, 100, 100, 0.5) == 20);
-    assert(ajouter_des_personnes(&ville2->population, 15, 80, 80, 0.3) == 15);
-
-    // Test inoculer_ville
-    assert(get_nb_malades(&ville1->population) == 0);
-    inoculer_ville(ville1);
-    assert(get_nb_malades(&ville1->population) == 1);
-    assert(get_nb_sains(&ville1->population) == 19);
-
-    // Test with second city
-    assert(get_nb_malades(&ville2->population) == 0);
-    inoculer_ville(ville2);
-    assert(get_nb_malades(&ville2->population) == 1);
-    assert(get_nb_sains(&ville2->population) == 14);
-
-    // Test simuler_une_heure_pandemie_ville
-    int initial_malades = get_nb_malades(&ville1->population);
-    simuler_une_heure_pandemie_ville(ville1);
-    // After simulation, we should still have the same or different number of sick people
-    assert(get_nb_malades(&ville1->population) >= 0);
-    assert(get_nb_personnes(&ville1->population) >= get_nb_morts(&ville1->population));
-
-    // Test obtenir_des_migrants_ville
-    int migrants_out_before = ville1->nb_migrants_out;
-    int migrants_created = obtenir_des_migrants_ville(ville1);
-    assert(migrants_created >= 0);
-    assert(ville1->nb_migrants_out >= migrants_out_before);
-
-    // Create some test migrants manually for testing
-    t_personne test_personne1 = init_personne(50, 50, 0.5);
-    t_personne test_personne2 = init_personne(60, 60, 0.3);
-    t_migrant test_migrant1 = init_migrant(&test_personne1, 0, 1, 2);
-    t_migrant test_migrant2 = init_migrant(&test_personne2, 1, 0, 0);
-
-    // Add migrants to ville1's migrant list
-    assert(inserer_liste_migrants(ville1->migrants, &test_migrant1));
-    assert(inserer_liste_migrants(ville1->migrants, &test_migrant2));
-    assert(get_dans_liste_migrants(ville1->migrants) >= 2);
-
-    // Test transferer_des_migrants_entre_villes
-    int migrants_ville1_before = get_dans_liste_migrants(ville1->migrants);
-    int migrants_ville2_before = get_dans_liste_migrants(ville2->migrants);
-    int transferred = transferer_des_migrants_entre_villes(ville1, ville2);
-    assert(transferred >= 0);
-
-    // Test obtenir_des_personnes_ville
-    // Add a migrant destined for ville1
-    t_personne arriving_personne = init_personne(40, 40, 0.4);
-    t_migrant arriving_migrant = init_migrant(&arriving_personne, 1, 0, 0);
-    assert(inserer_liste_migrants(ville1->migrants, &arriving_migrant));
-
-    int pop_before = get_nb_personnes(&ville1->population);
-    int migrants_in_before = ville1->nb_migrants_in;
-    int received = obtenir_des_personnes_ville(ville1);
-    assert(received >= 0);
-    assert(ville1->nb_migrants_in >= migrants_in_before);
-
-    // Test ecrire_logfile_ville
-    assert(ville1->logfile != NULL);
-    ecrire_logfile_ville(ville1);
-    assert(ville1->logfile != NULL); // Should still be open
-
-    assert(ville2->logfile != NULL);
-    ecrire_logfile_ville(ville2);
-    assert(ville2->logfile != NULL); // Should still be open
-
-    // Test edge cases
-
-    // Test with empty migrant list
-    t_ville empty_ville = init_ville("EmptyVille", 50, 50, 10, 0.2, 0.05, 2);
-    assert(empty_ville);
-    assert(ajouter_des_personnes(&empty_ville->population, 5, 50, 50, 0.2) == 5);
-
-    // Test functions with empty lists
-    assert(obtenir_des_personnes_ville(empty_ville) == 0);
-    int empty_migrants = obtenir_des_migrants_ville(empty_ville);
-    assert(empty_migrants >= 0);
-
-    // Test simulation on empty ville
-    simuler_une_heure_pandemie_ville(empty_ville);
-    assert(get_nb_personnes(&empty_ville->population) >= 0);
-
-    // Test transfer with no matching migrants
-    int no_transfer = transferer_des_migrants_entre_villes(empty_ville, ville1);
-    assert(no_transfer == 0);
-
-    // Test with ville that has migrants but no matching destinations
-    t_personne non_matching_personne = init_personne(30, 30, 0.6);
-    t_migrant non_matching_migrant = init_migrant(&non_matching_personne, 2, 3, 1);
-    assert(inserer_liste_migrants(empty_ville->migrants, &non_matching_migrant));
-
-    int no_match_received = obtenir_des_personnes_ville(ville1);
-    assert(no_match_received >= 0);
-
-    // Test with multiple simulation rounds
-    for (int i = 0; i < 5; i++) {
-        simuler_une_heure_pandemie_ville(ville1);
-        simuler_une_heure_pandemie_ville(ville2);
-        assert(get_nb_personnes(&ville1->population) >= get_nb_morts(&ville1->population));
-        assert(get_nb_personnes(&ville2->population) >= get_nb_morts(&ville2->population));
-    }
-
-    // Test multiple migrant operations
-    for (int i = 0; i < 3; i++) {
-        obtenir_des_migrants_ville(ville1);
-        obtenir_des_migrants_ville(ville2);
-        transferer_des_migrants_entre_villes(ville1, ville2);
-        obtenir_des_personnes_ville(ville1);
-        obtenir_des_personnes_ville(ville2);
-    }
-
-    // Verify counters are consistent
-    assert(ville1->nb_migrants_in >= 0);
-    assert(ville1->nb_migrants_out >= 0);
-    assert(ville1->nb_morts_transit >= 0);
-    assert(ville2->nb_migrants_in >= 0);
-    assert(ville2->nb_migrants_out >= 0);
-    assert(ville2->nb_morts_transit >= 0);
-
-    // Test final log writes
-    ecrire_logfile_ville(ville1);
-    ecrire_logfile_ville(ville2);
-    ecrire_logfile_ville(empty_ville);
-
-    // Test detruire_ville (this should be last)
-    detruire_ville(ville1);
-    detruire_ville(ville2);
-    detruire_ville(empty_ville);
-
-    // After destruction, pointers should be cleaned up
-    // Note: We can't test the pointers directly since they're freed,
-    // but the function should not crash when called
-
-    system("pause");
-    return EXIT_SUCCESS;
-}
-#endif
-
-#if 1
 int main(void) {
     init_ensemble_noms_villes(10);
 

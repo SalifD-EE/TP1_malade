@@ -1,5 +1,5 @@
 /*=========================================================*/
-/* pandemie.c - Programme principal pour INF147 TP1 */
+/* Pandemic.c - Programme principal pour INF147 TP2 */
 /* Salif Diarra et Léo Bouamrane */
 /*=========================================================*/
 
@@ -7,6 +7,8 @@
 #include "m_personne.h"
 #include "m_liste_personnes.h"
 #include "m_R2.h"
+#include "m_matrice_transition.h"
+#include "m_groupe_villes.h"
 
 #include <string.h>
 #include <stdio.h>
@@ -16,10 +18,10 @@
 /*=========================================================*/
 
 /*=========================================================*/
+
+//Affichage sur la console.
 #if (MODE_SIMULATION) == 0 //Peut être modifié dans dans Constante.h
 
-//Temporairement désactivé pour les tests unitaires du TP2
-#if 0
 int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();
@@ -132,9 +134,8 @@ int main(void) {
     return EXIT_SUCCESS;
 }
 #endif
-#endif
 
-
+//Écriture dans un fichier log.
 #if (MODE_SIMULATION) == 1
 int main(void) {
     /* Initialisation du générateur aléatoire */
@@ -210,4 +211,60 @@ int main(void) {
 
 #endif
 
+//Groupe de villes
+#if (MODE_SIMULATION) == 2
+int main(void) {
+    FILE* mat_transition;
+    FILE* config_villes;
+    t_groupe_villes gr;
+    int nb_villes_test;
+    int nb_heures_max = 1000;
+    int period_affich = 24;
+
+    //Initialisation du générateur aléatoire
+    srand_sys();
+    
+    //Construction de la matrice de transition
+    mat_transition = fopen("mat_transition.txt", "rt");
+    
+    if (!mat_transition) {
+        printf("Erreur : impossible d'ouvrir mat_transition.txt\n");
+        return EXIT_FAILURE;
+    }
+
+    lire_mat_transition(mat_transition);
+
+    //Ouverture et validation du fichier de config des villes
+    config_villes = fopen("config_villes_test.txt", "rt");
+
+    if (!config_villes) {
+        printf("Erreur : impossible d'ouvrir config_villes.txt\n");
+        return EXIT_FAILURE;
+    }
+
+    fscanf(config_villes, "%d", &nb_villes_test);
+    
+    assert(nb_villes_test == get_nb_depart_transition());
+    rewind(config_villes);
+    
+    gr = init_groupe_villes(config_villes, "groupe_villes_log.txt");
+    
+    //Exécution de la simulation
+    simuler_pandemie_groupe_villes(&gr, nb_heures_max, period_affich);
+
+    //Fin de la simulation
+    detruire_groupe_villes(&gr);
+    detruire_mat_transition();
+    detruire_ensemble_noms_villes();
+    
+    system("pause");
+    return EXIT_SUCCESS;
+    //Pour déboguer la population de chaque ville
+    /*for (int i = 0; i < get_nb_depart_transition(); i++)
+    {
+        t_liste_personnes pop = gr.tab_villes[i]->population;
+        afficher_liste_personnes(&pop);
+    }*/
+}
+#endif
 /*=========================================================*/
