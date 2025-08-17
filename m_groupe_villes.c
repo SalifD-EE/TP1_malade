@@ -147,18 +147,17 @@ int simuler_pandemie_groupe_villes(t_groupe_villes* gr, int nb_heures_max, int p
 
 
 void detruire_groupe_villes(t_groupe_villes* gr) {
+    if (!gr) return;
+
     for (int i = 0; i < gr->nb_villes; i++) {
         detruire_ville(gr->tab_villes[i]);
     }
     free(gr->tab_villes);
+
+    if (gr->log_villes) fclose(gr->log_villes);
+
     gr->tab_villes = NULL;
     gr->nb_villes = 0;
-    gr->taille_tab = 0;
-
-    if (gr->log_villes != NULL) {
-        fclose(gr->log_villes);
-        gr->log_villes = NULL;
-    }
 }
 
 
