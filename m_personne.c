@@ -125,6 +125,7 @@ void modifier_vitesse_personne(t_personne* lui, t_R2 vitesse) {
 
 /* Détermine si une personne meurt ou se rétablit */
 int determiner_mort_ou_retabli( const t_personne* lui) {
+    
     if (lui->etat != MALADE || lui->hrs_maladie < NB_HRS_MALADIE ) {
         return 0;
     }

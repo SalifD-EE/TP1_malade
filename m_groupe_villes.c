@@ -33,6 +33,7 @@ t_groupe_villes init_groupe_villes(FILE* config, const char* nom_log) {
     gr.total_vivants = 0;
     gr.total_morts = 0;
 
+  
     int nb_villes;
 
     fscanf(config, "%d", &nb_villes);
@@ -176,7 +177,7 @@ int get_nb_total_malades_groupe(t_groupe_villes* gr) {
 int get_nb_total_retablis_groupe(t_groupe_villes* gr) { 
     int retablis = 0;
     for (int i = 0; i < gr->nb_villes; i++) {
-        retablis += get_nb_retablis(gr->tab_villes[i]);
+        retablis += (assurer_temps_maladie(gr->tab_villes[i]) - get_nb_morts(gr->tab_villes[i]));
     }
     return retablis;
 }
