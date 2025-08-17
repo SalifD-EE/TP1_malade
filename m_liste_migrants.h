@@ -97,7 +97,7 @@ t_liste_migrants init_liste_migrants(void);
 	c'est une erreur d'utiliser ce handle de liste
 	après cet appel.
 */
-void detruire_liste_migrants(t_liste_migrants list);
+void detruire_liste_migrants(t_liste_migrants liste);
 
 /*-----------------------------------------------------------------*/
 
@@ -110,7 +110,7 @@ void detruire_liste_migrants(t_liste_migrants list);
 	si le handle n'est pas valide
 */
 
-int get_dans_liste_migrants(const t_liste_migrants list);
+int get_dans_liste_migrants(const t_liste_migrants liste);
 
 /*prédicat : savoir si la liste est vide
 entrée : le handle d'une liste existante
@@ -118,14 +118,14 @@ entrée : le handle d'une liste existante
 	Spécifications : le résultat est imprévisible
 	si le handle n'est pas valide
 */
-int est_vide_liste_migrants(const t_liste_migrants list);
+int est_vide_liste_migrants(const t_liste_migrants liste);
 
 /*	Retourne la position actuelle de l'itérateur
 entrée : le handle d'une liste existante
 Retour : Entre 0 et taille -1  de la liste
 		  -1 si elle est vide
 */
-int get_position_liste_migrants(const t_liste_migrants list);
+int get_position_liste_migrants(const t_liste_migrants liste);
 
 /*	copie  la valeur actuelle du noeud courant dans la référence
    position actuelle de l'itérateur
@@ -133,7 +133,7 @@ entrée : le handle d'une liste existante
 			la référence ou copier la valeur
 Retour : 1 si la liste n'est pas vide 0 sinon
 */
-int get_valeur_liste_migrants(const t_liste_migrants list, t_el_liste_migrants* dest);
+int get_valeur_liste_migrants(const t_liste_migrants liste, t_el_liste_migrants* dest);
 
 
 /*-----------------------------------------------------------------*/
@@ -156,7 +156,7 @@ int get_valeur_liste_migrants(const t_liste_migrants list, t_el_liste_migrants* 
 		sur le dernier élément,  impossible  d'avancer
 		1 sinon.
 */
-int avancer_liste_migrants(t_liste_migrants list);
+int avancer_liste_migrants(t_liste_migrants liste);
 
 ///*-----------------------------------------------------------------*/
 ///* 	Reculer l'itérateur d'une position
@@ -175,21 +175,21 @@ int avancer_liste_migrants(t_liste_migrants list);
 			 est supérieure OU égale à la taille de la liste
 			 1 sinon.
 */
-int positionner_liste_migrants(t_liste_migrants list, int position);
+int positionner_liste_migrants(t_liste_migrants liste, int position);
 
 /*-----------------------------------------------------------------*/
 /* Placer l'itérateur au début de la liste
 	entrée : le handle d'une liste existante
 	retour de 0 si la liste est vide et	1 sinon.
 */
-int aller_debut_liste_migrants(t_liste_migrants list);
+int aller_debut_liste_migrants(t_liste_migrants liste);
 
 /*-----------------------------------------------------------------*/
 /* 	Placer l'itérateur en fin de liste
 	entrée : le handle d'une liste existante
 	retour de 0 si la liste est vide et	1 sinon.
 */
-int aller_fin_liste_migrants(t_liste_migrants list);
+int aller_fin_liste_migrants(t_liste_migrants liste);
 /*-----------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------*/
@@ -203,14 +203,14 @@ int aller_fin_liste_migrants(t_liste_migrants list);
 	 Retour : 1 si la liste n'est pas vide
 			   0 sinon
 */
-int consulter_liste_migrants(const t_liste_migrants list, t_el_liste_migrants* dest);
+int consulter_liste_migrants(const t_liste_migrants liste, t_el_liste_migrants* dest);
 
 /*-----------------------------------------------------------------*/
 /* 	obtenir l'adresse  de la valeur sous l'itérateur
 	Retour : adresse non NULL si la liste n'est pas vide
 			 NULL sinon
 */
-t_el_liste_migrants* modifier_liste_migrants(t_liste_migrants list);
+t_el_liste_migrants* modifier_liste_migrants(t_liste_migrants liste);
 
 /*-----------------------------------------------------------------*/
 
@@ -230,13 +230,13 @@ t_el_liste_migrants* modifier_liste_migrants(t_liste_migrants list);
 	Retour : 1 insertion réussie, 0 sinon
 */
 /*-----------------------------------------------------------------*/
-int inserer_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src);
+int inserer_liste_migrants(t_liste_migrants liste, const t_el_liste_migrants* src);
 /*-----------------------------------------------------------------*/
-int inserer_debut_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src);
+int inserer_debut_liste_migrants(t_liste_migrants liste, const t_el_liste_migrants* src);
 /*-----------------------------------------------------------------*/
-int inserer_fin_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src);
+int inserer_fin_liste_migrants(t_liste_migrants liste, const t_el_liste_migrants* src);
 /*-----------------------------------------------------------------*/
-int inserer_position_liste_migrants(t_liste_migrants list, const t_el_liste_migrants* src);
+int inserer_position_liste_migrants(t_liste_migrants liste, const t_el_liste_migrants* src);
 /*-----------------------------------------------------------------*/
 /*-----------------------------------------------------------------*/
 
@@ -256,13 +256,13 @@ int inserer_position_liste_migrants(t_liste_migrants list, const t_el_liste_migr
 
 */
 /*-----------------------------------------------------------------*/
-int supprimer_liste_migrants(t_liste_migrants list);
+int supprimer_liste_migrants(t_liste_migrants liste);
 /*-----------------------------------------------------------------*/
-int supprimer_debut_liste_migrants(t_liste_migrants list);
+int supprimer_debut_liste_migrants(t_liste_migrants liste);
 /*-----------------------------------------------------------------*/
-int supprimer_fin_liste_migrants(t_liste_migrants list);
+int supprimer_fin_liste_migrants(t_liste_migrants liste);
 /*-----------------------------------------------------------------*/
-int supprimer_position_liste_migrants(t_liste_migrants list);
+int supprimer_position_liste_migrants(t_liste_migrants liste);
 /*-----------------------------------------------------------------*
 
 /*-----------------------------------------------------------------*/
@@ -273,8 +273,35 @@ int supprimer_position_liste_migrants(t_liste_migrants list);
 	Spécifications : cette liste pourra encore servir
 
 */
+int vider_liste_migrants(t_liste_migrants liste);
 
-int vider_liste_migrants(t_liste_migrants list);
+/* Décrémente de 1 les heures de transit à l'itérateur
+	entrée : le handle d'une liste existante
+	Retour : 1 si l'opération est réalisée avec succès, 0 si la liste est vide.
+
+	Spécifications : aucun
+
+*/
+int dec_hrs_transit_liste_migrants(t_liste_migrants liste);
+
+
+/* Incrémente les heures de maladie à l'itérateur
+	entrée : le handle d'une liste existante
+	Retour : 1 la maladie est terminée, 0 sinon.
+
+	Spécifications : retour de 0 si la liste est vide.
+
+*/
+int assurer_temps_maladie_migrants(t_liste_migrants liste);
+
+/* Détermine si un migrant est mort ou rétabli en transit.
+	entrée : le handle d'une liste existante, la proportion de confinement de la ville
+	Retour : 1 la maladie est terminée, 0 sinon.
+
+	Spécifications : retour de 0 si la liste est vide.
+
+*/
+int terminer_maladie_migrants(t_liste_migrants liste, double proportion_confinement);
 
 /*-----------------------------------------------------------------*/
 /*-----------------------------------------------------------------*/
