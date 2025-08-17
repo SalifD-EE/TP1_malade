@@ -1,0 +1,6 @@
+Nom: VilleTest2
+Population: 15
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------

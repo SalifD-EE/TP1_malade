@@ -219,7 +219,7 @@ int main(void) {
     t_groupe_villes gr;
     int nb_villes_test;
     int nb_heures_max = 1000;
-    int period_affich = 24;
+    int period_affich = 1;
 
     //Initialisation du générateur aléatoire
     srand_sys();
@@ -259,6 +259,7 @@ int main(void) {
     
     system("pause");
     return EXIT_SUCCESS;
+
     //Pour déboguer la population de chaque ville
     /*for (int i = 0; i < get_nb_depart_transition(); i++)
     {

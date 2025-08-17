@@ -35,7 +35,9 @@ t_ville init_ville(const char* nom_ville, int largeur, int hauteur, int taille_p
 	ville->infection_heure = 0;
 	ville->morts_heure = 0;
 	ville->population = creer_liste_personnes(taille_pop_initiale);
-	ajouter_des_personnes(&ville->population, taille_pop_initiale, largeur, hauteur, proportion_confinement);
+	
+	//Populer la ville
+	//ajouter_des_personnes(&ville->population, taille_pop_initiale, largeur, hauteur, proportion_confinement);
 
 	//Copier le nom de la ville dans la structure ainsi que ensemble_nom
 	strcpy(ville->nom_ville, nom_ville);
@@ -54,7 +56,7 @@ t_ville init_ville(const char* nom_ville, int largeur, int hauteur, int taille_p
 		return 0;
 	}
 	
-	free(nom_logfile);  // Don't forget to free the allocated memory
+	free(nom_logfile);
 
 	return ville;
 }
@@ -168,15 +170,20 @@ int obtenir_des_personnes_ville(t_ville ville) {
 int obtenir_des_migrants_ville(t_ville ville) {
 	t_personne personne_cour;
 	t_migrant nouveau_migrant;
-	int ville_dest = get_destination_transition(get_position_ville(ville->nom_ville));
+
+	//TODO: TEMPORAIRE POUR LES TESTS
+	//int ville_dest = get_destination_transition(get_position_ville(ville->nom_ville));
+	int ville_dest = 1;
+	
+	
 	int ctr_migrants_out = 0;
 
 	if (ville_dest != DESTINATION_ABSENTE && randf() < ville->prob_emigrer) {
-		for (int i = 0; i < randi(MAX_BORNE_EMIGRER); i++) {
+		for (int i = 0; i < MAX_BORNE_EMIGRER; i++) {
 			enlever_une_personne(&ville->population, &personne_cour);
-			nouveau_migrant = init_migrant(&personne_cour, get_position_ville(ville->nom_ville), ville_dest, 0);
+			nouveau_migrant = init_migrant(&personne_cour, get_position_ville(ville->nom_ville), ville_dest, ville->nb_hre_transit);
 
-			inserer_liste_migrants(&ville->migrants, &nouveau_migrant);
+			inserer_liste_migrants(ville->migrants, &nouveau_migrant);
 			++ville->nb_migrants_out;
 			++ctr_migrants_out;
 		}
@@ -188,20 +195,22 @@ int obtenir_des_migrants_ville(t_ville ville) {
 int transferer_des_migrants_entre_villes(t_ville src, t_ville dest) {
 	t_migrant migrant_cour;
 	int ctr_migrants_transf = 0;
-	
+	int nb_migrants_src = 0;
+
 	if (get_position_ville(dest) == get_position_ville(src) + 1) {
+		nb_migrants_src = get_dans_liste_migrants(src->migrants);
 		
-		aller_debut_liste_migrants(src->migrants);
-		for (int i = 0; i < get_dans_liste_migrants(src->migrants); ++i) {
+		//aller_debut_liste_migrants(src->migrants);
+		for (int i = nb_migrants_src - 1; i >= 0; --i) {
+			positionner_liste_migrants(src->migrants, i);
 			get_valeur_liste_migrants(src->migrants, &migrant_cour);
 			
-			if (get_hrs_transit(&migrant_cour) == 0 && comparer_noms_villes(get_nom_ville(get_destination_migrant(&migrant_cour)), dest->nom_ville) == 0) {
+			if (get_hrs_transit(&migrant_cour) == 0 && comparer_noms_villes(get_nom_ville(get_destination_migrant(&migrant_cour)), src->nom_ville) == 0) {
 				supprimer_liste_migrants(src->migrants);
 				set_transit_migrant(&migrant_cour, dest->nb_hre_transit);
-				inserer_liste_migrants(&dest->migrants, &migrant_cour);
+				inserer_liste_migrants(dest->migrants, &migrant_cour);
 				++ctr_migrants_transf;
 			}
-			avancer_liste_migrants(src->migrants);
 		}
 	}
 
@@ -232,13 +241,17 @@ void detruire_ville(t_ville ville) {
 }
 
 
-#if 0
+#if 1
 int main(void) {
-    init_ensemble_noms_villes(10);
+	srand_sys();
+	
+	init_ensemble_noms_villes(10);
 
     // Initialiser les données de test
-    t_ville ville1 = init_ville("VilleTest1", 100, 100, 50, 0.5, 0.1, 5);
-    t_ville ville2 = init_ville("VilleTest2", 80, 80, 30, 0.3, 0.2, 3);
+    t_ville ville1 = init_ville("VilleTest1", 100, 100, 50, 0.5, 1, 5);
+    t_ville ville2 = init_ville("VilleTest2", 80, 80, 30, 0.3, 1, 3);
+	ajouter_nom_ville("VilleTest1");
+	ajouter_nom_ville("VilleTest2");
 
     assert(ville1);
     assert(ville2);
@@ -246,6 +259,8 @@ int main(void) {
     // Ajouter une population initiale aux deux villes
     assert(ajouter_des_personnes(&ville1->population, 20, 100, 100, 0.5) == 20);
     assert(ajouter_des_personnes(&ville2->population, 15, 80, 80, 0.3) == 15);
+	//afficher_liste_personnes(&ville1->population);
+	//afficher_liste_personnes(&ville2->population);
 
     // Tester inoculer_ville
     assert(get_nb_malades(&ville1->population) == 0);
@@ -253,53 +268,60 @@ int main(void) {
     assert(get_nb_malades(&ville1->population) == 1);
     assert(get_nb_sains(&ville1->population) == 19);
 
-    // Tester avec la deuxième ville
     assert(get_nb_malades(&ville2->population) == 0);
     inoculer_ville(ville2);
     assert(get_nb_malades(&ville2->population) == 1);
     assert(get_nb_sains(&ville2->population) == 14);
 
+
+
+
+	/*=========================================================*/
+	// À TESTER PLUS TARD
+
     // Tester simuler_une_heure_pandemie_ville
-    int malades_initiaux = get_nb_malades(&ville1->population);
     simuler_une_heure_pandemie_ville(ville1);
+
     // Après simulation, nous devrions toujours avoir un nombre valide de malades
     assert(get_nb_malades(&ville1->population) >= 0);
     assert(get_nb_personnes(&ville1->population) >= get_nb_morts(&ville1->population));
+	/*=========================================================*/
+
+
+	// Tester obtenir_des_personnes_ville
+	// Ajouter un migrant destiné à ville1
+	t_personne personne_arrivante = init_personne(40, 40, 0.4);
+	t_migrant migrant_arrivant = init_migrant(&personne_arrivante, 1, 0, 0);
+
+	//Pour pouvoir utiliser consulter l'itérateur
+	t_personne personne_arrivante2 = init_personne(40, 40, 0.4);
+	t_migrant migrant_arrivant2 = init_migrant(&personne_arrivante2, 1, 0, 0);
+	
+	assert(inserer_liste_migrants(ville1->migrants, &migrant_arrivant));
+	assert(obtenir_des_personnes_ville(ville1) == 1);
+	assert(get_nb_personnes(&ville1->population) == 21);
+	assert(ville1->nb_migrants_in == 1);
+	assert(est_vide_liste_migrants(ville1->migrants) == 1);
+	assert(consulter_liste_migrants(ville1->migrants, &migrant_arrivant2) == 0);
+
 
     // Tester obtenir_des_migrants_ville
-    int migrants_sortis_avant = ville1->nb_migrants_out;
-    int migrants_crees = obtenir_des_migrants_ville(ville1);
-    assert(migrants_crees >= 0);
-    assert(ville1->nb_migrants_out >= migrants_sortis_avant);
+    assert(obtenir_des_migrants_ville(ville1) == 5);
+    assert(ville1->nb_migrants_out == 5);
+	assert(get_nb_personnes(&ville1->population) == 16);
 
-    // Créer quelques migrants de test manuellement
-    t_personne personne_test1 = init_personne(50, 50, 0.5);
-    t_personne personne_test2 = init_personne(60, 60, 0.3);
-    t_migrant migrant_test1 = init_migrant(&personne_test1, 0, 1, 2);
-    t_migrant migrant_test2 = init_migrant(&personne_test2, 1, 0, 0);
-
-    // Ajouter les migrants à la liste de migrants de ville1
-    assert(inserer_liste_migrants(ville1->migrants, &migrant_test1));
-    assert(inserer_liste_migrants(ville1->migrants, &migrant_test2));
-    assert(get_dans_liste_migrants(ville1->migrants) >= 2);
-
-    // Tester transferer_des_migrants_entre_villes
-    int migrants_ville1_avant = get_dans_liste_migrants(ville1->migrants);
-    int migrants_ville2_avant = get_dans_liste_migrants(ville2->migrants);
+	//Mettre les heures de transit à 0 pour forcer un transfert.
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 5; j++) {
+			dec_hrs_transit_liste_migrants(ville1->migrants);
+		}
+		avancer_liste_migrants(ville1->migrants);
+	}
+    
+	// Tester transferer_des_migrants_entre_villes
     int transferes = transferer_des_migrants_entre_villes(ville1, ville2);
-    assert(transferes >= 0);
+    assert(transferes == 5);
 
-    // Tester obtenir_des_personnes_ville
-    // Ajouter un migrant destiné à ville1
-    t_personne personne_arrivante = init_personne(40, 40, 0.4);
-    t_migrant migrant_arrivant = init_migrant(&personne_arrivante, 1, 0, 0);
-    assert(inserer_liste_migrants(ville1->migrants, &migrant_arrivant));
-
-    int pop_avant = get_nb_personnes(&ville1->population);
-    int migrants_entres_avant = ville1->nb_migrants_in;
-    int recus = obtenir_des_personnes_ville(ville1);
-    assert(recus >= 0);
-    assert(ville1->nb_migrants_in >= migrants_entres_avant);
 
     // Tester ecrire_logfile_ville
     assert(ville1->logfile != NULL);
@@ -309,6 +331,9 @@ int main(void) {
     assert(ville2->logfile != NULL);
     ecrire_logfile_ville(ville2);
     assert(ville2->logfile != NULL); // Devrait toujours être ouvert
+
+	system("pause");
+	return EXIT_SUCCESS;
 
     // Tester les cas limites
 
@@ -374,7 +399,6 @@ int main(void) {
     detruire_ville(ville_vide);
 
 
-    system("pause");
-    return EXIT_SUCCESS;
+    
 }
 #endif

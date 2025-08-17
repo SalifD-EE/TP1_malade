@@ -86,7 +86,10 @@ static void simuler_une_heure_groupe_villes(t_groupe_villes* gr) {
 
     for (int i = 0; i < gr->nb_villes; i++) {
         obtenir_des_personnes_ville(gr->tab_villes[i]);
+
+        //Problème ici. La liste de migrants est mal initialisée.
         obtenir_des_migrants_ville(gr->tab_villes[i]);
+
         simuler_une_heure_pandemie_ville(gr->tab_villes[i]);
     }
 }

@@ -243,6 +243,7 @@ void afficher_liste_personnes(const t_liste_personnes* liste) {
     for (int i = 0; i < liste->nb_personnes; i++) {
         printf("Personne %d: ", i);
         afficher_personne(&liste->liste[i]);
+        printf("\n");
     }
 }
 

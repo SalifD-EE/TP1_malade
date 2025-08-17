@@ -429,9 +429,11 @@ int supprimer_liste_migrants(t_liste_migrants liste) {
 /*  liberer tous les noeuds et assigner les membres */
 int vider_liste_migrants(t_liste_migrants liste) {
 	int cpt = 0;
-	t_noeud_migrant	temp = liste->tete;
+	t_noeud_migrant	temp;
+	
 	if (liste->taille == 0) return 0;
 
+	temp = liste->tete;
 	/* jusqu'au queue, on ne se trompe pas  */
 	while (liste->tete) {
 		cpt += 1;
