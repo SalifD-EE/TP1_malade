@@ -212,6 +212,7 @@ void ecrire_logfile_ville(t_ville ville) {
 	fprintf(ville->logfile, "Ville ID: %d\n", ville->nom_ville);
 	fprintf(ville->logfile, "Population: %d\n", ville->population);
 	fprintf(ville->logfile, "Migrants entrant: %d\n", ville->nb_migrants_in);
+    fprintf(ville->logfile, "Migrants sortant: %d\n", ville->nb_migrants_out);
 	fprintf(ville->logfile, "Migrants morts en transit: %d\n", ville->nb_morts_transit);
 	fprintf(ville->logfile, "----------------\n");
 }
