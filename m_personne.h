@@ -197,6 +197,15 @@ void modifier_position_personne(t_personne* lui, t_R2 position);
 void modifier_vitesse_personne(t_personne* lui, t_R2 vitesse);
 
 //--------------------------------------------
+/* MODIFIER_HRS_MALADIE_PERSONNE
+   Reçoit une personne ainsi qu'un nombre d'heures de maladie à lui assigner.
+   PARAMÈTRES : pointeur sur une personne, nombre d'heures de maladie à assigner
+   RETOUR : aucun
+   SPECS  : aucun
+*/
+void modifier_hrs_maladie_personne(t_personne* lui, int hrs_maladie);
+
+//--------------------------------------------
 /* DETERMINER_MORT_RETABLI
    Reçoit une personne et détermine au terme de la maladie
    s'il va mourir ou se rétablir

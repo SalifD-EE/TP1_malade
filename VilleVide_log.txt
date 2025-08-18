@@ -1,6 +1,0 @@
-Ville ID: 1479433328
-Population: -675742304
-Migrants entrant: 0
-Migrants sortant: 0
-Migrants morts en transit: 0
-----------------

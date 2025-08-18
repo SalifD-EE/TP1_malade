@@ -40,7 +40,6 @@ int dec_hrs_transit_migrant(t_migrant* lui) {
 }
 
 
-
 /*=========================================================*/
 
 int get_hrs_transit(const t_migrant* lui) {
@@ -48,7 +47,6 @@ int get_hrs_transit(const t_migrant* lui) {
 }
 
 int get_destination_migrant(const t_migrant* lui) {
-
     return lui->ville_destination;
 }
 
@@ -56,7 +54,6 @@ int get_destination_migrant(const t_migrant* lui) {
 /*=========================================================*/
 
 int get_depart_migrant(const t_migrant* lui) {
-
     return lui->ville_depart;
 }
 
@@ -64,36 +61,44 @@ int get_depart_migrant(const t_migrant* lui) {
 /*=========================================================*/
 
 int est_vivant_migrant(t_migrant* lui) {
-
-    return get_etat(&lui->voyageur);
-  
+    return get_etat(&lui->voyageur) != 2;
 }
 
 
 /*=========================================================*/
 
 int est_malade_migrant(const t_migrant* lui) {
-
-    return get_etat(&lui->voyageur);
-
-    
+    return get_etat(&lui->voyageur) == 1;
 }
 
 
 /*=========================================================*/
 
 int inc_hrs_maladie_migrant(t_migrant* lui) {
-    int changement = 0;
-    if ( est_malade_migrant(lui) ) {
-        // Incrémente les heures de maladie via le module m_personnes
-        int changement = inc_hrs_maladie(&lui->voyageur);
+    int resultat;
+    
+    if (est_malade_migrant(lui) == 1) {
+        
         // Si le nombre d'heures de maladie atteint NB_HRS_MALADIE, déterminer l'état
-        if (get_hrs_maladie(&lui->voyageur) >= NB_HRS_MALADIE) {
-            determiner_mort_ou_retabli(&lui->voyageur); // Fonction du module m_personnes
+        if (inc_hrs_maladie(&lui->voyageur) >= NB_HRS_MALADIE) {
+            modifier_etat_personne(&lui->voyageur, MORT, PROP_INITIALE);
+            
+            //resultat = determiner_mort_ou_retabli(&lui->voyageur); // Fonction du module m_personnes
+            //
+            //if (resultat == 1) { /* Mort */
+            //    modifier_etat_personne(&lui->voyageur, MORT, PROP_INITIALE);
+            //}
+            //else if (resultat == 2) { /* Rétabli */
+            //    //La proportion changera à nouveau une fois
+            //    modifier_etat_personne(&lui->voyageur, SAIN, PROP_INITIALE);
+            //}
+            
+            modifier_hrs_maladie_personne(&lui->voyageur, 0);
             return 1; // État changé
         }
-        return changement; // Retourne 1 si les heures de maladie ont changé, 0 sinon
+
     }
+    return 0; // Retourne 1 si les heures de maladie ont changé, 0 sinon
 }
 
 
