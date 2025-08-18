@@ -1,60 +1,60 @@
 Nom: Nantes
-Population: 1997
+Population: 1998
 Migrants entrants: 0
-Migrants sortants: 3
+Migrants sortants: 2
 Migrants morts en transit: 0
 ----------------
 Nom: Nantes
-Population: 1894
+Population: 1876
+Migrants entrants: 3
+Migrants sortants: 127
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1745
+Migrants entrants: 9
+Migrants sortants: 264
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1645
+Migrants entrants: 16
+Migrants sortants: 371
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1495
+Migrants entrants: 19
+Migrants sortants: 524
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1369
 Migrants entrants: 23
-Migrants sortants: 129
+Migrants sortants: 654
 Migrants morts en transit: 0
 ----------------
 Nom: Nantes
-Population: 1801
-Migrants entrants: 59
-Migrants sortants: 258
+Population: 1243
+Migrants entrants: 25
+Migrants sortants: 782
 Migrants morts en transit: 0
 ----------------
 Nom: Nantes
-Population: 1728
-Migrants entrants: 108
-Migrants sortants: 380
+Population: 1113
+Migrants entrants: 27
+Migrants sortants: 914
 Migrants morts en transit: 0
 ----------------
 Nom: Nantes
-Population: 1644
-Migrants entrants: 137
-Migrants sortants: 493
+Population: 989
+Migrants entrants: 35
+Migrants sortants: 1046
 Migrants morts en transit: 0
 ----------------
 Nom: Nantes
-Population: 1548
-Migrants entrants: 170
-Migrants sortants: 622
-Migrants morts en transit: 0
-----------------
-Nom: Nantes
-Population: 1458
-Migrants entrants: 206
-Migrants sortants: 748
-Migrants morts en transit: 0
-----------------
-Nom: Nantes
-Population: 1401
-Migrants entrants: 270
-Migrants sortants: 869
-Migrants morts en transit: 0
-----------------
-Nom: Nantes
-Population: 1350
-Migrants entrants: 336
-Migrants sortants: 986
-Migrants morts en transit: 0
-----------------
-Nom: Nantes
-Population: 1252
-Migrants entrants: 364
-Migrants sortants: 1112
+Population: 877
+Migrants entrants: 49
+Migrants sortants: 1172
 Migrants morts en transit: 0
 ----------------

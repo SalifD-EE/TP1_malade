@@ -1,60 +1,60 @@
 Nom: Strasbourg
-Population: 2998
+Population: 2996
 Migrants entrants: 0
-Migrants sortants: 2
+Migrants sortants: 4
 Migrants morts en transit: 0
 ----------------
 Nom: Strasbourg
-Population: 2871
-Migrants entrants: 3
-Migrants sortants: 132
+Population: 2878
+Migrants entrants: 7
+Migrants sortants: 129
 Migrants morts en transit: 0
 ----------------
 Nom: Strasbourg
-Population: 2791
-Migrants entrants: 41
-Migrants sortants: 250
+Population: 2753
+Migrants entrants: 17
+Migrants sortants: 264
 Migrants morts en transit: 0
 ----------------
 Nom: Strasbourg
-Population: 2679
-Migrants entrants: 62
-Migrants sortants: 383
+Population: 2631
+Migrants entrants: 23
+Migrants sortants: 392
 Migrants morts en transit: 0
 ----------------
 Nom: Strasbourg
-Population: 2578
-Migrants entrants: 74
-Migrants sortants: 496
+Population: 2507
+Migrants entrants: 24
+Migrants sortants: 517
 Migrants morts en transit: 0
 ----------------
 Nom: Strasbourg
-Population: 2472
-Migrants entrants: 97
-Migrants sortants: 625
+Population: 2398
+Migrants entrants: 33
+Migrants sortants: 635
 Migrants morts en transit: 0
 ----------------
 Nom: Strasbourg
-Population: 2390
-Migrants entrants: 127
-Migrants sortants: 737
+Population: 2282
+Migrants entrants: 44
+Migrants sortants: 762
 Migrants morts en transit: 0
 ----------------
 Nom: Strasbourg
-Population: 2263
-Migrants entrants: 141
-Migrants sortants: 878
+Population: 2172
+Migrants entrants: 53
+Migrants sortants: 881
 Migrants morts en transit: 0
 ----------------
 Nom: Strasbourg
-Population: 2141
-Migrants entrants: 147
-Migrants sortants: 1006
+Population: 2055
+Migrants entrants: 58
+Migrants sortants: 1003
 Migrants morts en transit: 0
 ----------------
 Nom: Strasbourg
-Population: 2047
-Migrants entrants: 171
-Migrants sortants: 1124
+Population: 1934
+Migrants entrants: 65
+Migrants sortants: 1131
 Migrants morts en transit: 0
 ----------------

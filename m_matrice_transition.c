@@ -1,6 +1,7 @@
 /******************************************************************************/
-/* m_matrice_transition.c     (*** À COMPLÉTER ***)                              */
+/* m_matrice_transition.c    */
 /* module de gestion d'une matrice de probabilités de passage               */
+/* Salif Diarra et Léo Bouamrane */
 /******************************************************************************/
 
 #include"m_matrice_transition.h"

@@ -1,6 +1,7 @@
 /******************************************************************************/
-/* M_ENSEMBLES_NOMS.C  en devenir    (*** FILL, À COMPLÉTER ***)                              */
-/* module de gestion des noms de villes dans le TP2                                      */
+/* M_ENSEMBLES_NOMS.C														  */
+/* module de gestion des noms de villes dans le TP2							  */
+/* Salif Diarra et Léo Bouamrane											  */
 /******************************************************************************/
   
 #include "m_ensemble_noms.h"
@@ -158,70 +159,6 @@ void detruire_ensemble_noms_villes(void) {
 	groupe_noms.nb_noms = 0;
 	groupe_noms.tab_noms = NULL;
 }
-
-/******************************************************************************/
-/******************************************************************************/
-
-#if 0
-
-/* ce petit test est fait pour être tracé 
-   pour en saisir la portée
-*/
-
-int main(void) {
-	int nb; int nb_max;
-	int suc; int rep;
-
-	const char* ville;
-
-	assert(init_ensemble_noms_villes(145));
-
-	nb = get_nombre_villes();
-	nb_max = get_nombre_max_villes();
-
-	rep = ajouter_nom_ville("toronto");
-	rep = ajouter_nom_ville("london");
-	rep = ajouter_nom_ville("levis");
-
-	nb = get_nombre_villes();
-	nb_max = get_nombre_max_villes();
-
-	assert(init_ensemble_noms_villes(10)==0);
-
-	nb = get_nombre_villes();
-	nb_max = get_nombre_max_villes();
-
-	suc = get_position_ville("london");
-	suc = get_position_ville("toronto");
-	suc = get_position_ville("levis");
-
-	ville = get_nom_ville(0);
-	printf("\n ville %s", ville);
-	printf("\n ville %s", get_nom_ville(1));
-
-	
-	vider_ensemble_noms_villes();
-	rep = get_position_ville("montreal");
-	rep = get_position_ville("toronto");
-
-	printf("\n ville %s", get_nom_ville(0));
-
-	nb = get_nombre_villes();
-	nb_max = get_nombre_max_villes();
-	
-
-	detruire_ensemble_noms_villes();
-	nb = get_nombre_villes();
-	nb_max = get_nombre_max_villes();
-
-	rep = init_ensemble_noms_villes(24);
-	nb = get_nombre_villes();
-	nb_max = get_nombre_max_villes();
-
-	system("pause");
-	return EXIT_SUCCESS;
-}
-#endif
 
 /******************************************************************************/
 /******************************************************************************/

@@ -15,10 +15,10 @@
 #define INC_CAT_AGE      10     //écart entre chaque tranche d'age suivante
 #define DEUX_PI 6.283185307179586 /* Valeur approchée de 2π */
 #define DISTANCE_CONTACT 2.5   //  distance maximale du risque d'infection 
-#define PROB_INFECTION  0.25    // probabilité initiale de contracter la maladie pour la simulation console
+#define PROB_INFECTION  0.6    // probabilité initiale de contracter la maladie pour la simulation console
 #define REDUCTEUR_INFECTION  2.25  // facteur réducteur de la proba d'infection suite a une précédente infection 
-#define NB_HRS_MALADIE     15*24    // nombre d'heures de maladie 
-#define NB_HRS_TRANSMISSION 2*24 /* Minimum d'heures pour transmission */
+#define NB_HRS_MALADIE     2*24    // nombre d'heures de maladie 
+#define NB_HRS_TRANSMISSION 24 /* Minimum d'heures pour transmission */
 
 //Définition des paliers qui causent les changements de confinement
 #define PALIER_MALADES_1 0.005

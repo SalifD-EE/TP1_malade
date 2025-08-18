@@ -1,4 +1,3 @@
-
 /*=========================================================*/
 /* Module m_liste_personnes pour INF147 - Été 2025 */
 /* Salif Diarra et Léo Bouamrane */
@@ -296,13 +295,8 @@ int enlever_une_personne(t_liste_personnes* liste, t_personne* dest) {
     // Remplacer par la dernière personne vivante
     liste->liste[idx] = liste->liste[nb_vivants - 1];
     liste->nb_personnes--;
-    //if (est_malade_personne(dest)) {
-    //    liste->nb_malades--;
-    //}
-    //else {
-    //    liste->nb_sains--;
-    //}
-    //return 1; // Extraction réussie
+
+    return 1; // Extraction réussie
 }
 
 /*=========================================================*/

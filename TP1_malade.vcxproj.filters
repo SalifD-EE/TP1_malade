@@ -88,5 +88,6 @@
     <Text Include="\\Mac\Home\Downloads\config_simulations.txt" />
     <Text Include="config_simulations_new.txt" />
     <Text Include="mat_transition.txt" />
+    <Text Include="config_villes_virulent.txt" />
   </ItemGroup>
 </Project>

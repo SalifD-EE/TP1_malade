@@ -225,20 +225,20 @@ int main(void) {
     srand_sys();
     
     //Construction de la matrice de transition
-    mat_transition = fopen("mat_transition_final.txt", "rt");
+    mat_transition = fopen("mat_transition_extremes.txt", "rt");
     
     if (!mat_transition) {
-        printf("Erreur : impossible d'ouvrir mat_transition.txt\n");
+        printf("Erreur : impossible d'ouvrir le fichier de matrice de transition\n");
         return EXIT_FAILURE;
     }
 
     lire_mat_transition(mat_transition);
 
     //Ouverture et validation du fichier de config des villes
-    config_villes = fopen("config_villes_final.txt", "rt");
+    config_villes = fopen("config_villes_normal.txt", "rt");
 
     if (!config_villes) {
-        printf("Erreur : impossible d'ouvrir config_villes_final.txt\n");
+        printf("Erreur : impossible d'ouvrir le fichier de config des villes\n");
         return EXIT_FAILURE;
     }
 

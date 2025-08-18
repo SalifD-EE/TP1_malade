@@ -165,8 +165,22 @@ double get_prop_morts(const t_liste_personnes* liste);
 */
 void afficher_liste_personnes(const t_liste_personnes* liste);
 
+/* AJOUTER_UNE_PERSONNE
+   Ajoute une personne à la liste
+   PARAMÈTRES : liste - pointeur sur la liste
+                src - pointeur constant vers la personne à ajouter
+   RETOUR : 1 si la personne est ajoutée, 0 sinon
+   SPECS : met à jour les compteurs selon l'état de la personne
+*/
 int ajouter_une_personne(t_liste_personnes* liste, const t_personne* src);
 
+/* ENLEVER_UNE_PERSONNE
+   Retire une personne de la liste et la copie dans dest
+   PARAMÈTRES : liste - pointeur sur la liste
+                dest - pointeur vers où copier la personne retirée
+   RETOUR : 1 si une personne est retirée, 0 si la liste est vide
+   SPECS : met à jour les compteurs, retire la dernière personne de la liste
+*/
 int enlever_une_personne(t_liste_personnes* liste, t_personne* dest);
 
 #endif

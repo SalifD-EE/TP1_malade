@@ -294,15 +294,6 @@ int dec_hrs_transit_liste_migrants(t_liste_migrants liste);
 */
 int assurer_temps_maladie_migrants(t_liste_migrants liste);
 
-/* Détermine si un migrant est mort ou rétabli en transit.
-	entrée : le handle d'une liste existante, la proportion de confinement de la ville
-	Retour : 1 si la personne est morte en transit, 0 sinon.
-
-	Spécifications : retour de 0 si la liste est vide.
-
-*/
-//int terminer_maladie_migrants(t_liste_migrants liste, double proportion_confinement);
-
 /*-----------------------------------------------------------------*/
 /*-----------------------------------------------------------------*/
 /* 	FIN DE LA LISTE */

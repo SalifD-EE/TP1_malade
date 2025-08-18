@@ -5,56 +5,56 @@ Migrants sortants: 0
 Migrants morts en transit: 0
 ----------------
 Nom: Cannes
-Population: 2087
-Migrants entrants: 4
-Migrants sortants: 17
+Population: 2062
+Migrants entrants: 0
+Migrants sortants: 38
 Migrants morts en transit: 0
 ----------------
 Nom: Cannes
-Population: 2076
-Migrants entrants: 24
-Migrants sortants: 48
+Population: 2044
+Migrants entrants: 5
+Migrants sortants: 61
 Migrants morts en transit: 0
 ----------------
 Nom: Cannes
-Population: 2084
-Migrants entrants: 53
-Migrants sortants: 69
+Population: 2029
+Migrants entrants: 20
+Migrants sortants: 91
 Migrants morts en transit: 0
 ----------------
 Nom: Cannes
-Population: 2084
-Migrants entrants: 96
-Migrants sortants: 112
+Population: 2022
+Migrants entrants: 32
+Migrants sortants: 110
 Migrants morts en transit: 0
 ----------------
 Nom: Cannes
-Population: 2094
-Migrants entrants: 125
-Migrants sortants: 131
+Population: 2004
+Migrants entrants: 43
+Migrants sortants: 139
 Migrants morts en transit: 0
 ----------------
 Nom: Cannes
-Population: 2108
-Migrants entrants: 168
-Migrants sortants: 160
+Population: 1995
+Migrants entrants: 61
+Migrants sortants: 166
 Migrants morts en transit: 0
 ----------------
 Nom: Cannes
-Population: 2100
-Migrants entrants: 202
-Migrants sortants: 202
+Population: 1974
+Migrants entrants: 73
+Migrants sortants: 199
 Migrants morts en transit: 0
 ----------------
 Nom: Cannes
-Population: 2138
-Migrants entrants: 262
-Migrants sortants: 224
+Population: 1981
+Migrants entrants: 99
+Migrants sortants: 218
 Migrants morts en transit: 0
 ----------------
 Nom: Cannes
-Population: 2177
-Migrants entrants: 312
-Migrants sortants: 235
+Population: 1966
+Migrants entrants: 107
+Migrants sortants: 241
 Migrants morts en transit: 0
 ----------------
