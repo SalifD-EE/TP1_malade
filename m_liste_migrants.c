@@ -429,22 +429,33 @@ int supprimer_liste_migrants(t_liste_migrants liste) {
 /*  liberer tous les noeuds et assigner les membres */
 int vider_liste_migrants(t_liste_migrants liste) {
 	int cpt = 0;
-	t_noeud_migrant	temp;
+	t_noeud_migrant	temp, suivant;
 	
 	if (liste->taille == 0) return 0;
 
 	temp = liste->tete;
-	/* jusqu'au queue, on ne se trompe pas  */
-	while (liste->tete) {
-		cpt += 1;
-		liste->tete = liste->tete->next;
-		free(temp);
+	
+	//while (temp != NULL) {
+	//	suivant = temp->next;  // Sauvegarder le suivant AVANT free
+	//	free(temp);            // Libérer le nœud courant
+	//	temp = suivant;        // Passer au suivant
+	//	cpt++;
+	//}
+
+	while (liste->tete != NULL) {
 		temp = liste->tete;
+		if (true) {
+
+		}
+		liste->tete = temp->next;
+		free(temp);
+		cpt++;
 	}
 
 	/* les membres sont remis à ceux d'une liste vierge  */
 	liste->tete = liste->queue = liste->iterateur = NULL;
-	liste->taille = 0; liste->position = -1;
+	liste->taille = 0;
+	liste->position = -1;
 	return cpt;
 
 }
@@ -468,19 +479,6 @@ int assurer_temps_maladie_migrants(t_liste_migrants liste) {
 	return 0;
 }
 
-//int terminer_maladie_migrants(t_liste_migrants liste, double proportion_confinement) {
-//	int resultat = determiner_mort_ou_retabli(&liste->iterateur->valeur.voyageur);
-//	
-//	if (resultat == 1) { /* Mort */
-//		modifier_etat_personne(&liste->iterateur->valeur.voyageur, MORT, proportion_confinement);
-//		return 1;
-//	}
-//	else if (resultat == 2) { /* Rétabli */
-//		modifier_etat_personne(&liste->iterateur->valeur.voyageur, SAIN, proportion_confinement);
-//	}
-//
-//	return 0;
-//}
 
 #if 0
 int main(void) {
