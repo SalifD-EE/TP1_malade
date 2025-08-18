@@ -37,7 +37,7 @@ t_ville init_ville(const char* nom_ville, int largeur, int hauteur, int taille_p
 	ville->population = creer_liste_personnes(taille_pop_initiale);
 	
 	//Populer la ville
-	//ajouter_des_personnes(&ville->population, taille_pop_initiale, largeur, hauteur, proportion_confinement);
+	ajouter_des_personnes(&ville->population, taille_pop_initiale, largeur, hauteur, proportion_confinement);
 
 	//Copier le nom de la ville dans la structure ainsi que ensemble_nom
 	strcpy(ville->nom_ville, nom_ville);
@@ -166,16 +166,12 @@ int obtenir_des_migrants_ville(t_ville ville) {
 	t_personne personne_cour;
 	t_migrant nouveau_migrant;
 
-	//TODO: TEMPORAIRE POUR LES TESTS
-	//int ville_dest = get_destination_transition(get_position_ville(ville->nom_ville));
-	int ville_dest = 1;
-	
-	
+	int ville_dest = get_destination_transition(get_position_ville(ville->nom_ville));
 	int ctr_migrants_out = 0;
 
-	//TODO: Ajouter le randi pour MAX_BORNE_EMIGRER
+
 	if (ville_dest != DESTINATION_ABSENTE && randf() < ville->prob_emigrer) {
-		for (int i = 0; i < MAX_BORNE_EMIGRER; i++) {
+		for (int i = 0; i < randi(MAX_BORNE_EMIGRER); i++) {
 			enlever_une_personne(&ville->population, &personne_cour);
 			nouveau_migrant = init_migrant(&personne_cour, get_position_ville(ville->nom_ville), ville_dest, ville->nb_hre_transit);
 
@@ -235,7 +231,7 @@ void detruire_ville(t_ville ville) {
 }
 
 
-#if 1
+#if 0
 int main(void) {
 	srand_sys();
 
@@ -326,11 +322,6 @@ int main(void) {
 	// Tester simuler_une_heure_pandemie_ville + ctr_mort_transit
 	simuler_une_heure_pandemie_ville(ville3);
 
-	system("pause");
-	return EXIT_SUCCESS;
-
-
-
     // Après simulation, nous devrions toujours avoir un nombre valide de malades
     assert(get_nb_malades(&ville1->population) >= 0);
     assert(get_nb_personnes(&ville1->population) >= get_nb_morts(&ville1->population));
@@ -338,7 +329,6 @@ int main(void) {
 	// Tester la simulation sur une ville vide
 	simuler_une_heure_pandemie_ville(ville_vide);
 	assert(get_nb_personnes(&ville_vide->population) >= 0);
-
 
     // Tester les écritures finales de log
     ecrire_logfile_ville(ville1);
@@ -352,6 +342,8 @@ int main(void) {
 	detruire_ville(ville3);
     detruire_ville(ville_vide);
 
+	system("pause");
+	return EXIT_SUCCESS;
 	
 }
 #endif

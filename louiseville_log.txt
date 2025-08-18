@@ -1,0 +1,201 @@
+Nom: louiseville
+Population: 1400
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1400
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1398
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1395
+Migrants entrants: 0
+Migrants sortants: 5
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1395
+Migrants entrants: 0
+Migrants sortants: 5
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1395
+Migrants entrants: 0
+Migrants sortants: 5
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1395
+Migrants entrants: 0
+Migrants sortants: 5
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1395
+Migrants entrants: 0
+Migrants sortants: 5
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1395
+Migrants entrants: 0
+Migrants sortants: 5
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1395
+Migrants entrants: 0
+Migrants sortants: 5
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1395
+Migrants entrants: 0
+Migrants sortants: 5
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1395
+Migrants entrants: 0
+Migrants sortants: 5
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1394
+Migrants entrants: 0
+Migrants sortants: 6
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1394
+Migrants entrants: 0
+Migrants sortants: 6
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1392
+Migrants entrants: 0
+Migrants sortants: 8
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1392
+Migrants entrants: 0
+Migrants sortants: 8
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1392
+Migrants entrants: 0
+Migrants sortants: 8
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1390
+Migrants entrants: 0
+Migrants sortants: 10
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1390
+Migrants entrants: 0
+Migrants sortants: 10
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1390
+Migrants entrants: 0
+Migrants sortants: 10
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1390
+Migrants entrants: 0
+Migrants sortants: 10
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1390
+Migrants entrants: 0
+Migrants sortants: 10
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1390
+Migrants entrants: 0
+Migrants sortants: 10
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1390
+Migrants entrants: 0
+Migrants sortants: 10
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1390
+Migrants entrants: 0
+Migrants sortants: 10
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1390
+Migrants entrants: 0
+Migrants sortants: 10
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1390
+Migrants entrants: 0
+Migrants sortants: 10
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1388
+Migrants entrants: 0
+Migrants sortants: 12
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1388
+Migrants entrants: 0
+Migrants sortants: 12
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1385
+Migrants entrants: 0
+Migrants sortants: 15
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1385
+Migrants entrants: 0
+Migrants sortants: 15
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1385
+Migrants entrants: 0
+Migrants sortants: 15
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1385
+Migrants entrants: 0
+Migrants sortants: 15
+Migrants morts en transit: 0
+----------------
+Nom: louiseville
+Population: 1385
+Migrants entrants: 0

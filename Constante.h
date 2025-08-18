@@ -6,7 +6,7 @@
 #ifndef _CONSTANTE_2025_1571_
 #define _CONSTANTE_2025_1571_
 
-#define MODE_SIMULATION 5 //0 = Sortie dans console, 1 = Sortie dans fichiers log, 2 = Groupes de villes
+#define MODE_SIMULATION 2 //0 = Sortie dans console, 1 = Sortie dans fichiers log, 2 = Groupes de villes
 
 #define EXEDENT_TAB 100 //Constante pour l'agrandissement du tableau dynamique 
 
