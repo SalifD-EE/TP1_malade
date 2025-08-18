@@ -453,6 +453,7 @@ int vider_liste_migrants(t_liste_migrants liste) {
 
 int dec_hrs_transit_liste_migrants(t_liste_migrants liste) {
 	if (liste->taille == 0) return 0;
+	if (liste->iterateur == NULL) return 0;
 	dec_hrs_transit_migrant(liste->iterateur);
 	return 1;
 }
