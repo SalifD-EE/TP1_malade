@@ -155,7 +155,7 @@ int main(void) {
     t_groupe_villes gr;
     int nb_villes_test;
     int nb_heures_max = 1000;
-    int period_affich = 1;
+    int period_affich = 24;
 
     //Initialisation du générateur aléatoire
     srand_sys();

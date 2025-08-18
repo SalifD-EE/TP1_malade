@@ -87,10 +87,7 @@ static void simuler_une_heure_groupe_villes(t_groupe_villes* gr) {
 
     for (int i = 0; i < gr->nb_villes; i++) {
         obtenir_des_personnes_ville(gr->tab_villes[i]);
-
-        //Problème ici. La liste de migrants est mal initialisée.
         obtenir_des_migrants_ville(gr->tab_villes[i]);
-
         simuler_une_heure_pandemie_ville(gr->tab_villes[i]);
     }
 }
@@ -106,7 +103,7 @@ int simuler_pandemie_groupe_villes(t_groupe_villes* gr, int nb_heures_max, int p
                 ecrire_logfile_ville(gr->tab_villes[i]);
             }
           
-            fprintf(gr->log_villes, "Heure %d: Malades %d, Rétablis %d, Vivants %d, Morts %d\n",
+            printf(gr->log_villes, "Heure %d: Malades %d, Rétablis %d, Vivants %d, Morts %d\n",
                 heures, gr->total_malades, gr->total_retablis, gr->total_vivants, gr->total_morts);
         }
 
