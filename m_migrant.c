@@ -81,17 +81,15 @@ int inc_hrs_maladie_migrant(t_migrant* lui) {
         
         // Si le nombre d'heures de maladie atteint NB_HRS_MALADIE, déterminer l'état
         if (inc_hrs_maladie(&lui->voyageur) >= NB_HRS_MALADIE) {
-            modifier_etat_personne(&lui->voyageur, MORT, PROP_INITIALE);
+            resultat = determiner_mort_ou_retabli(&lui->voyageur); // Fonction du module m_personnes
             
-            //resultat = determiner_mort_ou_retabli(&lui->voyageur); // Fonction du module m_personnes
-            //
-            //if (resultat == 1) { /* Mort */
-            //    modifier_etat_personne(&lui->voyageur, MORT, PROP_INITIALE);
-            //}
-            //else if (resultat == 2) { /* Rétabli */
-            //    //La proportion changera à nouveau une fois
-            //    modifier_etat_personne(&lui->voyageur, SAIN, PROP_INITIALE);
-            //}
+            if (resultat == 1) { /* Mort */
+                modifier_etat_personne(&lui->voyageur, MORT, PROP_INITIALE);
+            }
+            else if (resultat == 2) { /* Rétabli */
+                //La proportion changera à nouveau une fois
+                modifier_etat_personne(&lui->voyageur, SAIN, PROP_INITIALE);
+            }
             
             modifier_hrs_maladie_personne(&lui->voyageur, 0);
             return 1; // État changé

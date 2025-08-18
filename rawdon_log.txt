@@ -1,0 +1,213 @@
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 698
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 697
+Migrants entrants: 0
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 697
+Migrants entrants: 0
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 697
+Migrants entrants: 0
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 697
+Migrants entrants: 0
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 697
+Migrants entrants: 0
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 697
+Migrants entrants: 0
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 697
+Migrants entrants: 0
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 699
+Migrants entrants: 2
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 700
+Migrants entrants: 3
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 701
+Migrants entrants: 4
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 701
+Migrants entrants: 4
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: rawdon
+Population: 701
+Migrants

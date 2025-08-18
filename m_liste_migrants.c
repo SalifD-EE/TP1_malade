@@ -434,15 +434,8 @@ int vider_liste_migrants(t_liste_migrants liste) {
 	if (liste->taille == 0) return 0;
 
 	temp = liste->tete;
-	
-	//while (temp != NULL) {
-	//	suivant = temp->next;  // Sauvegarder le suivant AVANT free
-	//	free(temp);            // Libérer le nœud courant
-	//	temp = suivant;        // Passer au suivant
-	//	cpt++;
-	//}
 
-	while (liste->tete != NULL) {
+	while (cpt != liste->taille) {
 		temp = liste->tete;
 		liste->tete = temp->next;
 		free(temp);
