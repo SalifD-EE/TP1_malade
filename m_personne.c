@@ -123,6 +123,10 @@ void modifier_vitesse_personne(t_personne* lui, t_R2 vitesse) {
     lui->vitesse = vitesse;
 }
 
+void modifier_hrs_maladie_personne(t_personne* lui, int hrs_maladie) {
+    lui->hrs_maladie = hrs_maladie;
+}
+
 /* Détermine si une personne meurt ou se rétablit */
 int determiner_mort_ou_retabli( const t_personne* lui) {
     

@@ -459,29 +459,28 @@ int dec_hrs_transit_liste_migrants(t_liste_migrants liste) {
 int assurer_temps_maladie_migrants(t_liste_migrants liste) {
 	if (liste->taille == 0) return 0;
 	
-	if (get_etat(&liste->iterateur->valeur.voyageur) == MALADE) {
-		inc_hrs_maladie(&liste->iterateur->valeur.voyageur);
-		if (get_hrs_maladie(&liste->iterateur->valeur.voyageur) >= NB_HRS_MALADIE) {
-			return 1;
-		}
-	}
-
-	return 0;
-}
-
-int terminer_maladie_migrants(t_liste_migrants liste, double proportion_confinement) {
-	int resultat = determiner_mort_ou_retabli(&liste->iterateur->valeur.voyageur);
-	
-	if (resultat == 1) { /* Mort */
-		modifier_etat_personne(&liste->iterateur->valeur.voyageur, MORT, proportion_confinement);
+	//Vérifier si l'état du migrant a changé et si elle est morte.
+	if (inc_hrs_maladie_migrant(&liste->iterateur->valeur) == 1 && 
+		est_vivant_migrant(&liste->iterateur->valeur) == 0) {
 		return 1;
 	}
-	else if (resultat == 2) { /* Rétabli */
-		modifier_etat_personne(&liste->iterateur->valeur.voyageur, SAIN, proportion_confinement);
-	}
 
 	return 0;
 }
+
+//int terminer_maladie_migrants(t_liste_migrants liste, double proportion_confinement) {
+//	int resultat = determiner_mort_ou_retabli(&liste->iterateur->valeur.voyageur);
+//	
+//	if (resultat == 1) { /* Mort */
+//		modifier_etat_personne(&liste->iterateur->valeur.voyageur, MORT, proportion_confinement);
+//		return 1;
+//	}
+//	else if (resultat == 2) { /* Rétabli */
+//		modifier_etat_personne(&liste->iterateur->valeur.voyageur, SAIN, proportion_confinement);
+//	}
+//
+//	return 0;
+//}
 
 #if 0
 int main(void) {

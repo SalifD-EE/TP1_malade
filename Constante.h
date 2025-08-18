@@ -10,7 +10,6 @@
 
 #define EXEDENT_TAB 100 //Constante pour l'agrandissement du tableau dynamique 
 
-
 #define M_PI 3.1416922653589793
 #define PROP_INITIALE 0.4  //pourcentage pou la proportion de confinement initiale pour la simulation console
 #define INC_CAT_AGE      10     //écart entre chaque tranche d'age suivante
@@ -33,7 +32,6 @@
 #define PROP_CONFINEMENT_INTERMEDIAIRE  0.5
 #define PROP_CONFINEMENT_ELEVE  0.8
 #define PROP_CONFINEMENT_TOTAL 1.0
-
 
 /* uniquement pour  établir la norme du vecteur vitesse */
 // intervalle du choix aléatoire de la norme du vecteur vitesse 
