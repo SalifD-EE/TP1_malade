@@ -1,0 +1,60 @@
+Nom: Paris
+Population: 8500
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: Paris
+Population: 8483
+Migrants entrants: 5
+Migrants sortants: 22
+Migrants morts en transit: 0
+----------------
+Nom: Paris
+Population: 8478
+Migrants entrants: 30
+Migrants sortants: 52
+Migrants morts en transit: 0
+----------------
+Nom: Paris
+Population: 8509
+Migrants entrants: 80
+Migrants sortants: 71
+Migrants morts en transit: 0
+----------------
+Nom: Paris
+Population: 8506
+Migrants entrants: 113
+Migrants sortants: 107
+Migrants morts en transit: 0
+----------------
+Nom: Paris
+Population: 8521
+Migrants entrants: 170
+Migrants sortants: 149
+Migrants morts en transit: 0
+----------------
+Nom: Paris
+Population: 8538
+Migrants entrants: 225
+Migrants sortants: 187
+Migrants morts en transit: 0
+----------------
+Nom: Paris
+Population: 8560
+Migrants entrants: 278
+Migrants sortants: 218
+Migrants morts en transit: 0
+----------------
+Nom: Paris
+Population: 8561
+Migrants entrants: 317
+Migrants sortants: 256
+Migrants morts en transit: 0
+----------------
+Nom: Paris
+Population: 8577
+Migrants entrants: 363
+Migrants sortants: 286
+Migrants morts en transit: 0
+----------------

@@ -1,0 +1,60 @@
+Nom: Poitiers
+Population: 700
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: Poitiers
+Population: 704
+Migrants entrants: 10
+Migrants sortants: 6
+Migrants morts en transit: 0
+----------------
+Nom: Poitiers
+Population: 709
+Migrants entrants: 23
+Migrants sortants: 14
+Migrants morts en transit: 0
+----------------
+Nom: Poitiers
+Population: 754
+Migrants entrants: 71
+Migrants sortants: 17
+Migrants morts en transit: 0
+----------------
+Nom: Poitiers
+Population: 797
+Migrants entrants: 123
+Migrants sortants: 26
+Migrants morts en transit: 0
+----------------
+Nom: Poitiers
+Population: 818
+Migrants entrants: 157
+Migrants sortants: 39
+Migrants morts en transit: 0
+----------------
+Nom: Poitiers
+Population: 857
+Migrants entrants: 202
+Migrants sortants: 45
+Migrants morts en transit: 0
+----------------
+Nom: Poitiers
+Population: 901
+Migrants entrants: 263
+Migrants sortants: 62
+Migrants morts en transit: 0
+----------------
+Nom: Poitiers
+Population: 959
+Migrants entrants: 325
+Migrants sortants: 66
+Migrants morts en transit: 0
+----------------
+Nom: Poitiers
+Population: 1008
+Migrants entrants: 381
+Migrants sortants: 73
+Migrants morts en transit: 0
+----------------

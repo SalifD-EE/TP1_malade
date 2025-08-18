@@ -27,7 +27,6 @@ t_migrant init_migrant(const t_personne* src, int ville_dep, int ville_dest, int
 
 void set_transit_migrant(t_migrant* lui, int hrs) {
     lui->hrs_transit = hrs;
-
 }
 
 /*=========================================================*/
@@ -39,7 +38,6 @@ int dec_hrs_transit_migrant(t_migrant* lui) {
     return lui->hrs_transit;
 }
 
-
 /*=========================================================*/
 
 int get_hrs_transit(const t_migrant* lui) {
@@ -49,7 +47,6 @@ int get_hrs_transit(const t_migrant* lui) {
 int get_destination_migrant(const t_migrant* lui) {
     return lui->ville_destination;
 }
-
 
 /*=========================================================*/
 
@@ -77,7 +74,7 @@ int est_malade_migrant(const t_migrant* lui) {
 int inc_hrs_maladie_migrant(t_migrant* lui) {
     int resultat;
     
-    if (est_malade_migrant(lui) == 1) {
+    if (lui != NULL && est_malade_migrant(lui) == 1) {
         
         // Si le nombre d'heures de maladie atteint NB_HRS_MALADIE, déterminer l'état
         if (inc_hrs_maladie(&lui->voyageur) >= NB_HRS_MALADIE) {
@@ -96,10 +93,8 @@ int inc_hrs_maladie_migrant(t_migrant* lui) {
         }
 
     }
-    return 0; // Retourne 1 si les heures de maladie ont changé, 0 sinon
+    return 0;
 }
-
-
 
 /*=========================================================*/
 
@@ -109,5 +104,3 @@ t_personne get_personne_migrant(const t_migrant* lui) {
 
 
 /*=========================================================*/
-/*=========================================================*/
-

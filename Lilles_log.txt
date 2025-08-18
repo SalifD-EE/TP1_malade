@@ -1,0 +1,60 @@
+Nom: Lilles
+Population: 4500
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: Lilles
+Population: 4465
+Migrants entrants: 2
+Migrants sortants: 37
+Migrants morts en transit: 0
+----------------
+Nom: Lilles
+Population: 4418
+Migrants entrants: 10
+Migrants sortants: 92
+Migrants morts en transit: 0
+----------------
+Nom: Lilles
+Population: 4412
+Migrants entrants: 32
+Migrants sortants: 120
+Migrants morts en transit: 0
+----------------
+Nom: Lilles
+Population: 4383
+Migrants entrants: 51
+Migrants sortants: 168
+Migrants morts en transit: 0
+----------------
+Nom: Lilles
+Population: 4345
+Migrants entrants: 59
+Migrants sortants: 214
+Migrants morts en transit: 0
+----------------
+Nom: Lilles
+Population: 4305
+Migrants entrants: 72
+Migrants sortants: 267
+Migrants morts en transit: 0
+----------------
+Nom: Lilles
+Population: 4270
+Migrants entrants: 81
+Migrants sortants: 311
+Migrants morts en transit: 0
+----------------
+Nom: Lilles
+Population: 4207
+Migrants entrants: 87
+Migrants sortants: 380
+Migrants morts en transit: 0
+----------------
+Nom: Lilles
+Population: 4177
+Migrants entrants: 93
+Migrants sortants: 416
+Migrants morts en transit: 0
+----------------

@@ -1,0 +1,60 @@
+Nom: Bordeaux
+Population: 3998
+Migrants entrants: 0
+Migrants sortants: 2
+Migrants morts en transit: 0
+----------------
+Nom: Bordeaux
+Population: 3914
+Migrants entrants: 0
+Migrants sortants: 86
+Migrants morts en transit: 0
+----------------
+Nom: Bordeaux
+Population: 3832
+Migrants entrants: 0
+Migrants sortants: 168
+Migrants morts en transit: 0
+----------------
+Nom: Bordeaux
+Population: 3740
+Migrants entrants: 1
+Migrants sortants: 261
+Migrants morts en transit: 0
+----------------
+Nom: Bordeaux
+Population: 3642
+Migrants entrants: 1
+Migrants sortants: 359
+Migrants morts en transit: 0
+----------------
+Nom: Bordeaux
+Population: 3564
+Migrants entrants: 1
+Migrants sortants: 437
+Migrants morts en transit: 0
+----------------
+Nom: Bordeaux
+Population: 3461
+Migrants entrants: 1
+Migrants sortants: 540
+Migrants morts en transit: 0
+----------------
+Nom: Bordeaux
+Population: 3394
+Migrants entrants: 11
+Migrants sortants: 617
+Migrants morts en transit: 0
+----------------
+Nom: Bordeaux
+Population: 3304
+Migrants entrants: 11
+Migrants sortants: 707
+Migrants morts en transit: 0
+----------------
+Nom: Bordeaux
+Population: 3200
+Migrants entrants: 11
+Migrants sortants: 811
+Migrants morts en transit: 0
+----------------

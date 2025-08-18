@@ -1,0 +1,60 @@
+Nom: Lyon
+Population: 6000
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: Lyon
+Population: 5926
+Migrants entrants: 7
+Migrants sortants: 81
+Migrants morts en transit: 0
+----------------
+Nom: Lyon
+Population: 5894
+Migrants entrants: 37
+Migrants sortants: 143
+Migrants morts en transit: 0
+----------------
+Nom: Lyon
+Population: 5870
+Migrants entrants: 84
+Migrants sortants: 214
+Migrants morts en transit: 0
+----------------
+Nom: Lyon
+Population: 5848
+Migrants entrants: 122
+Migrants sortants: 274
+Migrants morts en transit: 0
+----------------
+Nom: Lyon
+Population: 5846
+Migrants entrants: 180
+Migrants sortants: 334
+Migrants morts en transit: 0
+----------------
+Nom: Lyon
+Population: 5832
+Migrants entrants: 236
+Migrants sortants: 404
+Migrants morts en transit: 0
+----------------
+Nom: Lyon
+Population: 5805
+Migrants entrants: 271
+Migrants sortants: 466
+Migrants morts en transit: 0
+----------------
+Nom: Lyon
+Population: 5806
+Migrants entrants: 342
+Migrants sortants: 536
+Migrants morts en transit: 0
+----------------
+Nom: Lyon
+Population: 5780
+Migrants entrants: 401
+Migrants sortants: 621
+Migrants morts en transit: 0
+----------------

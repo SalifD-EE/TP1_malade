@@ -1,0 +1,60 @@
+Nom: Dijon
+Population: 2100
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: Dijon
+Population: 2035
+Migrants entrants: 19
+Migrants sortants: 84
+Migrants morts en transit: 0
+----------------
+Nom: Dijon
+Population: 1986
+Migrants entrants: 52
+Migrants sortants: 166
+Migrants morts en transit: 0
+----------------
+Nom: Dijon
+Population: 1961
+Migrants entrants: 99
+Migrants sortants: 238
+Migrants morts en transit: 0
+----------------
+Nom: Dijon
+Population: 1949
+Migrants entrants: 145
+Migrants sortants: 296
+Migrants morts en transit: 0
+----------------
+Nom: Dijon
+Population: 1906
+Migrants entrants: 184
+Migrants sortants: 378
+Migrants morts en transit: 0
+----------------
+Nom: Dijon
+Population: 1884
+Migrants entrants: 243
+Migrants sortants: 459
+Migrants morts en transit: 0
+----------------
+Nom: Dijon
+Population: 1842
+Migrants entrants: 280
+Migrants sortants: 538
+Migrants morts en transit: 0
+----------------
+Nom: Dijon
+Population: 1799
+Migrants entrants: 320
+Migrants sortants: 621
+Migrants morts en transit: 0
+----------------
+Nom: Dijon
+Population: 1785
+Migrants entrants: 380
+Migrants sortants: 695
+Migrants morts en transit: 0
+----------------

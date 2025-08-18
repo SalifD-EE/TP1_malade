@@ -145,6 +145,70 @@ int main(void) {
     /* Initialisation du générateur aléatoire */
     srand_sys();
 
+    /* Paramètres de la simulation */
+    double hauteur = 0;     /* Hauteur du quartier (mètres) */
+    double largeur = 0;     /* Largeur du quartier (mètres) */
+    int nb_personnes = 0;
+    double prop_initiale = 0;
+    int intervalle_affich = 0; /* Afficher toutes les 24 heures */
+    int nb_simulations = 0;
+    char prefixe[12];
+    char nom_fichier[256];
+    nom_fichier[0] = '\0';
+    char sim_courante[sizeof(int) * 4];
+
+    FILE* config;
+    FILE* log;
+
+    /* Ouverture du fichier de configuration */
+    config = fopen("config_simulations.txt", "r");
+    if (!config) {
+        printf("Erreur : impossible d'ouvrir config_simulations.txt\n");
+        return EXIT_FAILURE;
+    }
+
+    /* Lecture des paramètres de simulation*/
+    if (fscanf(config, "%d %s", &nb_simulations, prefixe) != 2) {
+        printf("Erreur : echec de la lecture des parametres du fichier.\n");
+        fclose(config);
+        return EXIT_FAILURE;
+    }
+
+    for (int i = 0; i < nb_simulations; ++i) {
+        printf("\nExecution de la simulation %d ...\n", i);
+
+        /* Lecture des conditions initiales */
+        if (fscanf(config, "%lf %lf %d %lf %d",
+            &hauteur,
+            &largeur,
+            &nb_personnes,
+            &prop_initiale,
+            &intervalle_affich) != 5) {
+            printf("Erreur : echec de la lecture des parametres de simulation.\n");
+            fclose(config);
+            return 1;
+        }
+
+        /*Création du fichier texte*/
+        sprintf(sim_courante, "%d", i);
+        strcpy(nom_fichier, prefixe);
+        strcat(nom_fichier, sim_courante);
+        strcat(nom_fichier, ".txt");
+
+        log = fopen(nom_fichier, "w");
+        if (!log) {
+            printf("Erreur : impossible d'ouvrir le fichier log.%s\n", nom_fichier);
+            fclose(config);
+            return 1;
+        }
+
+        /* Début de la simulation */
+        simuler_pandemie(largeur, hauteur, nb_personnes, prop_initiale, intervalle_affich, log);
+
+        fclose(log);
+
+        printf("\nFin la simulation %d\n", i);
+}
 #endif
 
 //Groupe de villes
@@ -154,14 +218,14 @@ int main(void) {
     FILE* config_villes;
     t_groupe_villes gr;
     int nb_villes_test;
-    int nb_heures_max = 1000;
-    int period_affich = 24;
+    int nb_heures_max = 500;
+    int period_affich = 50;
 
     //Initialisation du générateur aléatoire
     srand_sys();
     
     //Construction de la matrice de transition
-    mat_transition = fopen("mat_transition.txt", "rt");
+    mat_transition = fopen("mat_transition_final.txt", "rt");
     
     if (!mat_transition) {
         printf("Erreur : impossible d'ouvrir mat_transition.txt\n");
@@ -183,7 +247,7 @@ int main(void) {
     assert(nb_villes_test == get_nb_depart_transition());
     rewind(config_villes);
     
-    gr = init_groupe_villes(config_villes, "groupe_villes_final.txt");
+    gr = init_groupe_villes(config_villes, "groupe_villes_log.txt");
     
     //Exécution de la simulation
     simuler_pandemie_groupe_villes(&gr, nb_heures_max, period_affich);
@@ -195,13 +259,6 @@ int main(void) {
     
     system("pause");
     return EXIT_SUCCESS;
-
-    //Pour déboguer la population de chaque ville
-    /*for (int i = 0; i < get_nb_depart_transition(); i++)
-    {
-        t_liste_personnes pop = gr.tab_villes[i]->population;
-        afficher_liste_personnes(&pop);
-    }*/
 }
 #endif
 /*=========================================================*/

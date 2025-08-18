@@ -1,0 +1,60 @@
+Nom: Marseille
+Population: 7000
+Migrants entrants: 0
+Migrants sortants: 0
+Migrants morts en transit: 0
+----------------
+Nom: Marseille
+Population: 6984
+Migrants entrants: 0
+Migrants sortants: 16
+Migrants morts en transit: 0
+----------------
+Nom: Marseille
+Population: 6975
+Migrants entrants: 0
+Migrants sortants: 25
+Migrants morts en transit: 0
+----------------
+Nom: Marseille
+Population: 6964
+Migrants entrants: 0
+Migrants sortants: 36
+Migrants morts en transit: 0
+----------------
+Nom: Marseille
+Population: 6959
+Migrants entrants: 0
+Migrants sortants: 41
+Migrants morts en transit: 0
+----------------
+Nom: Marseille
+Population: 6936
+Migrants entrants: 0
+Migrants sortants: 64
+Migrants morts en transit: 0
+----------------
+Nom: Marseille
+Population: 6932
+Migrants entrants: 0
+Migrants sortants: 68
+Migrants morts en transit: 0
+----------------
+Nom: Marseille
+Population: 6902
+Migrants entrants: 0
+Migrants sortants: 98
+Migrants morts en transit: 0
+----------------
+Nom: Marseille
+Population: 6891
+Migrants entrants: 0
+Migrants sortants: 109
+Migrants morts en transit: 0
+----------------
+Nom: Marseille
+Population: 6884
+Migrants entrants: 0
+Migrants sortants: 116
+Migrants morts en transit: 0
+----------------

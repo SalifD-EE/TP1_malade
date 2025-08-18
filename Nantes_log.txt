@@ -1,0 +1,60 @@
+Nom: Nantes
+Population: 1997
+Migrants entrants: 0
+Migrants sortants: 3
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1894
+Migrants entrants: 23
+Migrants sortants: 129
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1801
+Migrants entrants: 59
+Migrants sortants: 258
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1728
+Migrants entrants: 108
+Migrants sortants: 380
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1644
+Migrants entrants: 137
+Migrants sortants: 493
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1548
+Migrants entrants: 170
+Migrants sortants: 622
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1458
+Migrants entrants: 206
+Migrants sortants: 748
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1401
+Migrants entrants: 270
+Migrants sortants: 869
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1350
+Migrants entrants: 336
+Migrants sortants: 986
+Migrants morts en transit: 0
+----------------
+Nom: Nantes
+Population: 1252
+Migrants entrants: 364
+Migrants sortants: 1112
+Migrants morts en transit: 0
+----------------

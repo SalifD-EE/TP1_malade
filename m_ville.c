@@ -17,7 +17,9 @@
 
 /*=========================================================*/
 
-t_ville init_ville(const char* nom_ville, int largeur, int hauteur, int taille_pop_initiale, double proportion_confinement, double prob_emigrer, int nb_hre_transit) {
+t_ville init_ville(const char* nom_ville, int largeur, int hauteur, int taille_pop_initiale, 
+	double proportion_confinement, double prob_emigrer, int nb_hre_transit) {
+	
 	t_ville ville = malloc(sizeof(struct ville));
 	char* nom_logfile;
 
@@ -49,7 +51,6 @@ t_ville init_ville(const char* nom_ville, int largeur, int hauteur, int taille_p
 	strcat(nom_logfile, EXTENSION_FICHIER);
 
 	ville->logfile = fopen(nom_logfile, "w");
-	
 	if (!ville->logfile) {
 		printf("Erreur : impossible d'ouvrir le fichier logfile.%s\n", nom_ville);
 		fclose(ville->nom_ville);
@@ -135,14 +136,17 @@ int obtenir_des_personnes_ville(t_ville ville) {
 	int ctr_migrants_in = 0;
 	double norme_vit = NORME_VIT_MIN + randf() * (NORME_VIT_MAX - NORME_VIT_MIN);
 	double angle = randf() * 2 * M_PI; /* Angle entre [0, 2pi] */
+	int dest_migrant = DESTINATION_ABSENTE;
 
 	aller_debut_liste_migrants(ville->migrants);
 
 	for (int i = 0; i < get_dans_liste_migrants(ville->migrants); ++i) {
 		get_valeur_liste_migrants(ville->migrants, &migrant_cour);
+		dest_migrant = get_destination_migrant(&migrant_cour);
 
 		//Vérifier si le migrant est dans sa ville de destination.
-		if (comparer_noms_villes(get_nom_ville(get_destination_migrant(&migrant_cour)), ville->nom_ville) == 1) {
+		if (dest_migrant != DESTINATION_ABSENTE && dest_migrant == get_position_ville(ville->nom_ville)) {
+
 			nouvelle_pos = R2_nouveau(randf() * ville->largeur, randf() * ville->hauteur);
 			nouvelle_vit = R2_nouveau(norme_vit * cos(angle), norme_vit * sin(angle));
 			personne_cour = get_personne_migrant(&migrant_cour);

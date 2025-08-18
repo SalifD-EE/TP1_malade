@@ -109,8 +109,7 @@ void detruire_liste_migrants(t_liste_migrants liste) {
 
  /*consulter la valeur de l'itérateur*/
 int get_valeur_liste_migrants(const t_liste_migrants liste, t_el_liste_migrants* dest) {
-	if (liste->taille == 0) return 0;
-
+	if (liste->taille == 0 || liste->iterateur == NULL) return 0;
 	*dest = liste->iterateur->valeur;
 	return 1;
 }
@@ -136,6 +135,7 @@ int get_position_liste_migrants(const t_liste_migrants liste) {
 int avancer_liste_migrants(t_liste_migrants liste) {
 	/*si la liste != vide et si l'itérateur n'est pas à la fin */
 	if (liste->iterateur == liste->queue) return 0;
+	if (liste->taille == 0 || liste->iterateur == NULL) return 0;
 
 	/* l'itérateur passe au next */
 	liste->iterateur = liste->iterateur->next;
@@ -178,7 +178,9 @@ int positionner_liste_migrants(t_liste_migrants liste, int position) {
 	// si la liste est vide
 	if (!aller_debut_liste_migrants(liste)) return 0;
 
-	while (liste->position < position) avancer_liste_migrants(liste);
+	while (liste->position < position) {
+		if (avancer_liste_migrants(liste) == 0) break;
+	}
 
 	return 1;
 }
@@ -326,78 +328,103 @@ int inserer_liste_migrants(t_liste_migrants liste, const t_el_liste_migrants* sr
 /*-----------------------------------------------------------------*/
 /*  supprimer au debut et l'iterateur ira en tete */
 int supprimer_debut_liste_migrants(t_liste_migrants liste) {
+    t_noeud_migrant temp = liste->tete;
 
-	t_noeud_migrant temp = liste->tete;
+    if (liste->taille == 0) return 0;
+    if (liste->taille == 1) {
+        return vider_liste_migrants(liste);
+    }
 
-	if (liste->taille == 0) return 0;
+    // Avancer le pointeur de tête
+    liste->tete = liste->tete->next;
 
-	if (liste->taille == 1) {
-		return vider_liste_migrants(liste);
-	}
+    // Libérer l'ancien premier noeud
+    free(temp);
+    liste->taille -= 1;
 
-	/* on avance tete  */
-	liste->tete = liste->tete->next;
-
-	//list->tete->preced = NULL;
-
-	free(temp);
-	liste->taille -= 1;
-
-	// placer  l'iterateur au debut
-	aller_debut_liste_migrants(liste);
-	return 1;
+    // Mettre l'itérateur au début
+    liste->iterateur = liste->tete;
+    liste->position = 0;
+    
+    return 1;
 }
 /*-----------------------------------------------------------------*/
 /*  supprimer a la fin et l'iterateur ira en queue */
 int supprimer_fin_liste_migrants(t_liste_migrants liste) {
+    t_noeud_migrant temp = liste->queue;
+    t_noeud_migrant avant_dernier;
 
-	t_noeud_migrant temp = liste->queue;
+    if (liste->taille == 0) return 0;
+    if (liste->taille == 1) {
+        vider_liste_migrants(liste);
+        return 1;
+    }
 
-	if (liste->taille == 0) return 0;
-	if (liste->taille == 1) {
-		vider_liste_migrants(liste);
-		return 1;
-	}
+    // Trouver le noeud avant le dernier
+    avant_dernier = liste->tete;
+    while (avant_dernier->next != liste->queue) {
+        avant_dernier = avant_dernier->next;
+    }
+    
+    // Faire le lien
+    avant_dernier->next = NULL;
+    
+    // Mettre à jour la queue
+    liste->queue = avant_dernier;
+    
+    // Libérer l'ancien dernier noeud
+    free(temp);
+    liste->taille -= 1;
 
-	//list->queue = list->queue->preced;
-	liste->queue->next = NULL;
-	liste->taille -= 1;
-	free(temp);
-
-	// placer  l'iterateur à la fin
-	aller_fin_liste_migrants(liste);
-	return 1;
-
+    // Positionner l'itérateur sur le nouveau dernier noeud
+    liste->iterateur = liste->queue;
+    liste->position = liste->taille - 1;
+    
+    return 1;
 }
 /*-----------------------------------------------------------------*/
 /*  ici on traite le cas #4 */
 static int supprimer_position_liste_migrants(t_liste_migrants liste) {
-	t_noeud_migrant precedent;
-	t_noeud_migrant supprime;
+    t_noeud_migrant precedent;
+    t_noeud_migrant supprime;
 
-	//Positionner l'itérateur au noeud qui PRÉCÈDE celui à supprimer.
-	if (!positionner_liste_migrants(liste, liste->position - 1)) return 0;
-	
-	precedent = liste->iterateur;
-	supprime = liste->iterateur->next;
+    // Positionner l'itérateur au noeud qui PRÉCÈDE celui à supprimer.
+    if (!positionner_liste_migrants(liste, liste->position - 1)) return 0;
+    
+    precedent = liste->iterateur;
+    supprime = liste->iterateur->next;
 
-	//Le noeud précédent "saute" par dessus celui à supprimer
-	precedent->next = supprime->next;
+    // Le noeud précédent "saute" par dessus celui à supprimer
+    precedent->next = supprime->next;
+    
+    // Si on supprime le dernier élément, le précédent devient la queue
+    if (supprime == liste->queue) {
+        liste->queue = precedent;
+    }
+    
+    // Libérer la mémoire du noeud supprimé
+    free(supprime);
+    liste->taille -= 1;
 
-	//Remettre l'itérateur à la position sélectionnée
-	avancer_liste_migrants(liste);
-	
-	free(supprime);
-	liste->taille -= 1;
-
-	return 1;
+    // Mettre l'itérateur à la position de l'ancien noeud supprimé
+    // (maintenant occupée par le noeud suivant)
+    if (precedent->next != NULL) {
+        liste->iterateur = precedent->next;
+        liste->position++;  // On garde la même position logique
+    } else {
+        // Si on a supprimé le dernier noeud, l'itérateur reste sur le noeud précédent
+        liste->iterateur = precedent;
+        // La position reste inchangée car on a déjà reculé d'une position
+    }
+    
+    return 1;
 }
 
 /*-----------------------------------------------------------------*/
 /* supprimer le noeud sous l'itérateur
 Pour supprimer ce noeud,  on considère
 CAS #0 la liste est vide, rien à faire
-CAS #1 si la liste a un seul noeud, on la vide
+CAS #1 si la liste n'a qu'un élément , on la vide
 CAS #2 si l'itérateur est sur la tete
 CAS #3 si l'itérateur est sur le queue
 CAS #4 on supprime  un noeud  à l'intérieur (la static)
@@ -424,9 +451,7 @@ int supprimer_liste_migrants(t_liste_migrants liste) {
 	return supprimer_position_liste_migrants(liste);
 
 }
-/*-----------------------------------------------------------------*/
-/*-----------------------------------------------------------------*/
-/*  liberer tous les noeuds et assigner les membres */
+	/* liberer tous les noeuds et assigner les membres */
 int vider_liste_migrants(t_liste_migrants liste) {
 	int cpt = 0;
 	t_noeud_migrant	temp, suivant;

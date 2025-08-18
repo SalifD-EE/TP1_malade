@@ -97,27 +97,25 @@ static void simuler_une_heure_groupe_villes(t_groupe_villes* gr) {
 int simuler_pandemie_groupe_villes(t_groupe_villes* gr, int nb_heures_max, int periode_affich) {
     int heures = 0;
     while (get_nb_total_malades_groupe(gr) > 0 && heures < nb_heures_max) {
-       
+        
+        // 2. Simuler une heure
+        simuler_une_heure_groupe_villes(gr);
+
+        gr->total_malades = get_nb_total_malades_groupe(gr);
+        //gr->total_retablis = get_nb_total_retablis_groupe(gr);
+        gr->total_vivants = get_nb_total_vivants_groupe(gr);
+        gr->total_morts = get_nb_total_morts_groupe(gr);
+        
         if (heures % periode_affich == 0) {
+        printf("Heure : %d\n", heures);
             for (int i = 0; i < gr->nb_villes; i++) {
                 ecrire_logfile_ville(gr->tab_villes[i]);
             }
           
-            printf(gr->log_villes, "Heure %d: Malades %d, Rétablis %d, Vivants %d, Morts %d\n",
-                heures, gr->total_malades, gr->total_retablis, gr->total_vivants, gr->total_morts);
+            fprintf(gr->log_villes, "Heure %d: Malades %d, Vivants %d, Morts %d\n",
+                heures, gr->total_malades, gr->total_vivants, gr->total_morts);
+            fflush(gr->log_villes); // Force l'écriture
         }
-
-        // 2. Simuler une heure
-        simuler_une_heure_groupe_villes(gr);
-
-       
-        gr->total_malades = get_nb_total_malades_groupe(gr);
-
-        //Problématique. Déclenche le passage d'une autre heure.
-        //gr->total_retablis = get_nb_total_retablis_groupe(gr);
-
-        gr->total_vivants = get_nb_total_vivants_groupe(gr);
-        gr->total_morts = get_nb_total_morts_groupe(gr);
 
         heures++;
     }
@@ -154,8 +152,6 @@ int simuler_pandemie_groupe_villes(t_groupe_villes* gr, int nb_heures_max, int p
 
 
 void detruire_groupe_villes(t_groupe_villes* gr) {
-    if (!gr) return 0;
-
     for (int i = 0; i < gr->nb_villes; i++) {
         detruire_ville(gr->tab_villes[i]);
     }
@@ -174,17 +170,17 @@ void detruire_groupe_villes(t_groupe_villes* gr) {
 
 int get_nb_total_malades_groupe(t_groupe_villes* gr) {
     int malades = 0;
-    t_liste_personnes population;
     
     for (int i = 0; i < gr->nb_villes; i++) {
-        population = get_population(gr->tab_villes[i]);
-        malades += get_nb_malades(&population);
+        t_liste_personnes population = get_population(gr->tab_villes[i]);
+        
+        int nb_malades = get_nb_malades(&population);
+        malades += nb_malades;
+        
     }
     return malades;
 }
 
-/*TODO: Problème ici. assurer_temps_maladie progresse la simulation d'une heure, ce qui est
-    déjà fait dans simuler_une_heure_groupe_villes. Trouver une autre façon d'obtenir les gens rétablis.*/
 
 int get_nb_total_retablis_groupe(t_groupe_villes* gr) { 
     int retablis = 0;
@@ -200,7 +196,8 @@ int get_nb_total_vivants_groupe(t_groupe_villes* gr) {
 
     for (int i = 0; i < gr->nb_villes; i++) {
         population = get_population(gr->tab_villes[i]);
-        vivants += (get_nb_malades(&population) + get_nb_sains(&population));
+        int nb_vivant_ville = get_nb_malades(&population) + get_nb_sains(&population);
+        vivants += nb_vivant_ville;
     }
     return vivants;
 }

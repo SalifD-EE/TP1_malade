@@ -1,0 +1,10 @@
+Heure 0: Malades 10, Vivants 39900, Morts 0
+Heure 50: Malades 10, Vivants 39900, Morts 0
+Heure 100: Malades 10, Vivants 39900, Morts 0
+Heure 150: Malades 11, Vivants 39900, Morts 0
+Heure 200: Malades 13, Vivants 39900, Morts 0
+Heure 250: Malades 15, Vivants 39900, Morts 0
+Heure 300: Malades 17, Vivants 39900, Morts 0
+Heure 350: Malades 20, Vivants 39900, Morts 0
+Heure 400: Malades 13, Vivants 39899, Morts 1
+Heure 450: Malades 18, Vivants 39899, Morts 1
