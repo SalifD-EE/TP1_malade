@@ -324,10 +324,7 @@ int main(void) {
 	}
 
 	// Tester simuler_une_heure_pandemie_ville + ctr_mort_transit
-    
 	simuler_une_heure_pandemie_ville(ville3);
-
-
 
 	system("pause");
 	return EXIT_SUCCESS;
