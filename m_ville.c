@@ -9,7 +9,7 @@
 #include "Constante.h"
 #include "m_ensemble_noms.h"
 #include "m_matrice_transition.h"
-
+#include "m_groupe_villes.h"
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
