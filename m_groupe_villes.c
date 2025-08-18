@@ -10,7 +10,8 @@
 #include <stdlib.h>
 #include "m_groupe_villes.h"
 #include "m_ensemble_noms.h" 
-#include "m_ville.h"     
+#include "m_ville.h"  
+#include "m_liste_personnes.h" 
 
 
 /******************************************************************************/
